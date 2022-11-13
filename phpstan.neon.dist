@@ -1,0 +1,22 @@
+parameters:
+	tmpDir: build/phpstan
+	level: 5
+	paths:
+		- src/
+		- tests/
+	bootstrapFiles:
+		- vendor/codeigniter4/framework/system/Test/bootstrap.php
+	excludePaths:
+	ignoreErrors:
+	    - '#Call to an undefined method CodeIgniter\\HTTP\\Request::[a-zA-Z]+\(\).#'
+	    - '#Call to deprecated method getStatusCode\(\) of class CodeIgniter\\HTTP\\Response:\nTo be replaced by the PSR-7 version \(compatible\)#'
+	universalObjectCratesClasses:
+		- CodeIgniter\Entity
+		- CodeIgniter\Entity\Entity
+		- Faker\Generator
+	scanDirectories:
+		- vendor/codeigniter4/framework/system/Helpers
+	dynamicConstantNames:
+		- APP_NAMESPACE
+		- CI_DEBUG
+		- ENVIRONMENT

@@ -1,0 +1,67 @@
+{
+    "name": "michalsn/codeigniter-htmx",
+    "description": "HTMX helper for CodeIgniter 4 framework",
+    "license": "MIT",
+    "type": "library",
+    "keywords": ["codeigniter", "codeigniter4", "htmx"],
+    "authors": [
+        {
+            "name": "michalsn",
+            "homepage": "https://github.com/michalsn",
+            "role": "Developer"
+        }
+    ],
+    "homepage": "https://github.com/michalsn/codeigniter-htmx",
+    "require": {
+        "php": "^8.0"
+    },
+    "require-dev": {
+        "codeigniter4/framework": "^4.1",
+        "codeigniter/coding-standard": "^1.5",
+        "nexusphp/cs-config": "^3.6",
+        "nexusphp/tachycardia": "^1.0",
+        "phpstan/extension-installer": "^1.1",
+        "phpstan/phpstan": "^1.0",
+        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "phpstan/phpstan-phpunit": "^1.0",
+        "phpunit/phpunit": "^9.3",
+        "rector/rector": "0.14.7",
+        "roave/security-advisories": "dev-latest",
+        "vimeo/psalm": "^4.22"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+          "Michalsn\\CodeIgniterHtmx\\": "src"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
+    },
+    "scripts": {
+        "analyze": [
+            "phpstan analyze",
+            "psalm",
+            "rector process --dry-run"
+        ],
+        "sa": "@analyze",
+        "ci": [
+            "Composer\\Config::disableProcessTimeout",
+            "@cs",
+            "@deduplicate",
+            "@inspect",
+            "@analyze",
+            "@test"
+        ],
+        "cs": "php-cs-fixer fix --ansi --verbose --dry-run --diff",
+        "cs-fix": "php-cs-fixer fix --ansi --verbose --diff",
+        "style": "@cs-fix",
+        "deduplicate": "phpcpd app/ src/",
+        "inspect": "deptrac analyze --cache-file=build/deptrac.cache",
+        "mutate": "infection --threads=2 --skip-initial-tests --coverage=build/phpunit",
+        "test": "phpunit"
+    }
+}
