@@ -33,7 +33,12 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-          "Michalsn\\CodeIgniterHtmx\\": "src"
+            "Michalsn\\CodeIgniterHtmx\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests"
         }
     },
     "config": {

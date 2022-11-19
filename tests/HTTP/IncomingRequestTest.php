@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\HTTP;
+
 use CodeIgniter\HTTP\Request;
 use CodeIgniter\HTTP\URI;
 use CodeIgniter\HTTP\UserAgent;

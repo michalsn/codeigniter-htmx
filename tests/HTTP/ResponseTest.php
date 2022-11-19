@@ -1,7 +1,10 @@
 <?php
 
+namespace Tests\HTTP;
+
 use CodeIgniter\Test\CIUnitTestCase;
 use Config\App;
+use InvalidArgumentException;
 use Michalsn\CodeIgniterHtmx\HTTP\Response;
 
 /**
