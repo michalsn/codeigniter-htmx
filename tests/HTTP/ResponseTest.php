@@ -134,4 +134,12 @@ final class ResponseTest extends CIUnitTestCase
 
         $this->response->triggerClientEvent('event1', 'A message', 'foo');
     }
+
+    public function testTriggerClientEventThrowInvalidArgumentExceptionForHeaderContent(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->response->setHeader('HX-Trigger', 'foo');
+
+        $this->response->triggerClientEvent('event1', 'A message');
+    }
 }

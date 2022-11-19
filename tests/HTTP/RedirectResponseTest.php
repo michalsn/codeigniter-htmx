@@ -31,12 +31,32 @@ final class RedirectResponseTest extends CIUnitTestCase
         $this->assertSame(200, $this->response->getStatusCode());
     }
 
+    public function testHxLocationWithSourceAndEvent(): void
+    {
+        $this->response = $this->response->hxLocation(path: '/foo', source: '#myElem', event: 'click');
+
+        $this->assertTrue($this->response->hasHeader('HX-Location'));
+        $expected = json_encode(['path' => '/foo', 'source' => '#myElem', 'event' => 'doubleclick']);
+        $this->assertSame($expected, $this->response->getHeaderLine('HX-Location'));
+        $this->assertSame(200, $this->response->getStatusCode());
+    }
+
     public function testHxLocationWithTargetAndSwap(): void
     {
         $this->response = $this->response->hxLocation(path: '/foo', target: '#myDiv', swap: 'outerHTML');
 
         $this->assertTrue($this->response->hasHeader('HX-Location'));
         $expected = json_encode(['path' => '/foo', 'target' => '#myDiv', 'swap' => 'outerHTML']);
+        $this->assertSame($expected, $this->response->getHeaderLine('HX-Location'));
+        $this->assertSame(200, $this->response->getStatusCode());
+    }
+
+    public function testHxLocationWithValuesAndHeaders(): void
+    {
+        $this->response = $this->response->hxLocation(path: '/foo', values: ['myVal' => 'My Value'], headers: ['myHeader' => 'My Value']);
+
+        $this->assertTrue($this->response->hasHeader('HX-Location'));
+        $expected = json_encode(['path' => '/foo', 'target' => ['myVal' => 'My Value'], 'swap' => ['myHeader' => 'My Value']]);
         $this->assertSame($expected, $this->response->getHeaderLine('HX-Location'));
         $this->assertSame(200, $this->response->getStatusCode());
     }
