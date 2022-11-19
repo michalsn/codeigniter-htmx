@@ -3,7 +3,6 @@
 namespace Michalsn\CodeIgniterHtmx\HTTP;
 
 use CodeIgniter\HTTP\RedirectResponse as BaseRedirectResponse;
-use InvalidArgumentException;
 
 class RedirectResponse extends BaseRedirectResponse
 {
