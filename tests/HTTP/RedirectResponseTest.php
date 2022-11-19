@@ -56,7 +56,7 @@ final class RedirectResponseTest extends CIUnitTestCase
         $this->response = $this->response->hxLocation(path: '/foo', values: ['myVal' => 'My Value'], headers: ['myHeader' => 'My Value']);
 
         $this->assertTrue($this->response->hasHeader('HX-Location'));
-        $expected = json_encode(['path' => '/foo', 'target' => ['myVal' => 'My Value'], 'swap' => ['myHeader' => 'My Value']]);
+        $expected = json_encode(['path' => '/foo', 'values' => ['myVal' => 'My Value'], 'headers' => ['myHeader' => 'My Value']]);
         $this->assertSame($expected, $this->response->getHeaderLine('HX-Location'));
         $this->assertSame(200, $this->response->getStatusCode());
     }
