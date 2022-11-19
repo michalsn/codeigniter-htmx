@@ -33,7 +33,7 @@ final class RedirectResponseTest extends CIUnitTestCase
 
     public function testHxLocationWithSourceAndEvent(): void
     {
-        $this->response = $this->response->hxLocation(path: '/foo', source: '#myElem', event: 'click');
+        $this->response = $this->response->hxLocation(path: '/foo', source: '#myElem', event: 'doubleclick');
 
         $this->assertTrue($this->response->hasHeader('HX-Location'));
         $expected = json_encode(['path' => '/foo', 'source' => '#myElem', 'event' => 'doubleclick']);
