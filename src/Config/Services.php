@@ -9,6 +9,8 @@ use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\HTTP\UserAgent;
 use Config\App;
 use Config\Services as AppServices;
+use Config\Toolbar as ToolbarConfig;
+use Michalsn\CodeIgniterHtmx\Debug\Toolbar;
 use Michalsn\CodeIgniterHtmx\HTTP\IncomingRequest;
 use Michalsn\CodeIgniterHtmx\HTTP\RedirectResponse;
 use Michalsn\CodeIgniterHtmx\HTTP\Response;
@@ -87,5 +89,21 @@ class Services extends BaseService
         $config ??= config('App');
 
         return new Response($config);
+    }
+
+    /**
+     * Return the debug toolbar.
+     *
+     * @return Toolbar
+     */
+    public static function toolbar(?ToolbarConfig $config = null, bool $getShared = true)
+    {
+        if ($getShared) {
+            return static::getSharedInstance('toolbar', $config);
+        }
+
+        $config ??= config('Toolbar');
+
+        return new Toolbar($config);
     }
 }
