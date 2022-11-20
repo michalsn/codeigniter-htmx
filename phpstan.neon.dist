@@ -10,6 +10,7 @@ parameters:
 	ignoreErrors:
 	    - '#Call to an undefined method CodeIgniter\\HTTP\\Request::[a-zA-Z]+\(\).#'
 	    - '#Call to deprecated method getStatusCode\(\) of class CodeIgniter\\HTTP\\Response:\nTo be replaced by the PSR-7 version \(compatible\)#'
+	    - '#Call to an undefined method CodeIgniter\\HTTP\\CLIRequest|CodeIgniter\\HTTP\\IncomingRequest::isHtmx\(\).#'
 	universalObjectCratesClasses:
 		- CodeIgniter\Entity
 		- CodeIgniter\Entity\Entity
