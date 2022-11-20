@@ -61,7 +61,7 @@ class Toolbar extends BaseToolbar
             // Non-HTML formats should not include the debugbar
             // then we send headers saying where to find the debug data
             // for this response
-            if ($request->isAJAX() || $request->isHtmx() || !str_contains($format, 'html')) {
+            if ($request->isAJAX() || $request->isHtmx() || ! str_contains($format, 'html')) {
                 $response->setHeader('Debugbar-Time', "{$time}")
                     ->setHeader('Debugbar-Link', site_url("?debugbar_time={$time}"));
 
@@ -100,6 +100,4 @@ class Toolbar extends BaseToolbar
             $response->appendBody($script);
         }
     }
-
 }
-
