@@ -4,17 +4,20 @@ namespace Michalsn\CodeIgniterHtmx\Debug;
 
 use CodeIgniter\Debug\Toolbar as BaseToolbar;
 use CodeIgniter\HTTP\DownloadResponse;
-use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
-use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\ResponseInterface;
 use Config\Services;
 use Kint\Kint;
+use Michalsn\CodeIgniterHtmx\HTTP\IncomingRequest;
+use Michalsn\CodeIgniterHtmx\HTTP\Response;
 
+/**
+ * @property IncomingRequest $request
+ */
 class Toolbar extends BaseToolbar
 {
     /**
-     * Prepare for debugging..
+     * Prepare for debugging.
      *
      * @param RequestInterface  $request
      * @param ResponseInterface $response
