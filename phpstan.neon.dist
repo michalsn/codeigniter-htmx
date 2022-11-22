@@ -7,6 +7,7 @@ parameters:
 	bootstrapFiles:
 		- vendor/codeigniter4/framework/system/Test/bootstrap.php
 	excludePaths:
+	    - src/Debug/Toolbar.php
 	ignoreErrors:
 	    - '#Call to deprecated method getStatusCode\(\) of class CodeIgniter\\HTTP\\Response:\nTo be replaced by the PSR-7 version \(compatible\)#'
 	universalObjectCratesClasses:
