@@ -8,7 +8,6 @@ parameters:
 		- vendor/codeigniter4/framework/system/Test/bootstrap.php
 	excludePaths:
 	ignoreErrors:
-	    - '#Call to an undefined method CodeIgniter\\HTTP\\Request::[a-zA-Z]+\(\).#'
 	    - '#Call to deprecated method getStatusCode\(\) of class CodeIgniter\\HTTP\\Response:\nTo be replaced by the PSR-7 version \(compatible\)#'
 	universalObjectCratesClasses:
 		- CodeIgniter\Entity

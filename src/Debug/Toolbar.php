@@ -11,16 +11,10 @@ use Kint\Kint;
 use Michalsn\CodeIgniterHtmx\HTTP\IncomingRequest;
 use Michalsn\CodeIgniterHtmx\HTTP\Response;
 
-/**
- * @property IncomingRequest $request
- */
 class Toolbar extends BaseToolbar
 {
     /**
      * Prepare for debugging.
-     *
-     * @param RequestInterface  $request
-     * @param ResponseInterface $response
      */
     public function prepare(?RequestInterface $request = null, ?ResponseInterface $response = null)
     {

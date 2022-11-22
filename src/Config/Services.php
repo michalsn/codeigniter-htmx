@@ -4,7 +4,6 @@ namespace Michalsn\CodeIgniterHtmx\Config;
 
 use CodeIgniter\Config\BaseService;
 use CodeIgniter\HTTP\CLIRequest;
-use CodeIgniter\HTTP\IncomingRequest as BaseIncomingRequest;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\HTTP\UserAgent;
 use Config\App;
@@ -24,7 +23,7 @@ class Services extends BaseService
      *
      * @deprecated The parameter $config and $getShared are deprecated.
      */
-    public static function request(?App $config = null, bool $getShared = true): CLIRequest|BaseIncomingRequest
+    public static function request(?App $config = null, bool $getShared = true): CLIRequest|IncomingRequest
     {
         if ($getShared) {
             return static::getSharedInstance('request', $config);

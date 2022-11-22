@@ -2,7 +2,6 @@
 
 namespace Tests\HTTP;
 
-use CodeIgniter\HTTP\Request;
 use CodeIgniter\HTTP\URI;
 use CodeIgniter\HTTP\UserAgent;
 use CodeIgniter\Test\CIUnitTestCase;
@@ -14,7 +13,7 @@ use Michalsn\CodeIgniterHtmx\HTTP\IncomingRequest;
  */
 final class IncomingRequestTest extends CIUnitTestCase
 {
-    private Request $request;
+    private IncomingRequest $request;
 
     protected function setUp(): void
     {
