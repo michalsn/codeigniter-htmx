@@ -11,7 +11,7 @@ use Michalsn\CodeIgniterHtmx\View\ErrorModalDecorator;
 /**
  * @internal
  */
-final class ErrorModalDecoratorTest extends CIUnitTestCase
+final class ErrorModelDecoratorTest extends CIUnitTestCase
 {
     private $loader;
     private $viewsDir;
@@ -57,5 +57,4 @@ final class ErrorModalDecoratorTest extends CIUnitTestCase
         $this->assertStringContainsString($expected1, $view->render('with_decorator'));
         $this->assertStringContainsString($expected2, $view->render('with_decorator'));
     }
-
 }

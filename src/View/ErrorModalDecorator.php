@@ -8,56 +8,56 @@ class ErrorModalDecorator implements ViewDecoratorInterface
 {
     public static function decorate(string $html): string
     {
-        if (CI_DEBUG &&
-            ! service('request')->isHtmx() &&
-            str_contains($html, '</body>') &&
-            ! str_contains($html, 'id="htmxErrorModalScript"')
+        if (CI_DEBUG
+            && ! service('request')->isHtmx()
+            && str_contains($html, '</body>')
+            && ! str_contains($html, 'id="htmxErrorModalScript"')
         ) {
-            $script = <<<EOM
-<script id="htmxErrorModalScript">
-    document.addEventListener("htmx:responseError", function (event) {
-        const xhr = event.detail.xhr;
+            $script = <<<'EOM'
+                <script id="htmxErrorModalScript">
+                    document.addEventListener("htmx:responseError", function (event) {
+                        const xhr = event.detail.xhr;
 
-        event.stopPropagation();
+                        event.stopPropagation();
 
-        // Create modal
-        const htmxErrorModal = document.createElement('div');
-        htmxErrorModal.id = 'htmxErrorModal'
-        // Set title
-        const htmxErrorModalTitle = document.createElement('h2');
-        const htmxErrorModalTitleContent = document.createTextNode('Error: ' + xhr.status);
-        htmxErrorModalTitle.appendChild(htmxErrorModalTitleContent);
+                        // Create modal
+                        const htmxErrorModal = document.createElement('div');
+                        htmxErrorModal.id = 'htmxErrorModal'
+                        // Set title
+                        const htmxErrorModalTitle = document.createElement('h2');
+                        const htmxErrorModalTitleContent = document.createTextNode('Error: ' + xhr.status);
+                        htmxErrorModalTitle.appendChild(htmxErrorModalTitleContent);
 
-        // Set close buton
-        const htmxErrorModalCloseButton = document.createElement('button');
-        const htmxErrorModalCloseButtonContent = document.createTextNode('X');
-        htmxErrorModalCloseButton.appendChild(htmxErrorModalCloseButtonContent);
-        htmxErrorModalCloseButton.id = 'htmxErrorModalCloseButton';
+                        // Set close buton
+                        const htmxErrorModalCloseButton = document.createElement('button');
+                        const htmxErrorModalCloseButtonContent = document.createTextNode('X');
+                        htmxErrorModalCloseButton.appendChild(htmxErrorModalCloseButtonContent);
+                        htmxErrorModalCloseButton.id = 'htmxErrorModalCloseButton';
 
-        // Set error content
-        const htmxErrorModalContent = document.createElement('pre');
-        htmxErrorModalContent.innerHTML = xhr.response;
+                        // Set error content
+                        const htmxErrorModalContent = document.createElement('pre');
+                        htmxErrorModalContent.innerHTML = xhr.response;
 
-        // Set styles
-        htmxErrorModal.setAttribute('style', 'position: absolute; max-width: 90%; left: 50%; transform: translateX(-50%); z-index: 99999; background: #fbe0e0; padding: 20px; border-radius: 5px; font-family: sans-serif; top: 50px;');
-        htmxErrorModalTitle.setAttribute('style', 'display: inline-block;')
-        htmxErrorModalCloseButton.setAttribute('style', 'border: 1px solid; padding: 5px 8px 3px 8px; display: inline-block; float: right;');
+                        // Set styles
+                        htmxErrorModal.setAttribute('style', 'position: absolute; max-width: 90%; left: 50%; transform: translateX(-50%); z-index: 99999; background: #fbe0e0; padding: 20px; border-radius: 5px; font-family: sans-serif; top: 50px;');
+                        htmxErrorModalTitle.setAttribute('style', 'display: inline-block;')
+                        htmxErrorModalCloseButton.setAttribute('style', 'border: 1px solid; padding: 5px 8px 3px 8px; display: inline-block; float: right;');
 
-        // Append content to modal
-        htmxErrorModal.appendChild(htmxErrorModalTitle);
-        htmxErrorModal.appendChild(htmxErrorModalCloseButton);
-        htmxErrorModal.appendChild(htmxErrorModalContent);
+                        // Append content to modal
+                        htmxErrorModal.appendChild(htmxErrorModalTitle);
+                        htmxErrorModal.appendChild(htmxErrorModalCloseButton);
+                        htmxErrorModal.appendChild(htmxErrorModalContent);
 
-        // Add modal to DOM
-        document.body.appendChild(htmxErrorModal);
+                        // Add modal to DOM
+                        document.body.appendChild(htmxErrorModal);
 
-        // Handle close button
-        htmxErrorModalCloseButton.onclick = function remove() {
-            htmxErrorModal.parentElement.removeChild(htmxErrorModal);
-        }
-    });
-</script>
-EOM;
+                        // Handle close button
+                        htmxErrorModalCloseButton.onclick = function remove() {
+                            htmxErrorModal.parentElement.removeChild(htmxErrorModal);
+                        }
+                    });
+                </script>
+                EOM;
 
             $html = preg_replace(
                 '/<\/body>/',
