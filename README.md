@@ -1,17 +1,23 @@
 # CodeIgniter HTMX
 
-A set of methods for `IncomingRequest`, `Response` and `RedirectResponse` classes to help you work with [HTMX](https://htmx.org) fluently in CodeIgniter 4 framework.
+A set of methods for `IncomingRequest`, `Response` and `RedirectResponse` classes to help you work with [htmx](https://htmx.org) fluently in CodeIgniter 4 framework.
 
 [![PHPUnit](https://github.com/michalsn/codeigniter-htmx/actions/workflows/phpunit.yml/badge.svg)](https://github.com/michalsn/codeigniter-htmx/actions/workflows/phpunit.yml)
 [![PHPStan](https://github.com/michalsn/codeigniter-htmx/actions/workflows/phpstan.yml/badge.svg)](https://github.com/michalsn/codeigniter-htmx/actions/workflows/phpstan.yml)
 [![Deptrac](https://github.com/michalsn/codeigniter-htmx/actions/workflows/deptrac.yml/badge.svg)](https://github.com/michalsn/codeigniter-htmx/actions/workflows/deptrac.yml)
 [![Coverage Status](https://coveralls.io/repos/github/michalsn/codeigniter-htmx/badge.svg?branch=develop)](https://coveralls.io/github/michalsn/codeigniter-htmx?branch=develop)
 
+## Installation
+
     composer require michalsn/codeigniter-htmx
 
-## IncomingRequest
+## Docs
 
-### isHtmx()
+When an HTTP error response occurs, this library display it in the modal.
+
+### IncomingRequest
+
+#### isHtmx()
 
 Checks if there is a `HX-Request` header in place.
 Indicates that the request was fired with htmx.
@@ -20,7 +26,7 @@ Indicates that the request was fired with htmx.
 $this->request->isHtmx();
 ```
 
-### isBoosted()
+#### isBoosted()
 
 Checks if there is a `HX-Boosted` header in place.
 Indicates that the request is via an element using [hx-boost](https://htmx.org/attributes/hx-boost)
@@ -29,7 +35,7 @@ Indicates that the request is via an element using [hx-boost](https://htmx.org/a
 $this->request->isBoosted();
 ```
 
-### isHistoryRestoreRequest()
+#### isHistoryRestoreRequest()
 
 Checks if there is a `HX-History-Restore-Request` header in place.
 True if the request is for history restoration after a miss in the local history cache.
@@ -38,7 +44,7 @@ True if the request is for history restoration after a miss in the local history
 $this->request->isHistoryRestoreRequest();
 ```
 
-### getCurrentUrl()
+#### getCurrentUrl()
 
 Checks the `HX-Current-URL` header and return current URL of the browser.
 
@@ -46,7 +52,7 @@ Checks the `HX-Current-URL` header and return current URL of the browser.
 $this->request->getCurrentUrl();
 ```
 
-### getPrompt()
+#### getPrompt()
 
 Checks the `HX-Prompt` header - the user response to an [hx-prompt](https://htmx.org/attributes/hx-prompt/).
 
@@ -54,7 +60,7 @@ Checks the `HX-Prompt` header - the user response to an [hx-prompt](https://htmx
 $this->request->getPrompt();
 ```
 
-### getTarget()
+#### getTarget()
 
 Checks the `HX-Target` header. Returns the `id` of the target element if it exists.
 
@@ -62,7 +68,7 @@ Checks the `HX-Target` header. Returns the `id` of the target element if it exis
 $this->request->getTarget();
 ```
 
-### getTrigger()
+#### getTrigger()
 
 Checks the `HX-Trigger` header. Returns the `id` of the triggered element if it exists.
 
@@ -70,7 +76,7 @@ Checks the `HX-Trigger` header. Returns the `id` of the triggered element if it 
 $this->request->getTrigger();
 ```
 
-### getTriggerName()
+#### getTriggerName()
 
 Checks the `HX-Trigger-Name` header. Returns the `name` of the triggered element if it exists.
 
@@ -78,14 +84,14 @@ Checks the `HX-Trigger-Name` header. Returns the `name` of the triggered element
 $this->request->getTriggerName();
 ```
 
-### getTriggeringEvent()
+#### getTriggeringEvent()
 
 Checks the `Triggering-Event` header. The value of the header is a JSON serialized version of the event that triggered the request.
 Check the [event-header](https://htmx.org/extensions/event-header/) plugin for more information.
 
-## Response
+### Response
 
-### setPushUrl()
+#### setPushUrl()
 
 Sets the value in `HX-Push-Url` header. Pushes a new url into the history stack.
 
@@ -93,7 +99,7 @@ Sets the value in `HX-Push-Url` header. Pushes a new url into the history stack.
 $this->response->setPushUrl('/pushed-url');
 ```
 
-### setReplaceUrl()
+#### setReplaceUrl()
 
 Sets the value in `HX-Replace-Url` header. Replaces the current URL in the location bar.
 
@@ -101,7 +107,7 @@ Sets the value in `HX-Replace-Url` header. Replaces the current URL in the locat
 $this->response->setReplaceUrl('/replaced-url');
 ```
 
-### setReswap()
+#### setReswap()
 
 Sets the value in `HX-Reswap` header. Allows you to specify how the response will be swapped. See [hx-swap](https://htmx.org/attributes/hx-swap) for possible values.
 
@@ -109,7 +115,7 @@ Sets the value in `HX-Reswap` header. Allows you to specify how the response wil
 $this->response->setReswap('innerHTML show:#another-div:top');
 ```
 
-### setRetarget()
+#### setRetarget()
 
 Sets the value in `HX-Retarget` header. A CSS selector that updates the target of the content update to a different element on the page.
 
@@ -117,7 +123,7 @@ Sets the value in `HX-Retarget` header. A CSS selector that updates the target o
 $this->response->setRetarget('#another-div');
 ```
 
-### triggerClientEvent()
+#### triggerClientEvent()
 
 Allows you to set the headers: `HX-Trigger`, `HX-Trigger-After-Settle` or `HX-Trigger-After-Swap`.
 
@@ -132,9 +138,9 @@ $this->response->triggerClientEvent('showMessage', ['level' => 'info', 'message'
 
 For more information, please see [hx-trigger](https://htmx.org/headers/hx-trigger/).
 
-## RedirectResponse
+### RedirectResponse
 
-### hxLocation()
+#### hxLocation()
 
 Sets the `HX-Location` header to redirect without reloading the whole page.
 
@@ -144,7 +150,7 @@ return redirect()->hxLocation('/path');
 
 For more information, please see [hx-location](https://htmx.org/headers/hx-location/).
 
-### hxRedirect()
+#### hxRedirect()
 
 Can be used to do a client-side redirect to a new location.
 
@@ -152,7 +158,7 @@ Can be used to do a client-side redirect to a new location.
 return redirect()->hxRedirect('/path');
 ```
 
-### hxRefresh()
+#### hxRefresh()
 
 If called the client side will do a full refresh of the page.
 
@@ -162,7 +168,7 @@ return redirect()->hxRefresh();
 
 ---
 
-## Troubleshooting
+### Troubleshooting
 
 #### PHPStan
 * If you keep getting PHPStan error whenever you use any new **request** method, like `isHtmx()`, example:
