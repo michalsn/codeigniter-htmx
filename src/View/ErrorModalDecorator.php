@@ -35,13 +35,14 @@ class ErrorModalDecorator implements ViewDecoratorInterface
                         htmxErrorModalCloseButton.id = 'htmxErrorModalCloseButton';
 
                         // Set error content
-                        const htmxErrorModalContent = document.createElement('pre');
+                        const htmxErrorModalContent = document.createElement('textarea');
                         htmxErrorModalContent.innerHTML = xhr.response;
 
                         // Set styles
                         htmxErrorModal.setAttribute('style', 'position: absolute; max-width: 90%; left: 50%; transform: translateX(-50%); z-index: 99999; background: #fbe0e0; padding: 20px; border-radius: 5px; font-family: sans-serif; top: 50px;');
                         htmxErrorModalTitle.setAttribute('style', 'display: inline-block;')
                         htmxErrorModalCloseButton.setAttribute('style', 'border: 1px solid; padding: 5px 8px 3px 8px; display: inline-block; float: right;');
+                        htmxErrorModalContent.setAttribute('style', 'border: 1px solid #ccc; width: 80vw; height: 80vh');
 
                         // Append content to modal
                         htmxErrorModal.appendChild(htmxErrorModalTitle);
