@@ -109,9 +109,9 @@ class View extends BaseView
             $output     = $this->render($layoutView, $options, $saveData);
             // Get back current vars
             $this->renderVars = $renderVars;
-
         } elseif (! empty($this->renderVars['options']['fragments'])) {
             $output = '';
+
             foreach ($this->renderVars['options']['fragments'] as $fragmentName) {
                 $output .= $this->renderFragment($fragmentName);
                 unset($this->fragments[$fragmentName]);
@@ -207,5 +207,4 @@ class View extends BaseView
             return $contents;
         }
     }
-
 }

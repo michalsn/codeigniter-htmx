@@ -4,6 +4,7 @@ namespace Michalsn\CodeIgniterHtmx;
 
 use CodeIgniter\Config\View;
 use Michalsn\CodeIgniterHtmx\Config\Services;
+
 function view_fragment(string $name, string|array $fragments, array $data = [], array $options = []): string
 {
     $renderer = Services::renderer();

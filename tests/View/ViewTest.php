@@ -116,7 +116,7 @@ final class ViewTest extends CIUnitTestCase
     {
         $view = new View($this->config, $this->viewsDir, $this->loader);
 
-        $expected = "Page bottom";
+        $expected = 'Page bottom';
 
         $this->assertSame($expected, $view->render('with_fragment', ['fragments' => ['sample0']]));
     }
@@ -127,7 +127,7 @@ final class ViewTest extends CIUnitTestCase
 
         $view->setVar('testString1', 'Hello World');
         $view->setVar('testString2', 'Hello World');
-        $expected = "";
+        $expected = '';
 
         $this->assertSame($expected, $view->render('view_fragment', ['fragments' => ['sampleX']]));
     }

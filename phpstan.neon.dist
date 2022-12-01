@@ -11,6 +11,7 @@ parameters:
 	ignoreErrors:
 	    - '#Call to deprecated method getStatusCode\(\) of class CodeIgniter\\HTTP\\Response:\nTo be replaced by the PSR-7 version \(compatible\)#'
 	    - '#Variable \$testString might not be defined.#'
+	    - '#Variable \$this might not be defined.#'
 	universalObjectCratesClasses:
 		- CodeIgniter\Entity
 		- CodeIgniter\Entity\Entity
