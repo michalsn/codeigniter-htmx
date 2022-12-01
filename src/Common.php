@@ -20,11 +20,11 @@ if (! function_exists('view_fragment')) {
         $renderer = Services::renderer();
 
         /** @var View $config */
-        $config = config(View::class);
+        $config   = config(View::class);
         $saveData = $config->saveData;
 
         if (array_key_exists('saveData', $options)) {
-            $saveData = (bool)$options['saveData'];
+            $saveData = (bool) $options['saveData'];
             unset($options['saveData']);
         }
 
