@@ -1,13 +1,14 @@
 <?php
 
+namespace Michalsn\CodeIgniterHtmx;
+
 use CodeIgniter\Config\View;
 use Michalsn\CodeIgniterHtmx\Config\Services;
-
 function view_fragment(string $name, string|array $fragments, array $data = [], array $options = []): string
 {
     $renderer = Services::renderer();
 
-    /** @var \CodeIgniter\Config\View $config */
+    /** @var View $config */
     $config   = config(View::class);
     $saveData = $config->saveData;
 

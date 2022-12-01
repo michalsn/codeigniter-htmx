@@ -16,10 +16,8 @@ class View extends BaseView
 {
     /**
      * Holds the sections and their data.
-     *
-     * @var array
      */
-    protected $fragments = [];
+    protected array $fragments = [];
 
     /**
      * The name of the current section being rendered,
@@ -27,7 +25,7 @@ class View extends BaseView
      *
      * @var array<string>
      */
-    protected $fragmentStack = [];
+    protected array $fragmentStack = [];
 
     /**
      * Builds the output based upon a file name and any
