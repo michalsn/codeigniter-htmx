@@ -82,7 +82,7 @@ return static function (RectorConfig $rectorConfig): void {
 
         // Ignore files that should not be namespaced
         NormalizeNamespaceByPSR4ComposerAutoloadRector::class => [
-            __DIR__ . '/app/Helpers',
+            __DIR__ . '/src/Common.php',
         ],
 
         // May load view files directly when detecting classes
