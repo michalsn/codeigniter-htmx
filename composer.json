@@ -25,7 +25,8 @@
     "autoload": {
         "psr-4": {
             "Michalsn\\CodeIgniterHtmx\\": "src"
-        }
+        },
+        "files": ["src/Common.php"]
     },
     "autoload-dev": {
         "psr-4": {
