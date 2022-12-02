@@ -67,6 +67,17 @@ final class ViewTest extends CIUnitTestCase
         $this->assertSame($expected, $view->render('view_fragment', ['fragments' => ['sample1']]));
     }
 
+    public function testRenderViewFragmentInViewFragment()
+    {
+        $view = new View($this->config, $this->viewsDir, $this->loader);
+
+        $view->setVar('testString1', 'Hello World');
+        $view->setVar('testString2', 'Hello World');
+        $expected = "Hello World, fragment2!\n";
+
+        $this->assertSame($expected, $view->render('view_fragment_in_view_fragment', ['fragments' => ['sample2']]));
+    }
+
     public function testRenderViewFragments()
     {
         $view = new View($this->config, $this->viewsDir, $this->loader);
@@ -76,6 +87,36 @@ final class ViewTest extends CIUnitTestCase
         $expected = "Hello World, fragment1!\nHello World, fragment2!\n";
 
         $this->assertSame($expected, $view->render('view_fragment', ['fragments' => ['sample1', 'sample2']]));
+    }
+
+    public function testRenderViewFragmentsWithInclude()
+    {
+        $view = new View($this->config, $this->viewsDir, $this->loader);
+
+        $view->setVar('testString1', 'Hello World');
+        $expected = "Hello World, fragment1!\nview included\n";
+
+        $this->assertSame($expected, $view->render('view_with_include_1', ['fragments' => ['sample1']]));
+    }
+
+    public function testRenderViewFragmentsFromInclude()
+    {
+        $view = new View($this->config, $this->viewsDir, $this->loader);
+
+        $view->setVar('testString1', 'Hello World');
+        $view->setVar('testString2', 'Hello World');
+        $expected = "Hello World, fragment2!\n";
+
+        $this->assertSame($expected, $view->render('view_with_include_2', ['fragments' => ['sample2']]));
+    }
+
+    public function testRenderDefaultInclude()
+    {
+        $view = new View($this->config, $this->viewsDir, $this->loader);
+
+        $expected = "view included\n";
+
+        $this->assertSame($expected, $view->render('default_include'));
     }
 
     public function testRenderViewDataWithLayout()

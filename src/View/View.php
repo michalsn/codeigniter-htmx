@@ -109,7 +109,7 @@ class View extends BaseView
             $output     = $this->render($layoutView, $options, $saveData);
             // Get back current vars
             $this->renderVars = $renderVars;
-        } elseif (! empty($this->renderVars['options']['fragments'])) {
+        } elseif (! empty($this->renderVars['options']['fragments']) && $this->fragmentStack === []) {
             $output = '';
 
             foreach ($this->renderVars['options']['fragments'] as $fragmentName) {
@@ -184,7 +184,7 @@ class View extends BaseView
 
         $fragmentName = array_pop($this->fragmentStack);
 
-        // Ensure an array exists so we can store multiple entries for this.
+        // Ensure an array exists, so we can store multiple entries for this.
         if (! array_key_exists($fragmentName, $this->fragments)) {
             $this->fragments[$fragmentName] = [];
         }
@@ -206,5 +206,22 @@ class View extends BaseView
         foreach ($this->fragments[$fragmentName] as $contents) {
             return $contents;
         }
+    }
+
+    /**
+     * Used within layout views to include additional views.
+     *
+     * @param bool $saveData
+     */
+    public function include(string $view, ?array $options = null, $saveData = true): string
+    {
+        if ($this->fragmentStack !== []) {
+            $options['fragments'] = $this->renderVars['options']['fragments'];
+            echo $this->render($view, $options, $saveData);
+
+            return '';
+        }
+
+        return $this->render($view, $options, $saveData);
     }
 }
