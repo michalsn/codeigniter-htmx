@@ -6,6 +6,7 @@ use CodeIgniter\Config\Factories;
 use CodeIgniter\Config\Services;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\View\View;
+use Config;
 use Michalsn\CodeIgniterHtmx\View\ErrorModalDecorator;
 
 /**
@@ -23,7 +24,7 @@ final class ErrorModelDecoratorTest extends CIUnitTestCase
 
         $this->loader   = Services::locator();
         $this->viewsDir = SUPPORTPATH . 'Views';
-        $this->config   = config('View');
+        $this->config   = new Config\View();
     }
 
     public function testDecoratorDontApply()

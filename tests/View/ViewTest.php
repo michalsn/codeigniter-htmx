@@ -5,7 +5,6 @@ namespace Tests\View;
 use CodeIgniter\Config\Services;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\View\Exceptions\ViewException;
-
 use Config;
 
 use Michalsn\CodeIgniterHtmx\View\View;
@@ -26,7 +25,7 @@ final class ViewTest extends CIUnitTestCase
 
         $this->resetServices();
         $this->loader   = Services::locator();
-        $this->viewsDir = __DIR__ . '/../_support/Views';
+        $this->viewsDir = SUPPORTPATH . 'Views';
         $this->config   = new Config\View();
     }
 

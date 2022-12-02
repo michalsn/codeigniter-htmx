@@ -1,7 +1,7 @@
 <?php
 
+use CodeIgniter\Config\Services;
 use CodeIgniter\Config\View;
-use Michalsn\CodeIgniterHtmx\Config\Services;
 
 if (! function_exists('view_fragment')) {
     /**
