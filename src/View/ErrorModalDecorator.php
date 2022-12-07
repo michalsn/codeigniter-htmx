@@ -9,7 +9,7 @@ class ErrorModalDecorator implements ViewDecoratorInterface
     public static function decorate(string $html): string
     {
         if (CI_DEBUG
-            && ! is_cli()
+            && (! is_cli() || ENVIRONMENT === 'testing')
             && ! service('request')->isHtmx()
             && str_contains($html, '</body>')
             && ! str_contains($html, 'id="htmxErrorModalScript"')
