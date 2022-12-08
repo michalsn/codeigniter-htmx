@@ -9,7 +9,7 @@ Available methods:
 - [getPrompt()](#getprompt)
 - [getTarget()](#gettarget)
 - [getTrigger()](#gettrigger)
-- [gettriggername()](#gettriggername)
+- [getTriggerName()](#gettriggername)
 - [getTriggeringEvent()](#gettriggeringevent)
 
 ### isHtmx()
