@@ -1,0 +1,42 @@
+site_name: CodeIgniter HTMX
+site_description: Documentation for HTMX helper library for CodeIgniter 4 framework
+
+theme:
+  name: material
+  logo: assets/flame.svg
+  favicon: assets/favicon.ico
+  icon:
+    repo: fontawesome/brands/github
+
+extra:
+  homepage: https://michalsn.github.io/codeigniter-htmx
+
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/michalsn/codeigniter-htmx
+      name: GitHub
+
+repo_url: https://github.com/michalsn/codeigniter-htmx
+edit_uri: edit/develop/docs/
+
+markdown_extensions:
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      use_pygments: false
+
+extra_css:
+  - https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/styles/github.min.css
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/highlight.min.js
+  - assets/hljs.js
+
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Error handling: error_handling.md
+  - View fragments: view_fragments.md
+  - IncomingReqeuest: incoming_request.md
+  - Response: response.md
+  - RediretResponse: redirect_response.md
+  - Troubleshooting: troubleshooting.md
