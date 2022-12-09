@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - develop
+    paths:
+      - 'docs/*'
+      - 'mkdocs.yml'
 
 permissions:
   contents: write
