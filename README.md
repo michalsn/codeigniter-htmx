@@ -16,3 +16,7 @@ It also provides some additional help with **handling errors** in development mo
 ## Docs
 
 https://michalsn.github.io/codeigniter-htmx/
+
+## Demos
+
+https://github.com/michalsn/codeigniter-htmx-demo
