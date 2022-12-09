@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.0.0](https://github.com/michalsn/codeigniter-htmx/compare/v1.0.0-beta.2...v1.0.0) - 2022-12-09
+
 ### Changed
 - When an HTTP error response occurs, display it in the modal.
 - Add `view_fragment()` function to return only fragments of the view.
