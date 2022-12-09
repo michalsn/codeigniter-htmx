@@ -11,3 +11,8 @@ It also provides some additional help with **handling errors** in development mo
 * [Response](response.md)
 * [RediretResponse](redirect_response.md)
 * [Troubleshooting](troubleshooting.md)
+
+
+### Demos
+
+[https://github.com/michalsn/codeigniter-htmx-demo](https://github.com/michalsn/codeigniter-htmx-demo)
