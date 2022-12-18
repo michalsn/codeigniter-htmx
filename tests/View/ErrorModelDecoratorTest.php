@@ -2,6 +2,7 @@
 
 namespace Tests\View;
 
+use CodeIgniter\Autoloader\FileLocator;
 use CodeIgniter\Config\Factories;
 use CodeIgniter\Config\Services;
 use CodeIgniter\Test\CIUnitTestCase;
@@ -14,9 +15,9 @@ use Michalsn\CodeIgniterHtmx\View\ErrorModalDecorator;
  */
 final class ErrorModelDecoratorTest extends CIUnitTestCase
 {
-    private $loader;
-    private $viewsDir;
-    private $config;
+    private FileLocator $loader;
+    private string $viewsDir;
+    private \Config\View $config;
 
     protected function setUp(): void
     {
