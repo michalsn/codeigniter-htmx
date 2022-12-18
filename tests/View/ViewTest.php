@@ -6,8 +6,7 @@ use CodeIgniter\Autoloader\FileLocator;
 use CodeIgniter\Config\Services;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\View\Exceptions\ViewException;
-use Config;
-
+use Config\View as ViewConfig;
 use Michalsn\CodeIgniterHtmx\View\View;
 use RuntimeException;
 
@@ -18,7 +17,7 @@ final class ViewTest extends CIUnitTestCase
 {
     private FileLocator $loader;
     private string $viewsDir;
-    private \Config\View $config;
+    private ViewConfig $config;
 
     protected function setUp(): void
     {
@@ -27,7 +26,7 @@ final class ViewTest extends CIUnitTestCase
         $this->resetServices();
         $this->loader   = Services::locator();
         $this->viewsDir = SUPPORTPATH . 'Views';
-        $this->config   = new Config\View();
+        $this->config   = new ViewConfig();
     }
 
     public function testRenderViewData()

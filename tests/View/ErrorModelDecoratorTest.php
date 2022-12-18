@@ -7,7 +7,7 @@ use CodeIgniter\Config\Factories;
 use CodeIgniter\Config\Services;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\View\View;
-use Config;
+use Config\View as ViewConfig;
 use Michalsn\CodeIgniterHtmx\View\ErrorModalDecorator;
 
 /**
@@ -17,7 +17,7 @@ final class ErrorModelDecoratorTest extends CIUnitTestCase
 {
     private FileLocator $loader;
     private string $viewsDir;
-    private \Config\View $config;
+    private ViewConfig $config;
 
     protected function setUp(): void
     {
@@ -25,7 +25,7 @@ final class ErrorModelDecoratorTest extends CIUnitTestCase
 
         $this->loader   = Services::locator();
         $this->viewsDir = SUPPORTPATH . 'Views';
-        $this->config   = new Config\View();
+        $this->config   = new ViewConfig();
     }
 
     public function testDecoratorDontApply()
