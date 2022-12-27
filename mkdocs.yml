@@ -8,15 +8,17 @@ theme:
   icon:
     repo: fontawesome/brands/github
   palette:
-    # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
+      primary: indigo
+      accent: indigo
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
-    # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
+      primary: indigo
+      accent: indigo
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
@@ -38,7 +40,7 @@ markdown_extensions:
       use_pygments: false
 
 extra_css:
-  - https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/styles/github.min.css
+  - assets/github-dark-dimmed.css
 
 extra_javascript:
   - https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/highlight.min.js
