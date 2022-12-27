@@ -16,7 +16,7 @@ final class CommonTest extends CIUnitTestCase
         config('Paths')->viewDirectory = SUPPORTPATH . 'Views';
     }
 
-    public function testViewFragmentNone()
+    public function testViewFragmentNone(): void
     {
         $data = [
             'testString1' => 'Hello World',
@@ -28,7 +28,7 @@ final class CommonTest extends CIUnitTestCase
         $this->assertSame($expected, view_fragment('view_fragment', '', $data));
     }
 
-    public function testViewFragmentOne()
+    public function testViewFragmentOne(): void
     {
         $data = [
             'testString1' => 'Hello World',
@@ -40,7 +40,7 @@ final class CommonTest extends CIUnitTestCase
         $this->assertSame($expected, view_fragment('view_fragment', 'sample1', $data));
     }
 
-    public function testViewFragmentTwo()
+    public function testViewFragmentTwo(): void
     {
         $data = [
             'testString1' => 'Hello World',
@@ -52,7 +52,7 @@ final class CommonTest extends CIUnitTestCase
         $this->assertSame($expected, view_fragment('view_fragment', ['sample1', 'sample2'], $data));
     }
 
-    public function testViewFragmentSaveData()
+    public function testViewFragmentSaveData(): void
     {
         $data = [
             'testString1' => 'Hello World',

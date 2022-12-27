@@ -15,6 +15,8 @@ class Toolbar extends BaseToolbar
 {
     /**
      * Prepare for debugging.
+     *
+     * @return void
      */
     public function prepare(?RequestInterface $request = null, ?ResponseInterface $response = null)
     {

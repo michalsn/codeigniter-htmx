@@ -29,7 +29,7 @@ final class ViewTest extends CIUnitTestCase
         $this->config   = new ViewConfig();
     }
 
-    public function testRenderViewData()
+    public function testRenderViewData(): void
     {
         $view = new View($this->config, $this->viewsDir, $this->loader);
 
@@ -40,7 +40,7 @@ final class ViewTest extends CIUnitTestCase
         $this->assertSame($expected, $view->render('view_fragment'));
     }
 
-    public function testRenderViewDataWithDebug()
+    public function testRenderViewDataWithDebug(): void
     {
         service('filters')->enableFilters(['toolbar'], 'after');
 
@@ -56,7 +56,7 @@ final class ViewTest extends CIUnitTestCase
         $this->assertStringContainsString('<!-- DEBUG-VIEW ENDED 1', $result);
     }
 
-    public function testRenderViewFragment()
+    public function testRenderViewFragment(): void
     {
         $view = new View($this->config, $this->viewsDir, $this->loader);
 
@@ -67,7 +67,7 @@ final class ViewTest extends CIUnitTestCase
         $this->assertSame($expected, $view->render('view_fragment', ['fragments' => ['sample1']]));
     }
 
-    public function testRenderViewFragmentInViewFragment()
+    public function testRenderViewFragmentInViewFragment(): void
     {
         $view = new View($this->config, $this->viewsDir, $this->loader);
 
@@ -78,7 +78,7 @@ final class ViewTest extends CIUnitTestCase
         $this->assertSame($expected, $view->render('view_fragment_in_view_fragment', ['fragments' => ['sample2']]));
     }
 
-    public function testRenderViewFragments()
+    public function testRenderViewFragments(): void
     {
         $view = new View($this->config, $this->viewsDir, $this->loader);
 
@@ -89,7 +89,7 @@ final class ViewTest extends CIUnitTestCase
         $this->assertSame($expected, $view->render('view_fragment', ['fragments' => ['sample1', 'sample2']]));
     }
 
-    public function testRenderViewFragmentsWithInclude()
+    public function testRenderViewFragmentsWithInclude(): void
     {
         $view = new View($this->config, $this->viewsDir, $this->loader);
 
@@ -99,7 +99,7 @@ final class ViewTest extends CIUnitTestCase
         $this->assertSame($expected, $view->render('view_with_include_1', ['fragments' => ['sample1']]));
     }
 
-    public function testRenderViewFragmentsFromInclude()
+    public function testRenderViewFragmentsFromInclude(): void
     {
         $view = new View($this->config, $this->viewsDir, $this->loader);
 
@@ -110,7 +110,7 @@ final class ViewTest extends CIUnitTestCase
         $this->assertSame($expected, $view->render('view_with_include_2', ['fragments' => ['sample2']]));
     }
 
-    public function testRenderDefaultInclude()
+    public function testRenderDefaultInclude(): void
     {
         $view = new View($this->config, $this->viewsDir, $this->loader);
 
@@ -119,7 +119,7 @@ final class ViewTest extends CIUnitTestCase
         $this->assertSame($expected, $view->render('default_include'));
     }
 
-    public function testRenderViewDataWithLayout()
+    public function testRenderViewDataWithLayout(): void
     {
         $view = new View($this->config, $this->viewsDir, $this->loader);
 
@@ -130,7 +130,7 @@ final class ViewTest extends CIUnitTestCase
         $this->assertSame($expected, $view->render('with_fragment'));
     }
 
-    public function testRenderViewFragmentWithLayout()
+    public function testRenderViewFragmentWithLayout(): void
     {
         $view = new View($this->config, $this->viewsDir, $this->loader);
 
@@ -141,7 +141,7 @@ final class ViewTest extends CIUnitTestCase
         $this->assertSame($expected, $view->render('with_fragment', ['fragments' => ['sample1']]));
     }
 
-    public function testRenderViewFragmentsWithLayout()
+    public function testRenderViewFragmentsWithLayout(): void
     {
         $view = new View($this->config, $this->viewsDir, $this->loader);
 
@@ -152,7 +152,7 @@ final class ViewTest extends CIUnitTestCase
         $this->assertSame($expected, $view->render('with_fragment', ['fragments' => ['sample1', 'sample2']]));
     }
 
-    public function testRenderViewFragmentFromLayout()
+    public function testRenderViewFragmentFromLayout(): void
     {
         $view = new View($this->config, $this->viewsDir, $this->loader);
 
@@ -161,7 +161,7 @@ final class ViewTest extends CIUnitTestCase
         $this->assertSame($expected, $view->render('with_fragment', ['fragments' => ['sample0']]));
     }
 
-    public function testRenderViewFragmentDoesntExists()
+    public function testRenderViewFragmentDoesntExists(): void
     {
         $view = new View($this->config, $this->viewsDir, $this->loader);
 
@@ -172,7 +172,7 @@ final class ViewTest extends CIUnitTestCase
         $this->assertSame($expected, $view->render('view_fragment', ['fragments' => ['sampleX']]));
     }
 
-    public function testRenderViewFragmentBroken()
+    public function testRenderViewFragmentBroken(): void
     {
         $view = new View($this->config, $this->viewsDir, $this->loader);
 
@@ -183,7 +183,7 @@ final class ViewTest extends CIUnitTestCase
         $this->assertStringContainsString($expected, $view->render('view_fragment_error', ['fragments' => ['broken']]));
     }
 
-    public function testRenderViewFragmentWithCache()
+    public function testRenderViewFragmentWithCache(): void
     {
         $view = new View($this->config, $this->viewsDir, $this->loader);
 
@@ -196,7 +196,7 @@ final class ViewTest extends CIUnitTestCase
         $this->assertSame($expected, $view->render('view_fragment', ['fragments' => ['sample1'], 'cache' => 10]));
     }
 
-    public function testRendersThrowsExceptionIfFileNotFound()
+    public function testRendersThrowsExceptionIfFileNotFound(): void
     {
         $view = new View($this->config, $this->viewsDir, $this->loader);
 

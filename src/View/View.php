@@ -153,6 +153,8 @@ class View extends BaseView
      * Starts holds content for a fragment within the layout.
      *
      * @param string $name Fragment name
+     *
+     * @return void
      */
     public function fragment(string $name)
     {

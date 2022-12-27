@@ -28,7 +28,7 @@ final class ErrorModelDecoratorTest extends CIUnitTestCase
         $this->config   = new ViewConfig();
     }
 
-    public function testDecoratorDontApply()
+    public function testDecoratorDontApply(): void
     {
         $config             = $this->config;
         $config->decorators = [ErrorModalDecorator::class];
@@ -44,7 +44,7 @@ final class ErrorModelDecoratorTest extends CIUnitTestCase
         $this->assertStringNotContainsString($expected2, $view->render('without_decorator'));
     }
 
-    public function testDecoratorApply()
+    public function testDecoratorApply(): void
     {
         $config             = $this->config;
         $config->decorators = [ErrorModalDecorator::class];
