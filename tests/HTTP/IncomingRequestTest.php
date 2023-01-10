@@ -6,6 +6,7 @@ use CodeIgniter\HTTP\URI;
 use CodeIgniter\HTTP\UserAgent;
 use CodeIgniter\Test\CIUnitTestCase;
 use Config\App;
+use InvalidArgumentException;
 use Michalsn\CodeIgniterHtmx\HTTP\IncomingRequest;
 
 /**
@@ -134,5 +135,25 @@ final class IncomingRequestTest extends CIUnitTestCase
     public function testGetTriggeringEventIsNull(): void
     {
         $this->assertNull($this->request->getTriggeringEvent());
+    }
+
+    public function testIsMethodWithHtmxParam()
+    {
+        $request = $this->request->setHeader('HX-Request', 'true');
+        $this->assertTrue($request->is('htmx'));
+    }
+
+    public function testIsMethodWithBoostedParam()
+    {
+        $request = $this->request->setHeader('HX-Boosted', 'true');
+        $this->assertTrue($request->is('boosted'));
+    }
+
+    public function testIsMethodWithInvalidParam()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Unknown type: invalid');
+
+        $this->assertTrue($this->request->is('invalid'));
     }
 }

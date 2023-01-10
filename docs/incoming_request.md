@@ -11,6 +11,7 @@ Available methods:
 - [getTrigger()](#gettrigger)
 - [getTriggerName()](#gettriggername)
 - [getTriggeringEvent()](#gettriggeringevent)
+- [is()](#is)
 
 ### isHtmx()
 
@@ -83,3 +84,15 @@ $this->request->getTriggerName();
 
 Checks the `Triggering-Event` header. The value of the header is a JSON serialized version of the event that triggered the request.
 Check the [event-header](https://htmx.org/extensions/event-header/) plugin for more information.
+
+### is()
+
+This new method is available in CodeIgniter since v4.3. It's a handful shortcut and alternative to another CodeIgniter method: `getMethod()`. But it also provides different types of checks - you can read more about it in the [user guide](https://codeigniter.com/user_guide/incoming/incomingrequest.html#is).
+
+Along with this library, we added two new parameters that can be used: `htmx` and `boosted` which are equivalent of using `isHtmx()` and `isBoosted()` methods.
+
+```php
+$this->request->is('htmx');
+// or
+$this->request->is('boosted');
+```
