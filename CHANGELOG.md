@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.1.0](https://github.com/michalsn/codeigniter-htmx/compare/v1.0.0...v1.1.0) - 2023-01-10
+
+### Enhancements
+- Add support for `htmx` and `boosted` param to the `IncomingRequest::is()` method.
+
 ## [1.0.0](https://github.com/michalsn/codeigniter-htmx/compare/v1.0.0-beta.2...v1.0.0) - 2022-12-09
 
 ### Enhancements
@@ -17,5 +22,5 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Stop including code responsible for showing Debug Toolbar for `htmx` requests.
 
-## [1.0.0-beta] - 2022-11-19
+## 1.0.0-beta - 2022-11-19
 First beta realease
