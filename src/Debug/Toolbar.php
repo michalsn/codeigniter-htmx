@@ -6,6 +6,7 @@ use CodeIgniter\Debug\Toolbar as BaseToolbar;
 use CodeIgniter\HTTP\DownloadResponse;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\I18n\Time;
 use Config\Services;
 use Kint\Kint;
 use Michalsn\CodeIgniterHtmx\HTTP\IncomingRequest;
@@ -47,7 +48,7 @@ class Toolbar extends BaseToolbar
             helper('filesystem');
 
             // Updated to microtime() so we can get history
-            $time = sprintf('%.6f', microtime(true));
+            $time = sprintf('%.6f', Time::now()->format('U.u'));
 
             if (! is_dir(WRITEPATH . 'debugbar')) {
                 mkdir(WRITEPATH . 'debugbar', 0777);
@@ -75,11 +76,11 @@ class Toolbar extends BaseToolbar
             $kintScript         = ($kintScript === '0') ? '' : $kintScript;
 
             $script = PHP_EOL
-                . '<script type="text/javascript" ' . csp_script_nonce() . ' id="debugbar_loader" '
+                . '<script ' . csp_script_nonce() . ' id="debugbar_loader" '
                 . 'data-time="' . $time . '" '
                 . 'src="' . site_url() . '?debugbar"></script>'
-                . '<script type="text/javascript" ' . csp_script_nonce() . ' id="debugbar_dynamic_script"></script>'
-                . '<style type="text/css" ' . csp_style_nonce() . ' id="debugbar_dynamic_style"></style>'
+                . '<script ' . csp_script_nonce() . ' id="debugbar_dynamic_script"></script>'
+                . '<style ' . csp_style_nonce() . ' id="debugbar_dynamic_style"></style>'
                 . $kintScript
                 . PHP_EOL;
 
