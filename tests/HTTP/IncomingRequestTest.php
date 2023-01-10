@@ -137,19 +137,19 @@ final class IncomingRequestTest extends CIUnitTestCase
         $this->assertNull($this->request->getTriggeringEvent());
     }
 
-    public function testIsMethodWithHtmxParam()
+    public function testIsMethodWithHtmxParam(): void
     {
         $request = $this->request->setHeader('HX-Request', 'true');
         $this->assertTrue($request->is('htmx'));
     }
 
-    public function testIsMethodWithBoostedParam()
+    public function testIsMethodWithBoostedParam(): void
     {
         $request = $this->request->setHeader('HX-Boosted', 'true');
         $this->assertTrue($request->is('boosted'));
     }
 
-    public function testIsMethodWithInvalidParam()
+    public function testIsMethodWithInvalidParam(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Unknown type: invalid');
