@@ -108,4 +108,25 @@ class IncomingRequest extends BaseIncomingRequest
         return $this->hasHeader($header)
             && $this->header($header)->getValueLine() === 'true';
     }
+
+    /**
+     * Checks this request type.
+     *
+     * @param string $type HTTP verb or 'json' or 'ajax' or 'htmx' or 'boosted'
+     * @phpstan-param string|'get'|'post'|'put'|'delete'|'head'|'patch'|'options'|'json'|'ajax'|'htmx'|'boosted' $type
+     */
+    public function is(string $type): bool
+    {
+        $valueUpper = strtoupper($type);
+
+        if ($valueUpper === 'HTMX') {
+            return $this->isHtmx();
+        }
+
+        if ($valueUpper === 'BOOSTED') {
+            return $this->isBoosted();
+        }
+
+        return parent::is($type);
+    }
 }
