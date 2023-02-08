@@ -53,5 +53,5 @@ nav:
   - View fragments: view_fragments.md
   - IncomingReqeuest: incoming_request.md
   - Response: response.md
-  - RediretResponse: redirect_response.md
+  - RedirectResponse: redirect_response.md
   - Troubleshooting: troubleshooting.md
