@@ -11,7 +11,7 @@ We can use view fragments inside our views. The syntax is similar to one known f
         <caption><?= $caption; ?></caption>
         ...
     </table>
-<?php $this->fragmentEnd(); ?>
+<?php $this->endFragment(); ?>
 <div>
     ...
 </div>
