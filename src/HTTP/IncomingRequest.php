@@ -76,8 +76,6 @@ class IncomingRequest extends BaseIncomingRequest
      * version of the event that triggered the request.
      *
      * @see https://htmx.org/extensions/event-header/
-     *
-     * @return array|object|null
      */
     public function getTriggeringEvent(bool $toArray = true): array|object|null
     {
