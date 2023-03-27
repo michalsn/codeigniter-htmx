@@ -79,7 +79,7 @@ class IncomingRequest extends BaseIncomingRequest
      *
      * @return array|object|null
      */
-    public function getTriggeringEvent(bool $toArray = true)
+    public function getTriggeringEvent(bool $toArray = true): array|object|null
     {
         if (! $this->hasHeader('Triggering-Event')) {
             return null;
