@@ -9,6 +9,9 @@ It also provides some additional help with **handling errors** in development mo
 [![Deptrac](https://github.com/michalsn/codeigniter-htmx/actions/workflows/deptrac.yml/badge.svg)](https://github.com/michalsn/codeigniter-htmx/actions/workflows/deptrac.yml)
 [![Coverage Status](https://coveralls.io/repos/github/michalsn/codeigniter-htmx/badge.svg?branch=develop)](https://coveralls.io/github/michalsn/codeigniter-htmx?branch=develop)
 
+![PHP](https://img.shields.io/badge/PHP-%5E8.0-blue)
+![CodeIgniter](https://img.shields.io/badge/CodeIgniter-%5E4.3-blue)
+
 ## Installation
 
     composer require michalsn/codeigniter-htmx
