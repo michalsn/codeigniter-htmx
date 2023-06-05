@@ -17,6 +17,7 @@ It also provides some additional help with **handling errors** in development mo
 * [IncomingReqeuest](incoming_request.md)
 * [Response](response.md)
 * [RediretResponse](redirect_response.md)
+* [Debug Toolbar](debug_toolbar.md)
 * [Troubleshooting](troubleshooting.md)
 
 ### Demos

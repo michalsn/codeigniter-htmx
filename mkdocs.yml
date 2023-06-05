@@ -54,4 +54,5 @@ nav:
   - IncomingReqeuest: incoming_request.md
   - Response: response.md
   - RedirectResponse: redirect_response.md
+  - Debug Toolbar: debug_toolbar.md
   - Troubleshooting: troubleshooting.md
