@@ -1,1 +1,1 @@
-<html><body><?= $testString ?></body></html>
+<html><head></head><body><?= $testString ?></body></html>

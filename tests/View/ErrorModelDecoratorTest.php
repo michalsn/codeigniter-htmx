@@ -53,7 +53,7 @@ final class ErrorModelDecoratorTest extends CIUnitTestCase
         $view = new View($this->config, $this->viewsDir, $this->loader);
 
         $view->setVar('testString', 'Hello World');
-        $expected1 = '<body>Hello World<script';
+        $expected1 = '</script></head><body>Hello World';
         $expected2 = 'id="htmxErrorModalScript"';
 
         $this->assertStringContainsString($expected1, $view->render('with_decorator'));
