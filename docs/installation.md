@@ -3,6 +3,8 @@
 - [Composer Installation](#composer-installation)
 - [Manual Installation](#manual-installation)
 
+Remember - you still need to include the `htmx` javascript library inside the `head` tag.
+
 ## Composer Installation
 
 The only thing you have to do is to run this command, and you're ready to go.
