@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.2.0](https://github.com/michalsn/codeigniter-htmx/compare/v1.1.0...v1.2.0) - 2023-06-06
+
+### Enhancements
+- Add support for displaying the Debug Toolbar after `htmx` request.
+
+### Changed
+- The added JavaScript is now placed in the `head` tag.
+
 ## [1.1.0](https://github.com/michalsn/codeigniter-htmx/compare/v1.0.0...v1.1.0) - 2023-01-10
 
 ### Enhancements
