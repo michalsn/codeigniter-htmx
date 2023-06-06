@@ -2,7 +2,7 @@
 
 This library is set of methods for `IncomingRequest`, `Response` and `RedirectResponse` classes to help you work with htmx fluently in CodeIgniter 4 framework.
 
-It also provides some additional help with **handling errors** in development mode as well as support for **view fragments**.
+It also provides some additional help with **handling errors** and **Debug Toolbar** in development mode as well as support for **view fragments**.
 
 ### Requirements
 
