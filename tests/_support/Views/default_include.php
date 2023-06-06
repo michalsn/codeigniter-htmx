@@ -1,3 +1,1 @@
-<?php
-
-$this->include('view_included_1');
+<?= $this->include('view_included_1');
