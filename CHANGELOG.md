@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.2.1](https://github.com/michalsn/codeigniter-htmx/compare/v1.2.0...v1.2.1) - 2023-06-17
+
+### Fixed
+- In some cases `view_fragment` wasn't parsed properly.
+
 ## [1.2.0](https://github.com/michalsn/codeigniter-htmx/compare/v1.1.0...v1.2.0) - 2023-06-06
 
 ### Enhancements
