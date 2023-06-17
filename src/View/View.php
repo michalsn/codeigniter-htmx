@@ -158,10 +158,6 @@ class View extends BaseView
      */
     public function fragment(string $name)
     {
-        if (empty($this->renderVars['options']['fragments'])) {
-            return;
-        }
-
         $this->fragmentStack[] = $name;
 
         ob_start();
@@ -174,10 +170,6 @@ class View extends BaseView
      */
     public function endFragment()
     {
-        if (empty($this->renderVars['options']['fragments'])) {
-            return;
-        }
-
         $contents = ob_get_clean();
 
         if ($this->fragmentStack === []) {
@@ -217,7 +209,7 @@ class View extends BaseView
      */
     public function include(string $view, ?array $options = null, $saveData = true): string
     {
-        if ($this->fragmentStack !== []) {
+        if ($this->fragmentStack !== [] && ! empty($this->renderVars['options']['fragments'])) {
             $options['fragments'] = $this->renderVars['options']['fragments'];
             echo $this->render($view, $options, $saveData);
 

@@ -63,4 +63,28 @@ final class CommonTest extends CIUnitTestCase
 
         $this->assertSame($expected, view_fragment('view_fragment', ['sample1', 'sample2'], $data, ['saveData' => true]));
     }
+
+    public function testViewFragmentWithLayout(): void
+    {
+        $data = [
+            'testString1' => 'Hello World',
+            'testString2' => 'Hello World',
+        ];
+
+        $expected = "Hello World, fragment1!\nHello World, fragment2!\n";
+
+        $this->assertSame($expected, view_fragment('with_fragment', ['sample1', 'sample2'], $data));
+    }
+
+    public function testViewFragmentFromLayout(): void
+    {
+        $data = [
+            'testString1' => 'Hello World',
+            'testString2' => 'Hello World',
+        ];
+
+        $expected = "Page bottom";
+
+        $this->assertSame($expected, view_fragment('with_fragment', 'sample0', $data));
+    }
 }
