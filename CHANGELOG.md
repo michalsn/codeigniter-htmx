@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.2.2](https://github.com/michalsn/codeigniter-htmx/compare/v1.2.1...v1.2.2) - 2023-08-26
+
+### Fixed
+- Update `Toolbar` for changes in CI 4.4.
+
 ## [1.2.1](https://github.com/michalsn/codeigniter-htmx/compare/v1.2.0...v1.2.1) - 2023-06-17
 
 ### Fixed
