@@ -11,6 +11,7 @@ use Config\Services;
 use Kint\Kint;
 use Michalsn\CodeIgniterHtmx\HTTP\IncomingRequest;
 use Michalsn\CodeIgniterHtmx\HTTP\Response;
+use Config\Toolbar as ToolbarConfig;
 
 class Toolbar extends BaseToolbar
 {
@@ -36,7 +37,7 @@ class Toolbar extends BaseToolbar
                 return;
             }
 
-            $toolbar = Services::toolbar(config(self::class));
+            $toolbar = Services::toolbar(config(ToolbarConfig::class));
             $stats   = $app->getPerformanceStats();
             $data    = $toolbar->run(
                 $stats['startTime'],
