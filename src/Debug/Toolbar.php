@@ -8,10 +8,10 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\I18n\Time;
 use Config\Services;
+use Config\Toolbar as ToolbarConfig;
 use Kint\Kint;
 use Michalsn\CodeIgniterHtmx\HTTP\IncomingRequest;
 use Michalsn\CodeIgniterHtmx\HTTP\Response;
-use Config\Toolbar as ToolbarConfig;
 
 class Toolbar extends BaseToolbar
 {
