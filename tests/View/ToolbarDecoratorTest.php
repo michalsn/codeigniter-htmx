@@ -8,6 +8,7 @@ use CodeIgniter\Config\Services;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\View\View;
 use Config\View as ViewConfig;
+use Michalsn\CodeIgniterHtmx\Config\Htmx as HtmxConfig;
 use Michalsn\CodeIgniterHtmx\View\ToolbarDecorator;
 
 /**
@@ -58,5 +59,41 @@ final class ToolbarDecoratorTest extends CIUnitTestCase
 
         $this->assertStringContainsString($expected1, $view->render('with_decorator'));
         $this->assertStringContainsString($expected2, $view->render('with_decorator'));
+    }
+
+    public function testDecoratorDisabled(): void
+    {
+        $htmxConfig = new HtmxConfig();
+        $htmxConfig->toolbarDecorator = false;
+        Factories::injectMock('config', 'Htmx', $htmxConfig);
+
+        $config             = $this->config;
+        $config->decorators = [ToolbarDecorator::class];
+        Factories::injectMock('config', 'View', $config);
+
+        $view = new View($this->config, $this->viewsDir, $this->loader);
+
+        $view->setVar('testString', 'Hello World');
+        $expected1 = '<h1>Hello World</h1>';
+        $expected2 = 'id="htmxToolbarScript"';
+
+        $this->assertStringContainsString($expected1, $view->render('without_decorator'));
+        $this->assertStringNotContainsString($expected2, $view->render('without_decorator'));
+    }
+
+    public function testDecoratorDisabledWithSkipDecoratorsString(): void
+    {
+        $config             = $this->config;
+        $config->decorators = [ToolbarDecorator::class];
+        Factories::injectMock('config', 'View', $config);
+
+        $view = new View($this->config, $this->viewsDir, $this->loader);
+
+        $view->setVar('testString', 'htmxSkipViewDecorators');
+        $expected1 = '<h1>htmxSkipViewDecorators</h1>';
+        $expected2 = 'id="htmxToolbarScript"';
+
+        $this->assertStringContainsString($expected1, $view->render('without_decorator'));
+        $this->assertStringNotContainsString($expected2, $view->render('without_decorator'));
     }
 }

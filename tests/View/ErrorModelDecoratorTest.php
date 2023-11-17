@@ -8,6 +8,7 @@ use CodeIgniter\Config\Services;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\View\View;
 use Config\View as ViewConfig;
+use Michalsn\CodeIgniterHtmx\Config\Htmx as HtmxConfig;
 use Michalsn\CodeIgniterHtmx\View\ErrorModalDecorator;
 
 /**
@@ -58,5 +59,41 @@ final class ErrorModelDecoratorTest extends CIUnitTestCase
 
         $this->assertStringContainsString($expected1, $view->render('with_decorator'));
         $this->assertStringContainsString($expected2, $view->render('with_decorator'));
+    }
+
+    public function testDecoratorDisabled(): void
+    {
+        $htmxConfig = new HtmxConfig();
+        $htmxConfig->errorModalDecorator = false;
+        Factories::injectMock('config', 'Htmx', $htmxConfig);
+
+        $config             = $this->config;
+        $config->decorators = [ErrorModalDecorator::class];
+        Factories::injectMock('config', 'View', $config);
+
+        $view = new View($this->config, $this->viewsDir, $this->loader);
+
+        $view->setVar('testString', 'Hello World 1');
+        $expected1 = '<h1>Hello World 1</h1>';
+        $expected2 = 'id="htmxErrorModalScript"';
+
+        $this->assertStringContainsString($expected1, $view->render('without_decorator'));
+        $this->assertStringNotContainsString($expected2, $view->render('without_decorator'));
+    }
+
+    public function testDecoratorDisabledWithSkipDecoratorsString(): void
+    {
+        $config             = $this->config;
+        $config->decorators = [ErrorModalDecorator::class];
+        Factories::injectMock('config', 'View', $config);
+
+        $view = new View($this->config, $this->viewsDir, $this->loader);
+
+        $view->setVar('testString', 'htmxSkipViewDecorators');
+        $expected1 = '<h1>htmxSkipViewDecorators</h1>';
+        $expected2 = 'id="htmxErrorModalScript"';
+
+        $this->assertStringContainsString($expected1, $view->render('without_decorator'));
+        $this->assertStringNotContainsString($expected2, $view->render('without_decorator'));
     }
 }
