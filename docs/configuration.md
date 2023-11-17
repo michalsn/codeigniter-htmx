@@ -1,6 +1,6 @@
 # Configuration
 
-To make changes to the config file, we have to have our copy in the `app/Config/MHtmx.php`. Luckily, this package comes with handy command that will make this easy.
+To make changes to the config file, we have to have our copy in the `app/Config/Htmx.php`. Luckily, this package comes with handy command that will make this easy.
 
 When we run:
 
@@ -22,7 +22,7 @@ This allows us to disable the `ToolbarDecorator` class. Please read [Debug Toolb
 
 ### $errorModalDecorator
 
-This allows us to disable thr `ErrorModalDecorator` class. Please read [Error handling](error_handling.md) page for more information.
+This allows us to disable the `ErrorModalDecorator` class. Please read [Error handling](error_handling.md) page for more information.
 
 ### $skipViewDecoratorsString
 
