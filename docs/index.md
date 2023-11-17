@@ -12,6 +12,7 @@ It also provides some additional help with **handling errors** and **Debug Toolb
 ### Table of Contents
 
 * [Installation](installation.md)
+* [Configuration](configuration.md)
 * [Error handling](error_handling.md)
 * [View fragments](view_fragments.md)
 * [IncomingReqeuest](incoming_request.md)
