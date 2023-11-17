@@ -11,7 +11,9 @@ class ErrorModalDecorator implements ViewDecoratorInterface
         if (CI_DEBUG
             && (! is_cli() || ENVIRONMENT === 'testing')
             && ! service('request')->isHtmx()
+            && config('Htmx')->errorModalDecorator
             && str_contains($html, '</head>')
+            && ! str_contains($html, config('Htmx')->skipViewDecoratorsString)
             && ! str_contains($html, 'id="htmxErrorModalScript"')
         ) {
             $script = sprintf(
