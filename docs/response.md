@@ -6,6 +6,7 @@ Available methods:
 - [setReplaceUrl()](#setreplaceurl)
 - [setReswap()](#setreswap)
 - [setRetarget()](#setretarget)
+- [setReselect()](#setreselect)
 - [triggerClientEvent()](#triggerclientevent)
 
 ### setPushUrl()
@@ -38,6 +39,14 @@ Sets the value in `HX-Retarget` header. A CSS selector that updates the target o
 
 ```php
 $this->response->setRetarget('#another-div');
+```
+
+### setReselect()
+
+Sets the value in `HX-Reselect` header. A CSS selector that allows you to choose which part of the response is used to be swapped in. Overrides an existing [hx-select](https://htmx.org/attributes/hx-select/) on the triggering element.
+
+```php
+$this->response->setReselect('#another-div');
 ```
 
 ### triggerClientEvent()

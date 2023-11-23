@@ -12,9 +12,9 @@ We will get our copy ready for modifications.
 
 Available options:
 
-- [$toolbarDecorator](#$toolbarDecorator)
-- [$errorModalDecorator](#$errorModalDecorator)
-- [$skipViewDecoratorsString](#$skipViewDecoratorsString)
+- [$toolbarDecorator](#toolbarDecorator)
+- [$errorModalDecorator](#errorModalDecorator)
+- [$skipViewDecoratorsString](#skipViewDecoratorsString)
 
 ### $toolbarDecorator
 

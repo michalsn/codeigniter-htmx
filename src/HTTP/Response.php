@@ -61,6 +61,19 @@ class Response extends BaseResponse
     }
 
     /**
+     * A CSS selector that allows you to choose which part
+     * of the response is used to be swapped in.
+     *
+     * @return Response;
+     */
+    public function setReselect(string $selector): Response
+    {
+        $this->setHeader('HX-Reselect', $selector);
+
+        return $this;
+    }
+
+    /**
      * Allows you to trigger client side events.
      *
      * @return Response;
