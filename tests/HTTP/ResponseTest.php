@@ -77,6 +77,13 @@ final class ResponseTest extends CIUnitTestCase
         $this->assertSame('#element', $this->response->getHeaderLine('HX-Retarget'));
     }
 
+    public function testSetReselect(): void
+    {
+        $this->response->setReselect('#element');
+
+        $this->assertSame('#element', $this->response->getHeaderLine('HX-Reselect'));
+    }
+
     public function testTriggerClientEvent(): void
     {
         $this->response->triggerClientEvent('showMessage');
