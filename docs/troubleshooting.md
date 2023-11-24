@@ -1,5 +1,37 @@
 # Troubleshooting
 
+## Slow content swapping
+
+In `development` environment, if you experience slow content swapping but the requests itself are fast,
+you may want to turn off the `View Collector`. To do so, go to the `app/Config/Toolbar.php` file and
+comment out the line with `View::class`:
+
+```php
+
+// ...
+
+class Toolbar extends BaseConfig
+{
+
+    // ...
+
+    public array $collectors = [
+        Timers::class,
+        Database::class,
+        Logs::class,
+        //Views::class,
+
+        // ...
+    ];
+
+    // ...
+
+```
+
+This happens because HTML comments added by this collector class slow down the proces of parsing the content by htmx.
+
+This problem will not apply to the `production` environment, since the `Debug Toolbar` is disabled by default in this environment.
+
 ## PHPStan
 
 ### Request
