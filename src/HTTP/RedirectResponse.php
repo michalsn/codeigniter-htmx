@@ -40,11 +40,11 @@ class RedirectResponse extends BaseRedirectResponse
             $data['swap'] = $swap;
         }
 
-        if (! empty($values)) {
+        if ($values !== null && $values !== []) {
             $data['values'] = $values;
         }
 
-        if (! empty($headers)) {
+        if ($headers !== null && $headers !== []) {
             $data['headers'] = $headers;
         }
 

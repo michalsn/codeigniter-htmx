@@ -83,7 +83,7 @@ final class CommonTest extends CIUnitTestCase
             'testString2' => 'Hello World',
         ];
 
-        $expected = "Page bottom";
+        $expected = 'Page bottom';
 
         $this->assertSame($expected, view_fragment('with_fragment', 'sample0', $data));
     }

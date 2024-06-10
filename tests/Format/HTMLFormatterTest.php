@@ -72,5 +72,4 @@ final class HTMLFormatterTest extends CIUnitTestCase
 
         $this->assertSame($expected, $this->htmlFormatter->format($data));
     }
-
 }
