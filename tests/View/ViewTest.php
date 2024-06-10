@@ -2,7 +2,6 @@
 
 namespace Tests\View;
 
-use CodeIgniter\Autoloader\FileLocator;
 use CodeIgniter\Autoloader\FileLocatorInterface;
 use CodeIgniter\Config\Services;
 use CodeIgniter\Test\CIUnitTestCase;
