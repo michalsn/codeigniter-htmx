@@ -19,6 +19,7 @@ It also provides some additional help with **handling errors** and **Debug Toolb
 * [Response](response.md)
 * [RediretResponse](redirect_response.md)
 * [Debug Toolbar](debug_toolbar.md)
+* [HTML Formatter](html_formatter.md)
 * [Troubleshooting](troubleshooting.md)
 
 ### Demos

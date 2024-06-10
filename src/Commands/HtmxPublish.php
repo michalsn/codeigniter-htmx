@@ -40,6 +40,26 @@ class HtmxPublish extends BaseCommand
             file_put_contents($file, $contents);
         }
 
+        $file = APPPATH . 'Config/Format.php';
+
+        $publisher->addLineAfter(
+            $file,
+            "        'text/html'",
+            "'text/xml', // human-readable XML",
+        );
+
+        $publisher->addLineAfter(
+            $file,
+            "        'text/html'        => HTMLFormatter::class,",
+            "'text/xml'         => XMLFormatter::class,",
+        );
+
+        $publisher->addLineAfter(
+            $file,
+            'use Michalsn\\CodeIgniterHtmx\\Format\\HTMLFormatter;',
+            'use CodeIgniter\\Format\\XMLFormatter;',
+        );
+
         CLI::write(CLI::color('  Published! ', 'green') . 'You can customize the configuration by editing the "app/Config/Htmx.php" file.');
     }
 }
