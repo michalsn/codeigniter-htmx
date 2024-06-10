@@ -18,8 +18,8 @@ It also provides some additional help with **handling errors** and **Debug Toolb
 * [IncomingReqeuest](incoming_request.md)
 * [Response](response.md)
 * [RediretResponse](redirect_response.md)
-* [Debug Toolbar](debug_toolbar.md)
 * [HTML Formatter](html_formatter.md)
+* [Debug Toolbar](debug_toolbar.md)
 * [Troubleshooting](troubleshooting.md)
 
 ### Demos
