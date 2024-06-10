@@ -3,6 +3,24 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.5.0](https://github.com/michalsn/codeigniter-htmx/compare/v1.4.0...v1.5.0) - 2024-06-10
+
+### Enhancements
+
+- feat: add HTML formatter
+
+## [1.4.0](https://github.com/michalsn/codeigniter-htmx/compare/v1.3.0...v1.4.0) - 2023-11-23
+
+### Enhancements
+
+- feat: add `HX-Reselect` header support
+
+## [1.3.0](https://github.com/michalsn/codeigniter-htmx/compare/v1.2.2...v1.3.0) - 2023-11-20
+
+### Enhancements
+
+- feat: configurable view decorators
+
 ## [1.2.2](https://github.com/michalsn/codeigniter-htmx/compare/v1.2.1...v1.2.2) - 2023-08-26
 
 ### Fixed
