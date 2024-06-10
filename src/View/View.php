@@ -23,7 +23,7 @@ class View extends BaseView
      * The name of the current section being rendered,
      * if any.
      *
-     * @var array<string>
+     * @var list<string>
      */
     protected array $fragmentStack = [];
 

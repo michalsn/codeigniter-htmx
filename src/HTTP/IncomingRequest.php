@@ -110,7 +110,7 @@ class IncomingRequest extends BaseIncomingRequest
     /**
      * Checks this request type.
      *
-     * @param string $type HTTP verb or 'json' or 'ajax' or 'htmx' or 'boosted'
+     * @param         string                                                                                     $type HTTP verb or 'json' or 'ajax' or 'htmx' or 'boosted'
      * @phpstan-param string|'get'|'post'|'put'|'delete'|'head'|'patch'|'options'|'json'|'ajax'|'htmx'|'boosted' $type
      */
     public function is(string $type): bool

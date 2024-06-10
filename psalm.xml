@@ -7,13 +7,15 @@
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
     autoloader="psalm_autoload.php"
     cacheDirectory="build/psalm/"
+    findUnusedBaselineEntry="true"
+    findUnusedCode="false"
 >
     <projectFiles>
         <directory name="src/" />
         <directory name="tests/" />
         <ignoreFiles>
             <directory name="vendor" />
-            <directory name="tests/_support/Views/" />
+            <directory name="tests/_support/Views" />
         </ignoreFiles>
     </projectFiles>
 </psalm>

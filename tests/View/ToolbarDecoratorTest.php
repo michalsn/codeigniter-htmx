@@ -2,7 +2,7 @@
 
 namespace Tests\View;
 
-use CodeIgniter\Autoloader\FileLocator;
+use CodeIgniter\Autoloader\FileLocatorInterface;
 use CodeIgniter\Config\Factories;
 use CodeIgniter\Config\Services;
 use CodeIgniter\Test\CIUnitTestCase;
@@ -16,7 +16,7 @@ use Michalsn\CodeIgniterHtmx\View\ToolbarDecorator;
  */
 final class ToolbarDecoratorTest extends CIUnitTestCase
 {
-    private FileLocator $loader;
+    private FileLocatorInterface $loader;
     private string $viewsDir;
     private ViewConfig $config;
 
@@ -63,7 +63,7 @@ final class ToolbarDecoratorTest extends CIUnitTestCase
 
     public function testDecoratorDisabled(): void
     {
-        $htmxConfig = new HtmxConfig();
+        $htmxConfig                   = new HtmxConfig();
         $htmxConfig->toolbarDecorator = false;
         Factories::injectMock('config', 'Htmx', $htmxConfig);
 
