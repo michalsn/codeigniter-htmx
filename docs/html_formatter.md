@@ -19,7 +19,7 @@ Since content negotiation will be triggered for any format other than `json` or 
 2. Move the `'text/html'` entry from the `$supportedResponseFormats` config array to the first position in the array - this way it will be used as the default value.
    ```php
    public array $supportedResponseFormats = [
-        'text/html'
+        'text/html',
         'application/json',
         'application/xml', // machine-readable XML
         'text/xml', // human-readable XML
