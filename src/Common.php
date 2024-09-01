@@ -15,7 +15,7 @@ if (! function_exists('view_fragment')) {
      *
      * @param array $options Options for saveData or third-party extensions.
      */
-    function view_fragment(string $name, string|array $fragments, array $data = [], array $options = []): string
+    function view_fragment(string $name, array|string $fragments, array $data = [], array $options = []): string
     {
         $renderer = Services::renderer();
 
