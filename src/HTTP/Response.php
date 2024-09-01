@@ -11,8 +11,6 @@ class Response extends BaseResponse
 
     /**
      * Pushes a new url into the history stack.
-     *
-     * @return Response;
      */
     public function setPushUrl(?string $url = null): Response
     {
@@ -23,8 +21,6 @@ class Response extends BaseResponse
 
     /**
      * Replaces the current URL in the location bar.
-     *
-     * @return Response;
      */
     public function setReplaceUrl(?string $url = null): Response
     {
@@ -35,8 +31,6 @@ class Response extends BaseResponse
 
     /**
      * Allows you to specify how the response will be swapped.
-     *
-     * @return Response;
      */
     public function setReswap(string $method): Response
     {
@@ -50,8 +44,6 @@ class Response extends BaseResponse
     /**
      * A CSS selector that updates the target of the content
      * update to a different element on the page.
-     *
-     * @return Response;
      */
     public function setRetarget(string $selector): Response
     {
@@ -63,8 +55,6 @@ class Response extends BaseResponse
     /**
      * A CSS selector that allows you to choose which part
      * of the response is used to be swapped in.
-     *
-     * @return Response;
      */
     public function setReselect(string $selector): Response
     {
@@ -75,8 +65,6 @@ class Response extends BaseResponse
 
     /**
      * Allows you to trigger client side events.
-     *
-     * @return Response;
      */
     public function triggerClientEvent(string $name, array|string $params = '', string $after = 'receive'): Response
     {
