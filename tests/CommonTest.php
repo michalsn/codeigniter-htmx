@@ -12,6 +12,8 @@ final class CommonTest extends CIUnitTestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        config('Paths')->viewDirectory = SUPPORTPATH . 'Views';
     }
 
     public function testViewFragmentNone(): void
