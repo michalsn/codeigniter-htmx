@@ -32,7 +32,12 @@ class Services extends BaseService
             return static::getSharedInstance('renderer', $viewPath, $config);
         }
 
-        $viewPath = $viewPath ?: (new Paths())->viewDirectory;
+        if ($viewPath === null && ENVIRONMENT === 'testing') {
+            $viewPath = SUPPORTPATH . 'Views';
+        } else {
+            $viewPath = $viewPath ?: (new Paths())->viewDirectory;
+        }
+
         $config ??= config('View');
 
         return new View($config, $viewPath, AppServices::locator(), CI_DEBUG, AppServices::logger());

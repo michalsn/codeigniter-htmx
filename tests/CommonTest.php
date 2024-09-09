@@ -3,7 +3,6 @@
 namespace Tests;
 
 use CodeIgniter\Test\CIUnitTestCase;
-use Config\Paths;
 
 /**
  * @internal
@@ -13,8 +12,6 @@ final class CommonTest extends CIUnitTestCase
     protected function setUp(): void
     {
         parent::setUp();
-
-        (new Paths())->viewDirectory = SUPPORTPATH . 'Views';
     }
 
     public function testViewFragmentNone(): void
