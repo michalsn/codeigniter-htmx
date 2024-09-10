@@ -7,7 +7,6 @@ use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\HTTP\UserAgent;
 use Config\App;
-use Config\Optimize;
 use Config\Paths;
 use Config\Services as AppServices;
 use Config\Toolbar as ToolbarConfig;
@@ -33,9 +32,7 @@ class Services extends BaseService
             return static::getSharedInstance('renderer', $viewPath, $config);
         }
 
-        $viewPath = $viewPath ?: ((new Optimize())->configCacheEnabled ?
-            (new Paths())->viewDirectory :
-            config('Paths')->viewDirectory);
+        $viewPath = $viewPath ?: (new Paths())->viewDirectory;
 
         $config ??= config('View');
 

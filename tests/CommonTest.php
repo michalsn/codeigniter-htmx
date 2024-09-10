@@ -13,7 +13,7 @@ final class CommonTest extends CIUnitTestCase
     {
         parent::setUp();
 
-        config('Paths')->viewDirectory = SUPPORTPATH . 'Views';
+        service('renderer', SUPPORTPATH . 'Views');
     }
 
     public function testViewFragmentNone(): void
