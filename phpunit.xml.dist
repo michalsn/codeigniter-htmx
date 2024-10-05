@@ -12,7 +12,7 @@
     stopOnFailure="false"
     stopOnIncomplete="false"
     stopOnSkipped="false"
-    cacheDirectory=".phpunit.cache"
+    cacheDirectory="build/.phpunit.cache"
     beStrictAboutCoverageMetadata="true">
     <coverage includeUncoveredFiles="true">
         <report>
