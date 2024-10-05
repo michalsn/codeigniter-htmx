@@ -112,6 +112,8 @@ class View extends BaseView
         } elseif (! empty($this->renderVars['options']['fragments']) && $this->fragmentStack === []) {
             $output = '';
 
+            $this->fragments = array_intersect_key($this->fragments, array_flip($this->renderVars['options']['fragments']));
+
             foreach ($this->renderVars['options']['fragments'] as $fragmentName) {
                 $output .= $this->renderFragment($fragmentName);
                 unset($this->fragments[$fragmentName]);
@@ -197,9 +199,13 @@ class View extends BaseView
             return '';
         }
 
+        $output = '';
+
         foreach ($this->fragments[$fragmentName] as $contents) {
-            return $contents;
+            $output .= $contents;
         }
+
+        return $output;
     }
 
     /**
