@@ -16,7 +16,8 @@ It also provides some additional help with **handling errors** and **Debug Toolb
 
     composer require michalsn/codeigniter-htmx
 
-Remember - you still need to include the `htmx` javascript library inside the `head` tag.
+> [!NOTE]
+> Remember - you still need to include the `htmx` javascript library inside the `head` tag.
 
 ## Docs
 

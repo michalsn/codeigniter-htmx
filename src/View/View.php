@@ -5,6 +5,7 @@ namespace Michalsn\CodeIgniterHtmx\View;
 use CodeIgniter\Debug\Toolbar\Collectors\Views;
 use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\View\Exceptions\ViewException;
+use CodeIgniter\View\RendererInterface;
 use CodeIgniter\View\View as BaseView;
 use Config\Toolbar;
 use RuntimeException;
@@ -15,9 +16,9 @@ use RuntimeException;
 class View extends BaseView
 {
     /**
-     * Holds the sections and their data.
+     * Show fragments tags or not.
      */
-    protected array $fragments = [];
+    protected bool $showFragments = false;
 
     /**
      * The name of the current section being rendered,
@@ -28,6 +29,116 @@ class View extends BaseView
     protected array $fragmentStack = [];
 
     /**
+     * Starts holds content for a fragment within the layout.
+     *
+     * @param string $name Fragment name
+     */
+    public function fragment(string $name): void
+    {
+        $this->fragmentStack[] = $name;
+
+        if ($this->showFragments) {
+            echo sprintf('@[[fragmentStart="%s"]]', $name);
+        }
+    }
+
+    /**
+     * Captures the last fragment
+     *
+     * @throws RuntimeException
+     */
+    public function endFragment(): void
+    {
+        if ($this->fragmentStack === []) {
+            ob_end_clean();
+
+            throw new RuntimeException('View themes, no current fragment.');
+        }
+
+        $name = array_pop($this->fragmentStack);
+
+        if ($this->showFragments) {
+            echo sprintf('@[[fragmentEnd="%s"]]', $name);
+        }
+    }
+
+    /**
+     * Whether we should display fragments tags or not.
+     */
+    protected function showFragments(bool $display = true): RendererInterface
+    {
+        $this->showFragments = $display;
+
+        return $this;
+    }
+
+    /**
+     * Render fragments.
+     */
+    public function renderFragments(string $name, ?array $options = null, ?bool $saveData = null): string
+    {
+        $fragments = $options['fragments'] ?? [];
+        $output    = $this->showFragments()->render($name, $options, $saveData);
+
+        if ($fragments === []) {
+            return preg_replace('/@\[\[fragmentStart="[^"]+"\]\]|@\[\[fragmentEnd="[^"]+"\]\]/', '', $output);
+        }
+
+        $result = $this->showFragments(false)->parseFragments($output, $fragments);
+        $output = '';
+
+        foreach ($result as $contents) {
+            $output .= implode('', $contents);
+        }
+
+        return $output;
+    }
+
+    /**
+     * Parse output to retrieve fragments.
+     */
+    protected function parseFragments(string $output, array $fragments): array
+    {
+        $results = [];
+        $stack   = [];
+
+        // Match all fragment start and end tags at once
+        preg_match_all('/@\[\[fragmentStart="([^"]+)"\]\]|@\[\[fragmentEnd="([^"]+)"\]\]/', $output, $matches, PREG_OFFSET_CAPTURE);
+
+        // Return empty array if no matches
+        if (count($matches[0]) === 0) {
+            return $results;
+        }
+
+        foreach ($matches[0] as $index => $match) {
+            $pos     = $match[1];
+            $isStart = isset($matches[1][$index]) && $matches[1][$index][0] !== '';
+            $name    = $isStart ? $matches[1][$index][0] : (isset($matches[2][$index]) ? $matches[2][$index][0] : '');
+
+            if ($isStart) {
+                $stack[] = ['name' => $name, 'start' => $pos];
+            } elseif ($stack !== [] && end($stack)['name'] === $name) {
+                $info = array_pop($stack);
+
+                // Calculate the position of the fragment content
+                $fragmentStart = $info['start'] + strlen($matches[0][array_search($info['name'], array_column($matches[1], 0), true)][0]);
+                $fragmentEnd   = $pos;
+
+                // Extract the content between the tags
+                $content = substr($output, $fragmentStart, $fragmentEnd - $fragmentStart);
+                // Clean the fragment content by removing the tags
+                $content = preg_replace('/@\[\[fragmentStart="[^"]+"\]\]|@\[\[fragmentEnd="[^"]+"\]\]/', '', $content);
+
+                if (in_array($info['name'], $fragments, true)) {
+                    $results[$info['name']][] = $content;
+                }
+            }
+        }
+
+        return $results;
+    }
+
+    /**
      * Builds the output based upon a file name and any
      * data that has already been set.
      *
@@ -35,13 +146,13 @@ class View extends BaseView
      *  - cache      Number of seconds to cache for
      *  - cache_name Name to use for cache
      *
-     * @param string     $view     File name of the view source
-     * @param array|null $options  Reserved for 3rd-party uses since
-     *                             it might be needed to pass additional info
-     *                             to other template engines.
-     * @param bool|null  $saveData If true, saves data for subsequent calls,
-     *                             if false, cleans the data after displaying,
-     *                             if null, uses the config setting.
+     * @param string                    $view     File name of the view source
+     * @param array<string, mixed>|null $options  Reserved for 3rd-party uses since
+     *                                            it might be needed to pass additional info
+     *                                            to other template engines.
+     * @param bool|null                 $saveData If true, saves data for subsequent calls,
+     *                                            if false, cleans the data after displaying,
+     *                                            if null, uses the config setting.
      */
     public function render(string $view, ?array $options = null, ?bool $saveData = null): string
     {
@@ -58,7 +169,7 @@ class View extends BaseView
 
         // Was it cached?
         if (isset($this->renderVars['options']['cache'])) {
-            $cacheName = $this->renderVars['options']['cache_name'] ?? str_replace('.php', '', $this->renderVars['view']);
+            $cacheName = $this->renderVars['options']['cache_name'] ?? str_replace('.php', '', $this->renderVars['view']) . (empty($this->renderVars['options']['fragments']) ? '' : implode('', $this->renderVars['options']['fragments']));
             $cacheName = str_replace(['\\', '/'], '', $cacheName);
 
             $this->renderVars['cacheName'] = $cacheName;
@@ -109,13 +220,6 @@ class View extends BaseView
             $output     = $this->render($layoutView, $options, $saveData);
             // Get back current vars
             $this->renderVars = $renderVars;
-        } elseif (! empty($this->renderVars['options']['fragments']) && $this->fragmentStack === []) {
-            $output = '';
-
-            foreach ($this->renderVars['options']['fragments'] as $fragmentName) {
-                $output .= $this->renderFragment($fragmentName);
-                unset($this->fragments[$fragmentName]);
-            }
         }
 
         $output = $this->decorateOutput($output);
@@ -147,75 +251,5 @@ class View extends BaseView
         $this->tempData = null;
 
         return $output;
-    }
-
-    /**
-     * Starts holds content for a fragment within the layout.
-     *
-     * @param string $name Fragment name
-     *
-     * @return void
-     */
-    public function fragment(string $name)
-    {
-        $this->fragmentStack[] = $name;
-
-        ob_start();
-    }
-
-    /**
-     * Captures the last fragment
-     *
-     * @throws RuntimeException
-     */
-    public function endFragment()
-    {
-        $contents = ob_get_clean();
-
-        if ($this->fragmentStack === []) {
-            throw new RuntimeException('View themes, no current fragment.');
-        }
-
-        $fragmentName = array_pop($this->fragmentStack);
-
-        // Ensure an array exists, so we can store multiple entries for this.
-        if (! array_key_exists($fragmentName, $this->fragments)) {
-            $this->fragments[$fragmentName] = [];
-        }
-
-        $this->fragments[$fragmentName][] = $contents;
-
-        echo $contents;
-    }
-
-    /**
-     * Renders a fragment's contents.
-     */
-    protected function renderFragment(string $fragmentName)
-    {
-        if (! isset($this->fragments[$fragmentName])) {
-            return '';
-        }
-
-        foreach ($this->fragments[$fragmentName] as $contents) {
-            return $contents;
-        }
-    }
-
-    /**
-     * Used within layout views to include additional views.
-     *
-     * @param bool $saveData
-     */
-    public function include(string $view, ?array $options = null, $saveData = true): string
-    {
-        if ($this->fragmentStack !== [] && ! empty($this->renderVars['options']['fragments'])) {
-            $options['fragments'] = $this->renderVars['options']['fragments'];
-            echo $this->render($view, $options, $saveData);
-
-            return '';
-        }
-
-        return $this->render($view, $options, $saveData);
     }
 }
