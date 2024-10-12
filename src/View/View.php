@@ -106,7 +106,7 @@ class View extends BaseView
         preg_match_all('/@\[\[fragmentStart="([^"]+)"\]\]|@\[\[fragmentEnd="([^"]+)"\]\]/', $output, $matches, PREG_OFFSET_CAPTURE);
 
         // Return empty array if no matches
-        if (count($matches[0]) === 0) {
+        if ($matches[0] === []) {
             return $results;
         }
 
