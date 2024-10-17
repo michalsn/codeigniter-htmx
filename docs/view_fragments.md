@@ -39,3 +39,5 @@ class Home extends BaseController
 
 We can return multiple fragments at the same time. Just separate each fragment with a comma or assign an array
 instead of a string.
+
+If you declare the same fragment name multiple times in the view file, all these occurrences of the fragment will be returned.

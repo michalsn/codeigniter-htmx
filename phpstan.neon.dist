@@ -12,6 +12,8 @@ parameters:
 	ignoreErrors:
 		- '#Variable \$testString might not be defined.#'
 		- '#Variable \$this might not be defined.#'
+		- '#Call to an undefined method CodeIgniter\\View\\RendererInterface::renderFragments\(\).#'
+		- '#Call to an undefined method CodeIgniter\\View\\RendererInterface::parseFragments\(\).#'
 	universalObjectCratesClasses:
 		- CodeIgniter\Entity
 		- CodeIgniter\Entity\Entity

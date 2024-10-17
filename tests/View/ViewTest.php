@@ -5,6 +5,7 @@ namespace Tests\View;
 use CodeIgniter\Autoloader\FileLocatorInterface;
 use CodeIgniter\Config\Services;
 use CodeIgniter\Test\CIUnitTestCase;
+use CodeIgniter\Test\ReflectionHelper;
 use CodeIgniter\View\Exceptions\ViewException;
 use Config\View as ViewConfig;
 use Michalsn\CodeIgniterHtmx\View\View;
@@ -15,6 +16,8 @@ use RuntimeException;
  */
 final class ViewTest extends CIUnitTestCase
 {
+    use ReflectionHelper;
+
     private FileLocatorInterface $loader;
     private string $viewsDir;
     private ViewConfig $config;
@@ -37,7 +40,7 @@ final class ViewTest extends CIUnitTestCase
         $view->setVar('testString2', 'Hello World');
         $expected = "Fragment 1 header\nHello World, fragment1!\nFragment 2 header\nHello World, fragment2!\n";
 
-        $this->assertSame($expected, $view->render('view_fragment'));
+        $this->assertSame($expected, $view->renderFragments('view_fragment'));
     }
 
     public function testRenderViewDataWithDebug(): void
@@ -50,7 +53,7 @@ final class ViewTest extends CIUnitTestCase
         $view->setVar('testString2', 'Hello World');
         $expected = "Fragment 1 header\nHello World, fragment1!\nFragment 2 header\nHello World, fragment2!\n";
 
-        $result = $view->render('view_fragment');
+        $result = $view->renderFragments('view_fragment');
         $this->assertStringContainsString($expected, $result);
         $this->assertStringContainsString('<!-- DEBUG-VIEW START 1', $result);
         $this->assertStringContainsString('<!-- DEBUG-VIEW ENDED 1', $result);
@@ -64,7 +67,7 @@ final class ViewTest extends CIUnitTestCase
         $view->setVar('testString2', 'Hello World');
         $expected = "Hello World, fragment1!\n";
 
-        $this->assertSame($expected, $view->render('view_fragment', ['fragments' => ['sample1']]));
+        $this->assertSame($expected, $view->renderFragments('view_fragment', ['fragments' => ['sample1']]));
     }
 
     public function testRenderViewFragmentInViewFragment(): void
@@ -75,7 +78,7 @@ final class ViewTest extends CIUnitTestCase
         $view->setVar('testString2', 'Hello World');
         $expected = "Hello World, fragment2!\n";
 
-        $this->assertSame($expected, $view->render('view_fragment_in_view_fragment', ['fragments' => ['sample2']]));
+        $this->assertSame($expected, $view->renderFragments('view_fragment_in_view_fragment', ['fragments' => ['sample2']]));
     }
 
     public function testRenderViewFragments(): void
@@ -86,7 +89,7 @@ final class ViewTest extends CIUnitTestCase
         $view->setVar('testString2', 'Hello World');
         $expected = "Hello World, fragment1!\nHello World, fragment2!\n";
 
-        $this->assertSame($expected, $view->render('view_fragment', ['fragments' => ['sample1', 'sample2']]));
+        $this->assertSame($expected, $view->renderFragments('view_fragment', ['fragments' => ['sample1', 'sample2']]));
     }
 
     public function testRenderViewFragmentsWithInclude(): void
@@ -96,7 +99,7 @@ final class ViewTest extends CIUnitTestCase
         $view->setVar('testString1', 'Hello World');
         $expected = "Hello World, fragment1!\nview included\n";
 
-        $this->assertSame($expected, $view->render('view_with_include_1', ['fragments' => ['sample1']]));
+        $this->assertSame($expected, $view->renderFragments('view_with_include_1', ['fragments' => ['sample1']]));
     }
 
     public function testRenderViewFragmentsFromInclude(): void
@@ -107,7 +110,7 @@ final class ViewTest extends CIUnitTestCase
         $view->setVar('testString2', 'Hello World');
         $expected = "Hello World, fragment2!\n";
 
-        $this->assertSame($expected, $view->render('view_with_include_2', ['fragments' => ['sample2']]));
+        $this->assertSame($expected, $view->renderFragments('view_with_include_2', ['fragments' => ['sample2']]));
     }
 
     public function testRenderDefaultInclude(): void
@@ -116,7 +119,7 @@ final class ViewTest extends CIUnitTestCase
 
         $expected = "view included\n";
 
-        $this->assertSame($expected, $view->render('default_include'));
+        $this->assertSame($expected, $view->renderFragments('default_include'));
     }
 
     public function testRenderViewDataWithLayout(): void
@@ -127,7 +130,7 @@ final class ViewTest extends CIUnitTestCase
         $view->setVar('testString2', 'Hello World');
         $expected = "Page top\n\nFragment 1 header\nHello World, fragment1!\nFragment 2 header\nHello World, fragment2!\n\nPage bottom";
 
-        $this->assertSame($expected, $view->render('with_fragment'));
+        $this->assertSame($expected, $view->renderFragments('with_fragment'));
     }
 
     public function testRenderViewFragmentWithLayout(): void
@@ -138,7 +141,7 @@ final class ViewTest extends CIUnitTestCase
         $view->setVar('testString2', 'Hello World');
         $expected = "Hello World, fragment1!\n";
 
-        $this->assertSame($expected, $view->render('with_fragment', ['fragments' => ['sample1']]));
+        $this->assertSame($expected, $view->renderFragments('with_fragment', ['fragments' => ['sample1']]));
     }
 
     public function testRenderViewFragmentsWithLayout(): void
@@ -149,7 +152,7 @@ final class ViewTest extends CIUnitTestCase
         $view->setVar('testString2', 'Hello World');
         $expected = "Hello World, fragment1!\nHello World, fragment2!\n";
 
-        $this->assertSame($expected, $view->render('with_fragment', ['fragments' => ['sample1', 'sample2']]));
+        $this->assertSame($expected, $view->renderFragments('with_fragment', ['fragments' => ['sample1', 'sample2']]));
     }
 
     public function testRenderViewFragmentFromLayout(): void
@@ -158,7 +161,7 @@ final class ViewTest extends CIUnitTestCase
 
         $expected = 'Page bottom';
 
-        $this->assertSame($expected, $view->render('with_fragment', ['fragments' => ['sample0']]));
+        $this->assertSame($expected, $view->renderFragments('with_fragment', ['fragments' => ['sample0']]));
     }
 
     public function testRenderViewFragmentDoesntExists(): void
@@ -169,7 +172,7 @@ final class ViewTest extends CIUnitTestCase
         $view->setVar('testString2', 'Hello World');
         $expected = '';
 
-        $this->assertSame($expected, $view->render('view_fragment', ['fragments' => ['sampleX']]));
+        $this->assertSame($expected, $view->renderFragments('view_fragment', ['fragments' => ['sampleX']]));
     }
 
     public function testRenderViewFragmentBroken(): void
@@ -180,7 +183,7 @@ final class ViewTest extends CIUnitTestCase
         $expected = '';
 
         $this->expectException(RuntimeException::class);
-        $this->assertStringContainsString($expected, $view->render('view_fragment_error', ['fragments' => ['broken']]));
+        $this->assertStringContainsString($expected, $view->renderFragments('view_fragment_error', ['fragments' => ['broken']]));
     }
 
     public function testRenderViewFragmentWithCache(): void
@@ -191,9 +194,12 @@ final class ViewTest extends CIUnitTestCase
         $view->setVar('testString2', 'Hello World');
         $expected = "Hello World, fragment1!\n";
 
-        $this->assertSame($expected, $view->render('view_fragment', ['fragments' => ['sample1'], 'cache' => 10]));
+        $this->assertSame($expected, $view->renderFragments('view_fragment', ['fragments' => ['sample1'], 'cache' => 10]));
+
+        $view->setVar('testString1', 'You should not see this');
+        $view->setVar('testString2', 'You should not see this');
         // this second renderings should go through the cache
-        $this->assertSame($expected, $view->render('view_fragment', ['fragments' => ['sample1'], 'cache' => 10]));
+        $this->assertSame($expected, $view->renderFragments('view_fragment', ['fragments' => ['sample1'], 'cache' => 10]));
     }
 
     public function testRendersThrowsExceptionIfFileNotFound(): void
@@ -203,6 +209,16 @@ final class ViewTest extends CIUnitTestCase
         $this->expectException(ViewException::class);
         $view->setVar('testString', 'Hello World');
 
-        $view->render('missing');
+        $view->renderFragments('missing');
+    }
+
+    public function testParseFragmentsNoMatch()
+    {
+        $view = new View($this->config, $this->viewsDir, $this->loader);
+
+        $obj    = $this->getPrivateMethodInvoker($view, 'parseFragments');
+        $result = $obj('output data', []);
+
+        $this->assertSame([], $result);
     }
 }
