@@ -32,6 +32,6 @@ if (! function_exists('view_fragment')) {
             ? array_map('trim', explode(',', $fragments))
             : $fragments;
 
-        return $renderer->setData($data, 'raw')->render($name, $options, $saveData);
+        return $renderer->setData($data, 'raw')->renderFragments($name, $options, $saveData);
     }
 }
