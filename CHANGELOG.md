@@ -9,7 +9,7 @@ All notable changes to this project will be documented in this file.
 - Make view fragments work properly with complex layouts.
 - Respect fragments visibility based on sections.
 
-### Braking changes
+### Breaking changes
 - The public method `View::renderFragment()` has been removed.
 - The protected property `View::fragments` has been removed.
 - The methods have been changed: `View::fragment()`, `View::endFragment()`, `View::render()`, `View::include()`.
