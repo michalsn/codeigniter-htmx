@@ -3,6 +3,22 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [2.0.0](https://github.com/michalsn/codeigniter-htmx/compare/v1.6.0...v2.0.0) - 2024-10-17
+
+### Fixes
+- Make view fragments work properly with complex layouts.
+- Respect fragments visibility based on sections.
+
+### Braking changes
+- The public method `View::renderFragment()` has been removed.
+- The protected property `View::fragments` has been removed.
+- The methods have been changed: `View::fragment()`, `View::endFragment()`, `View::render()`, `View::include()`.
+
+## [1.6.0](https://github.com/michalsn/codeigniter-htmx/compare/v1.5.0...v1.6.0) - 2024-09-09
+
+### Fixes
+- An error when config caching is enabled
+
 ## [1.5.0](https://github.com/michalsn/codeigniter-htmx/compare/v1.4.0...v1.5.0) - 2024-06-10
 
 ### Enhancements
