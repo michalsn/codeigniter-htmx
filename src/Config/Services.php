@@ -11,6 +11,7 @@ use Config\Paths;
 use Config\Services as AppServices;
 use Config\Toolbar as ToolbarConfig;
 use Config\View as ViewConfig;
+use Michalsn\CodeIgniterHtmx\CodeIgniter;
 use Michalsn\CodeIgniterHtmx\Debug\Toolbar;
 use Michalsn\CodeIgniterHtmx\HTTP\IncomingRequest;
 use Michalsn\CodeIgniterHtmx\HTTP\RedirectResponse;
@@ -19,6 +20,22 @@ use Michalsn\CodeIgniterHtmx\View\View;
 
 class Services extends BaseService
 {
+    /**
+     * CodeIgniter, the core of the framework.
+     *
+     * @return CodeIgniter
+     */
+    public static function codeigniter(?App $config = null, bool $getShared = true)
+    {
+        if ($getShared) {
+            return static::getSharedInstance('codeigniter', $config);
+        }
+
+        $config ??= config(App::class);
+
+        return new CodeIgniter($config);
+    }
+
     /**
      * The Renderer class is the class that actually displays a file to the user.
      * The default View class within CodeIgniter is intentionally simple, but this
