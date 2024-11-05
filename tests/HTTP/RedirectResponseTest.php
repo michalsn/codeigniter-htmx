@@ -31,6 +31,21 @@ final class RedirectResponseTest extends CIUnitTestCase
         $this->assertSame(200, $this->response->getStatusCode());
     }
 
+    public function testHxLocationWithFullPath(): void
+    {
+        $this->response = $this->response->hxLocation('https://example.com/foo1');
+
+        $this->assertSame(json_encode(['path' => '/foo1']), $this->response->getHeaderLine('HX-Location'));
+
+        $this->response = $this->response->hxLocation('http://example.com/foo2');
+
+        $this->assertSame(json_encode(['path' => '/foo2']), $this->response->getHeaderLine('HX-Location'));
+
+        $this->response = $this->response->hxLocation('http://example.com/foo3?page=1&sort=ASC#top');
+
+        $this->assertSame(json_encode(['path' => '/foo3?page=1&sort=ASC#top']), $this->response->getHeaderLine('HX-Location'));
+    }
+
     public function testHxLocationWithSourceAndEvent(): void
     {
         $this->response = $this->response->hxLocation(path: '/foo', source: '#myElem', event: 'doubleclick');
