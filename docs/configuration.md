@@ -36,3 +36,10 @@ Since these decorators are used automatically in the `development` mode (or to b
 We can add the defined string as an `id` or `class` to the html tag.
 
 In the `production` environment these decorators are ignored by design. So this is useful only for the `development` mode.
+
+### $storePreviousURL
+
+Saving the previous URL between requests.
+Sometimes this breaks the logic - the previous URL is part of the HTMX instead of the request page.
+
+In the **/home > /htmx-request > /home** query chain, you can sometimes get an unexpected result if the previous URL is saved between requests. Instead of **/home**, you will get **/htmx-request**. The value `false` will save only page from which request was received
