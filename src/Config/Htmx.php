@@ -22,4 +22,9 @@ class Htmx extends BaseConfig
      * when they are enabled.
      */
     public string $skipViewDecoratorsString = 'htmxSkipViewDecorators';
+
+    /**
+     * Enable / disable storing previous URLs for HTMX requests.
+     */
+    public bool $storePreviousURL = true;
 }
