@@ -39,7 +39,10 @@ In the `production` environment these decorators are ignored by design. So this 
 
 ### $storePreviousURL
 
-Saving the previous URL between requests.
-Sometimes this breaks the logic - the previous URL is part of the HTMX instead of the request page.
+Specifies whether the HTMX request URL should be stored in the session, for use with the `previous_url()` helper function.
+For more information, see the [user guide](https://codeigniter.com/user_guide/helpers/url_helper.html#previous_url).
 
-In the **/home > /htmx-request > /home** query chain, you can sometimes get an unexpected result if the previous URL is saved between requests. Instead of **/home**, you will get **/htmx-request**. The value `false` will save only page from which request was received
+Basically, if you use HTMX extensively, including for navigating your site, you will probably want to leave it as `true`,
+and in cases where storing the request is not desirable, even if it uses HTMX, you can use custom header, to indicate the
+AJAX call or [ajax-header](https://github.com/bigskysoftware/htmx-extensions/blob/main/src/ajax-header/README.md) extension,
+which will add the necessary headers automatically. URLs from AJAX requests are always excluded from session storage.

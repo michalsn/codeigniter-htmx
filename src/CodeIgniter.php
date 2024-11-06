@@ -5,13 +5,12 @@ namespace Michalsn\CodeIgniterHtmx;
 use CodeIgniter\CodeIgniter as BaseCodeIgniter;
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\DownloadResponse;
-use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\URI;
-use Michalsn\CodeIgniterHtmx\HTTP\IncomingRequest as HTMXIncomingRequest;
+use Michalsn\CodeIgniterHtmx\HTTP\IncomingRequest;
 
 /**
- * @property CLIRequest|HTMXIncomingRequest|IncomingRequest|null $request
+ * @property CLIRequest|IncomingRequest|null $request
  */
 class CodeIgniter extends BaseCodeIgniter
 {
@@ -41,8 +40,14 @@ class CodeIgniter extends BaseCodeIgniter
             return;
         }
 
-        // Ignore AJAX and HTMX requests
-        if ((method_exists($this->request, 'isHTMX') && $this->request->isHTMX()) || (method_exists($this->request, 'isAJAX') && $this->request->isAJAX())) {
+        // Ignore AJAX requests
+        if (method_exists($this->request, 'isAJAX') && $this->request->isAJAX()) {
+            return;
+        }
+
+        // Ignore HTMX requests
+        if (config('Htmx')->storePreviousURL === false
+            && method_exists($this->request, 'isHTMX') && $this->request->isHTMX()) {
             return;
         }
 

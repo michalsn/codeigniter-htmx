@@ -25,30 +25,40 @@ final class CodeIgniterTest extends CIUnitTestCase
         $this->resetServices();
     }
 
-    public function testIsHTMXNotSavePreviousURL(): void
+    public function testStorePreviousURLIsHTMX(): void
     {
-        // Default request behavior
-        $uri     = service('uri');
-        $request = service('incomingrequest');
+        $_SESSION['_ci_previous_url'] = 'https://example.com/index.php/?previous=original';
 
-        $uri->setPath('/')->setQuery('previous=original');
+        config('Htmx')->storePreviousURL = true;
+
+        service('uri')->setPath('/')->setQuery('previous=saved_from_htmx');
+        service('request')->appendHeader('HX-Request', 'true');
 
         ob_start();
         service('codeigniter', null, false)->setContext('web')->run();
         ob_get_clean();
 
+        $this->assertTrue(service('request')->isHTMX());
         $this->assertArrayHasKey('_ci_previous_url', $_SESSION);
-        $this->assertSame('https://example.com/index.php/?previous=original', $_SESSION['_ci_previous_url']);
+        $this->assertSame('https://example.com/index.php/?previous=saved_from_htmx', $_SESSION['_ci_previous_url']);
+    }
 
-        // HTMX request
-        $uri->setPath('/')->setQuery('previous=htmx');
-        $request->appendHeader('HX-Request', 'true');
+    public function testDontStorePreviousURLIsHTMX(): void
+    {
+        $_SESSION['_ci_previous_url'] = 'https://example.com/index.php/?previous=original';
+
+        service('uri')->setPath('/')->setQuery('previous=original');
+
+        config('Htmx')->storePreviousURL = false;
+
+        service('uri')->setPath('/')->setQuery('previous=not_saved_from_htmx');
+        service('request')->appendHeader('HX-Request', 'true');
 
         ob_start();
         service('codeigniter', null, false)->setContext('web')->run();
         ob_get_clean();
 
-        $this->assertTrue($request->isHTMX());
+        $this->assertTrue(service('request')->isHTMX());
         $this->assertArrayHasKey('_ci_previous_url', $_SESSION);
         $this->assertSame('https://example.com/index.php/?previous=original', $_SESSION['_ci_previous_url']);
     }
