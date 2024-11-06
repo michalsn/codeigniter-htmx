@@ -21,7 +21,6 @@ class RedirectResponse extends BaseRedirectResponse
         ?array $values = null,
         ?array $headers = null
     ): RedirectResponse {
-        // single_service
         if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
             $path = (string) service('uri', $path, false)->withScheme('')->setHost('');
         }

@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [2.1.0](https://github.com/michalsn/codeigniter-htmx/compare/v2.0.0...v2.1.0) - 2024-11-06
+
+### Enhancements
+
+- Add an option to disable previous URL storage for HTMX requests.
+- Improve `RedirectResponse::hxLocation()` to also work with full URL, which will be auto-transformed to PATH.
+
 ## [2.0.0](https://github.com/michalsn/codeigniter-htmx/compare/v1.6.0...v2.0.0) - 2024-10-17
 
 ### Fixes
