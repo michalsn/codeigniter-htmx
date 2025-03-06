@@ -72,7 +72,7 @@ class CodeIgniter extends BaseCodeIgniter
                 $uri->getAuthority(),
                 $uri->getPath(),
                 $uri->getQuery(),
-                $uri->getFragment()
+                $uri->getFragment(),
             ));
         }
     }
