@@ -224,10 +224,25 @@ class View extends BaseView
 
         $output = $this->decorateOutput($output);
 
-        $this->logPerformance($this->renderVars['start'], microtime(true), $this->renderVars['view']);
+        $this->logPerformance(
+            $this->renderVars['start'],
+            microtime(true),
+            $this->renderVars['view'],
+        );
 
-        if (($this->debug && (! isset($options['debug']) || $options['debug'] === true))
-            && in_array(DebugToolbar::class, service('filters')->getFiltersClass()['after'], true)
+        // Check if DebugToolbar is enabled.
+        $filters              = service('filters');
+        $requiredAfterFilters = $filters->getRequiredFilters('after')[0];
+        if (in_array('toolbar', $requiredAfterFilters, true)) {
+            $debugBarEnabled = true;
+        } else {
+            $afterFilters    = $filters->getFiltersClass()['after'];
+            $debugBarEnabled = in_array(DebugToolbar::class, $afterFilters, true);
+        }
+
+        if (
+            $this->debug && $debugBarEnabled
+            && (! isset($options['debug']) || $options['debug'] === true)
             && empty($this->renderVars['options']['fragments'])
         ) {
             $toolbarCollectors = config(Toolbar::class)->collectors;

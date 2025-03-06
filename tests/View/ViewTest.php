@@ -34,7 +34,7 @@ final class ViewTest extends CIUnitTestCase
 
     public function testRenderViewData(): void
     {
-        $view = new View($this->config, $this->viewsDir, $this->loader);
+        $view = new View($this->config, $this->viewsDir, $this->loader, false);
 
         $view->setVar('testString1', 'Hello World');
         $view->setVar('testString2', 'Hello World');
@@ -45,8 +45,6 @@ final class ViewTest extends CIUnitTestCase
 
     public function testRenderViewDataWithDebug(): void
     {
-        service('filters')->enableFilters(['toolbar'], 'after');
-
         $view = new View($this->config, $this->viewsDir, $this->loader);
 
         $view->setVar('testString1', 'Hello World');
@@ -61,7 +59,7 @@ final class ViewTest extends CIUnitTestCase
 
     public function testRenderViewFragment(): void
     {
-        $view = new View($this->config, $this->viewsDir, $this->loader);
+        $view = new View($this->config, $this->viewsDir, $this->loader, false);
 
         $view->setVar('testString1', 'Hello World');
         $view->setVar('testString2', 'Hello World');
@@ -72,7 +70,7 @@ final class ViewTest extends CIUnitTestCase
 
     public function testRenderViewFragmentInViewFragment(): void
     {
-        $view = new View($this->config, $this->viewsDir, $this->loader);
+        $view = new View($this->config, $this->viewsDir, $this->loader, false);
 
         $view->setVar('testString1', 'Hello World');
         $view->setVar('testString2', 'Hello World');
@@ -83,7 +81,7 @@ final class ViewTest extends CIUnitTestCase
 
     public function testRenderViewFragments(): void
     {
-        $view = new View($this->config, $this->viewsDir, $this->loader);
+        $view = new View($this->config, $this->viewsDir, $this->loader, false);
 
         $view->setVar('testString1', 'Hello World');
         $view->setVar('testString2', 'Hello World');
@@ -94,7 +92,7 @@ final class ViewTest extends CIUnitTestCase
 
     public function testRenderViewFragmentsWithInclude(): void
     {
-        $view = new View($this->config, $this->viewsDir, $this->loader);
+        $view = new View($this->config, $this->viewsDir, $this->loader, false);
 
         $view->setVar('testString1', 'Hello World');
         $expected = "Hello World, fragment1!\nview included\n";
@@ -104,7 +102,7 @@ final class ViewTest extends CIUnitTestCase
 
     public function testRenderViewFragmentsFromInclude(): void
     {
-        $view = new View($this->config, $this->viewsDir, $this->loader);
+        $view = new View($this->config, $this->viewsDir, $this->loader, false);
 
         $view->setVar('testString1', 'Hello World');
         $view->setVar('testString2', 'Hello World');
@@ -115,7 +113,7 @@ final class ViewTest extends CIUnitTestCase
 
     public function testRenderDefaultInclude(): void
     {
-        $view = new View($this->config, $this->viewsDir, $this->loader);
+        $view = new View($this->config, $this->viewsDir, $this->loader, false);
 
         $expected = "view included\n";
 
@@ -124,7 +122,7 @@ final class ViewTest extends CIUnitTestCase
 
     public function testRenderViewDataWithLayout(): void
     {
-        $view = new View($this->config, $this->viewsDir, $this->loader);
+        $view = new View($this->config, $this->viewsDir, $this->loader, false);
 
         $view->setVar('testString1', 'Hello World');
         $view->setVar('testString2', 'Hello World');
@@ -135,7 +133,7 @@ final class ViewTest extends CIUnitTestCase
 
     public function testRenderViewFragmentWithLayout(): void
     {
-        $view = new View($this->config, $this->viewsDir, $this->loader);
+        $view = new View($this->config, $this->viewsDir, $this->loader, false);
 
         $view->setVar('testString1', 'Hello World');
         $view->setVar('testString2', 'Hello World');
@@ -146,7 +144,7 @@ final class ViewTest extends CIUnitTestCase
 
     public function testRenderViewFragmentsWithLayout(): void
     {
-        $view = new View($this->config, $this->viewsDir, $this->loader);
+        $view = new View($this->config, $this->viewsDir, $this->loader, false);
 
         $view->setVar('testString1', 'Hello World');
         $view->setVar('testString2', 'Hello World');
@@ -157,7 +155,7 @@ final class ViewTest extends CIUnitTestCase
 
     public function testRenderViewFragmentFromLayout(): void
     {
-        $view = new View($this->config, $this->viewsDir, $this->loader);
+        $view = new View($this->config, $this->viewsDir, $this->loader, false);
 
         $expected = 'Page bottom';
 
@@ -166,7 +164,7 @@ final class ViewTest extends CIUnitTestCase
 
     public function testRenderViewFragmentDoesntExists(): void
     {
-        $view = new View($this->config, $this->viewsDir, $this->loader);
+        $view = new View($this->config, $this->viewsDir, $this->loader, false);
 
         $view->setVar('testString1', 'Hello World');
         $view->setVar('testString2', 'Hello World');
@@ -177,7 +175,7 @@ final class ViewTest extends CIUnitTestCase
 
     public function testRenderViewFragmentBroken(): void
     {
-        $view = new View($this->config, $this->viewsDir, $this->loader);
+        $view = new View($this->config, $this->viewsDir, $this->loader, false);
 
         $view->setVar('testString1', 'Hello World');
         $expected = '';
@@ -188,7 +186,7 @@ final class ViewTest extends CIUnitTestCase
 
     public function testRenderViewFragmentWithCache(): void
     {
-        $view = new View($this->config, $this->viewsDir, $this->loader);
+        $view = new View($this->config, $this->viewsDir, $this->loader, false);
 
         $view->setVar('testString1', 'Hello World');
         $view->setVar('testString2', 'Hello World');
@@ -204,7 +202,7 @@ final class ViewTest extends CIUnitTestCase
 
     public function testRendersThrowsExceptionIfFileNotFound(): void
     {
-        $view = new View($this->config, $this->viewsDir, $this->loader);
+        $view = new View($this->config, $this->viewsDir, $this->loader, false);
 
         $this->expectException(ViewException::class);
         $view->setVar('testString', 'Hello World');
@@ -214,7 +212,7 @@ final class ViewTest extends CIUnitTestCase
 
     public function testParseFragmentsNoMatch()
     {
-        $view = new View($this->config, $this->viewsDir, $this->loader);
+        $view = new View($this->config, $this->viewsDir, $this->loader, false);
 
         $obj    = $this->getPrivateMethodInvoker($view, 'parseFragments');
         $result = $obj('output data', []);
