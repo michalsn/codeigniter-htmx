@@ -14,11 +14,22 @@ on:
       - '**.php'
       - '.github/workflows/phpcsfixer.yml'
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
 jobs:
   build:
-    name: Coding Standards
+    name: PHP ${{ matrix.php-versions }} Coding Standards
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+    if: (! contains(github.event.head_commit.message, '[ci skip]'))
+    strategy:
+      fail-fast: false
+      matrix:
+        php-versions: ['8.1', '8.2', '8.4']
 
     steps:
       - name: Checkout
@@ -27,7 +38,7 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: ${{ matrix.php-versions }}
           extensions: json, tokenizer
           coverage: none
         env:
@@ -53,3 +64,5 @@ jobs:
 
       - name: Check code for standards compliance
         run: vendor/bin/php-cs-fixer fix --verbose --ansi --dry-run --using-cache=no --diff
+        env:
+          PHP_CS_FIXER_IGNORE_ENV: ${{ matrix.php-versions == '8.4' }}
