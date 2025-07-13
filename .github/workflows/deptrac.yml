@@ -7,7 +7,7 @@ on:
     paths:
       - '**.php'
       - 'composer.*'
-      - 'depfile.yaml'
+      - 'deptrac.yaml'
       - '.github/workflows/deptrac.yml'
   push:
     branches:
@@ -15,7 +15,7 @@ on:
     paths:
       - '**.php'
       - 'composer.*'
-      - 'depfile.yaml'
+      - 'deptrac.yaml'
       - '.github/workflows/deptrac.yml'
 
 jobs:
@@ -67,5 +67,5 @@ jobs:
 
       - name: Trace dependencies
         run: |
-          composer require --dev qossmic/deptrac-shim
+          composer require --dev deptrac/deptrac
           vendor/bin/deptrac analyze --cache-file=build/deptrac.cache
