@@ -1,0 +1,184 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Call to an undefined method CodeIgniter\\View\\RendererInterface\:\:renderFragments\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/Common.php
+
+		-
+			message: '''
+				#^Call to deprecated method __construct\(\) of class CodeIgniter\\HTTP\\Response\:
+				4\.5\.0 The param \$config is no longer used\.$#
+			'''
+			identifier: method.deprecated
+			count: 2
+			path: src/Config/Services.php
+
+		-
+			message: '#^Call to an undefined method CodeIgniter\\View\\RendererInterface\:\:parseFragments\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/View/View.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertArrayHasKey\(\) with ''_ci_previous_url'' and non\-empty\-array will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 2
+			path: tests/CodeIgniterTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertSame\(\) with ''https\://example\.com…'' and ''https\://example\.com…'' will always evaluate to false\.$#'
+			identifier: method.impossibleType
+			count: 1
+			path: tests/CodeIgniterTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertSame\(\) with ''https\://example\.com…'' and ''https\://example\.com…'' will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/CodeIgniterTest.php
+
+		-
+			message: '''
+				#^Call to deprecated method __construct\(\) of class CodeIgniter\\HTTP\\Response\:
+				4\.5\.0 The param \$config is no longer used\.$#
+			'''
+			identifier: method.deprecated
+			count: 1
+			path: tests/HTTP/RedirectResponseTest.php
+
+		-
+			message: '''
+				#^Call to deprecated method __construct\(\) of class CodeIgniter\\HTTP\\Response\:
+				4\.5\.0 The param \$config is no longer used\.$#
+			'''
+			identifier: method.deprecated
+			count: 1
+			path: tests/HTTP/ResponseTest.php
+
+		-
+			message: '#^Variable \$this might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: tests/_support/Views/complex/include.php
+
+		-
+			message: '#^Variable \$this might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: tests/_support/Views/complex/layout.php
+
+		-
+			message: '#^Variable \$this might not be defined\.$#'
+			identifier: variable.undefined
+			count: 5
+			path: tests/_support/Views/complex/view1.php
+
+		-
+			message: '#^Variable \$this might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: tests/_support/Views/complex/view2.php
+
+		-
+			message: '#^Variable \$this might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: tests/_support/Views/complex/view3.php
+
+		-
+			message: '#^Variable \$this might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: tests/_support/Views/default_include.php
+
+		-
+			message: '#^Variable \$this might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: tests/_support/Views/huge/include.php
+
+		-
+			message: '#^Variable \$this might not be defined\.$#'
+			identifier: variable.undefined
+			count: 4
+			path: tests/_support/Views/huge/layout.php
+
+		-
+			message: '#^Variable \$this might not be defined\.$#'
+			identifier: variable.undefined
+			count: 6
+			path: tests/_support/Views/huge/view.php
+
+		-
+			message: '#^Variable \$this might not be defined\.$#'
+			identifier: variable.undefined
+			count: 3
+			path: tests/_support/Views/layout.php
+
+		-
+			message: '#^Variable \$this might not be defined\.$#'
+			identifier: variable.undefined
+			count: 5
+			path: tests/_support/Views/many/layout.php
+
+		-
+			message: '#^Variable \$this might not be defined\.$#'
+			identifier: variable.undefined
+			count: 9
+			path: tests/_support/Views/many/view1.php
+
+		-
+			message: '#^Variable \$this might not be defined\.$#'
+			identifier: variable.undefined
+			count: 4
+			path: tests/_support/Views/view_fragment.php
+
+		-
+			message: '#^Variable \$this might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: tests/_support/Views/view_fragment_error.php
+
+		-
+			message: '#^Variable \$this might not be defined\.$#'
+			identifier: variable.undefined
+			count: 4
+			path: tests/_support/Views/view_fragment_in_view_fragment.php
+
+		-
+			message: '#^Variable \$this might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: tests/_support/Views/view_included_2.php
+
+		-
+			message: '#^Variable \$this might not be defined\.$#'
+			identifier: variable.undefined
+			count: 3
+			path: tests/_support/Views/view_with_include_1.php
+
+		-
+			message: '#^Variable \$this might not be defined\.$#'
+			identifier: variable.undefined
+			count: 3
+			path: tests/_support/Views/view_with_include_2.php
+
+		-
+			message: '#^Variable \$testString might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: tests/_support/Views/with_decorator.php
+
+		-
+			message: '#^Variable \$this might not be defined\.$#'
+			identifier: variable.undefined
+			count: 7
+			path: tests/_support/Views/with_fragment.php
+
+		-
+			message: '#^Variable \$testString might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: tests/_support/Views/without_decorator.php
