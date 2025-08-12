@@ -29,7 +29,7 @@ trait HtmxTrait
                 'Option "%s" is not a valid variable for %s. A valid option has to be one of: %s',
                 $option,
                 $field,
-                implode(', ', $this->swapOptions)
+                implode(', ', $this->swapOptions),
             ));
         }
 

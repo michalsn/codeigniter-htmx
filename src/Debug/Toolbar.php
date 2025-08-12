@@ -43,7 +43,7 @@ class Toolbar extends BaseToolbar
                 $stats['startTime'],
                 $stats['totalTime'],
                 $request,
-                $response
+                $response,
             );
 
             helper('filesystem');
@@ -91,8 +91,8 @@ class Toolbar extends BaseToolbar
                         '/<head>/',
                         '<head>' . $script,
                         $response->getBody(),
-                        1
-                    )
+                        1,
+                    ),
                 );
 
                 return;

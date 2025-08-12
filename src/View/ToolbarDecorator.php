@@ -19,14 +19,14 @@ class ToolbarDecorator implements ViewDecoratorInterface
             $script = sprintf(
                 '<script %s id="htmxToolbarScript">%s</script>',
                 csp_script_nonce(),
-                file_get_contents(__DIR__ . '/toolbar_decorator.js')
+                file_get_contents(__DIR__ . '/toolbar_decorator.js'),
             );
 
             $html = preg_replace(
                 '/<\/head>/',
                 $script . '</head>',
                 $html,
-                1
+                1,
             );
         }
 

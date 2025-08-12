@@ -92,7 +92,7 @@ class Services extends BaseService
             $config,
             AppServices::uri(),
             'php://input',
-            new UserAgent()
+            new UserAgent(),
         );
     }
 

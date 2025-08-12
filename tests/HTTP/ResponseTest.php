@@ -90,7 +90,7 @@ final class ResponseTest extends CIUnitTestCase
 
         $this->assertSame(
             '{"showMessage":""}',
-            $this->response->getHeaderLine('HX-Trigger')
+            $this->response->getHeaderLine('HX-Trigger'),
         );
     }
 
@@ -100,7 +100,7 @@ final class ResponseTest extends CIUnitTestCase
 
         $this->assertSame(
             '{"showMessage":{"level":"info","message":"Here Is A Message"}}',
-            $this->response->getHeaderLine('HX-Trigger')
+            $this->response->getHeaderLine('HX-Trigger'),
         );
     }
 
@@ -111,7 +111,7 @@ final class ResponseTest extends CIUnitTestCase
 
         $this->assertSame(
             '{"event1":"A message","event2":"Another message"}',
-            $this->response->getHeaderLine('HX-Trigger')
+            $this->response->getHeaderLine('HX-Trigger'),
         );
     }
 
@@ -121,7 +121,7 @@ final class ResponseTest extends CIUnitTestCase
 
         $this->assertSame(
             '{"showMessage":""}',
-            $this->response->getHeaderLine('HX-Trigger-After-Settle')
+            $this->response->getHeaderLine('HX-Trigger-After-Settle'),
         );
     }
 
@@ -131,7 +131,7 @@ final class ResponseTest extends CIUnitTestCase
 
         $this->assertSame(
             '{"showMessage":""}',
-            $this->response->getHeaderLine('HX-Trigger-After-Swap')
+            $this->response->getHeaderLine('HX-Trigger-After-Swap'),
         );
     }
 
