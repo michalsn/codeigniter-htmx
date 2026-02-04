@@ -20,7 +20,7 @@ class Toolbar extends BaseToolbar
      *
      * @psalm-suppress UndefinedClass
      */
-    public function prepare(?RequestInterface $request = null, ?ResponseInterface $response = null)
+    public function prepare(?RequestInterface $request = null, ?ResponseInterface $response = null): void
     {
         /**
          * @var IncomingRequest|null $request
