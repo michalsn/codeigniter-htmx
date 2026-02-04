@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\View;
 
 use CodeIgniter\Autoloader\FileLocatorInterface;

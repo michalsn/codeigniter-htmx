@@ -14,6 +14,8 @@ class HTMLFormatter implements FormatterInterface
      * Takes the given data and formats it.
      *
      * @param array|string|null $data
+     *
+     * @phpstan-return string
      */
     public function format($data): string
     {
