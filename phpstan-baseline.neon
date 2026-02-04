@@ -28,18 +28,6 @@ parameters:
 			path: tests/CodeIgniterTest.php
 
 		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertSame\(\) with ''https\://example\.com…'' and ''https\://example\.com…'' will always evaluate to false\.$#'
-			identifier: method.impossibleType
-			count: 1
-			path: tests/CodeIgniterTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertSame\(\) with ''https\://example\.com…'' and ''https\://example\.com…'' will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 1
-			path: tests/CodeIgniterTest.php
-
-		-
 			message: '''
 				#^Call to deprecated method __construct\(\) of class CodeIgniter\\HTTP\\Response\:
 				4\.5\.0 The param \$config is no longer used\.$#

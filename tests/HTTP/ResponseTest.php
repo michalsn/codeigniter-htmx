@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\HTTP;
 
 use CodeIgniter\Test\CIUnitTestCase;
@@ -30,7 +32,7 @@ final class ResponseTest extends CIUnitTestCase
 
     public function testSetPushUrlFalse(): void
     {
-        $this->response->setPushUrl(null);
+        $this->response->setPushUrl();
 
         $this->assertSame('false', $this->response->getHeaderLine('HX-Push-Url'));
     }
@@ -44,7 +46,7 @@ final class ResponseTest extends CIUnitTestCase
 
     public function testSetReplaceUrlFalse(): void
     {
-        $this->response->setReplaceUrl(null);
+        $this->response->setReplaceUrl();
 
         $this->assertSame('false', $this->response->getHeaderLine('HX-Replace-Url'));
     }
