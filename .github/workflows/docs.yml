@@ -35,11 +35,11 @@ jobs:
         run: |
           case "$BRANCH_NAME" in
             develop)
-              mike deploy --push --update-aliases dev
+              mike deploy --push --update-aliases dev latest
+              mike set-default --push latest
               ;;
             v2)
-              mike deploy --push --update-aliases v2 latest
-              mike set-default --push latest
+              mike deploy --push --update-aliases v2
               ;;
             *)
               echo "Unsupported docs branch: $BRANCH_NAME"
