@@ -35,7 +35,7 @@ extra:
       name: GitHub
 
 repo_url: https://github.com/michalsn/codeigniter-htmx
-edit_uri: edit/develop/docs/
+edit_uri: edit/v2/docs/
 
 markdown_extensions:
   - pymdownx.superfences
