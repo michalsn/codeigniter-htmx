@@ -3,61 +3,45 @@
     <url>
          <loc>https://michalsn.github.io/codeigniter-htmx/dev/</loc>
          <lastmod>2026-04-11</lastmod>
-         <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://michalsn.github.io/codeigniter-htmx/dev/configuration/</loc>
          <lastmod>2026-04-11</lastmod>
-         <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://michalsn.github.io/codeigniter-htmx/dev/debug_toolbar/</loc>
          <lastmod>2026-04-11</lastmod>
-         <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://michalsn.github.io/codeigniter-htmx/dev/error_handling/</loc>
          <lastmod>2026-04-11</lastmod>
-         <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://michalsn.github.io/codeigniter-htmx/dev/html_formatter/</loc>
          <lastmod>2026-04-11</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://michalsn.github.io/codeigniter-htmx/dev/htmx_4_migration/</loc>
-         <lastmod>2026-04-11</lastmod>
-         <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://michalsn.github.io/codeigniter-htmx/dev/incoming_request/</loc>
          <lastmod>2026-04-11</lastmod>
-         <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://michalsn.github.io/codeigniter-htmx/dev/installation/</loc>
          <lastmod>2026-04-11</lastmod>
-         <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://michalsn.github.io/codeigniter-htmx/dev/redirect_response/</loc>
          <lastmod>2026-04-11</lastmod>
-         <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://michalsn.github.io/codeigniter-htmx/dev/response/</loc>
          <lastmod>2026-04-11</lastmod>
-         <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://michalsn.github.io/codeigniter-htmx/dev/troubleshooting/</loc>
          <lastmod>2026-04-11</lastmod>
-         <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://michalsn.github.io/codeigniter-htmx/dev/view_fragments/</loc>
          <lastmod>2026-04-11</lastmod>
-         <changefreq>daily</changefreq>
     </url>
 </urlset>
