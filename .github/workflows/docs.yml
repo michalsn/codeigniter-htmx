@@ -4,9 +4,13 @@ on:
   push:
     branches:
       - develop
+      - v2
     paths:
-      - 'docs/*'
+      - 'docs/**'
       - 'mkdocs.yml'
+      - 'requirements-docs.txt'
+      - '.github/workflows/docs.yml'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -16,8 +20,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v6
         with:
           python-version: 3.x
-      - run: pip install mkdocs-material
-      - run: mkdocs gh-deploy --force
+      - run: pip install -r requirements-docs.txt
+      - run: git fetch origin gh-pages --depth=1
+      - run: git config user.name github-actions[bot]
+      - run: git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+      - name: Deploy docs with mike
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          case "$BRANCH_NAME" in
+            develop)
+              mike deploy --push --update-aliases dev
+              ;;
+            v2)
+              mike deploy --push --update-aliases v2 latest
+              mike set-default --push latest
+              ;;
+            *)
+              echo "Unsupported docs branch: $BRANCH_NAME"
+              exit 1
+              ;;
+          esac

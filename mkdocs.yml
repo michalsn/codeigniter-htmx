@@ -1,5 +1,6 @@
 site_name: CodeIgniter HTMX
 site_description: Documentation for HTMX helper library for CodeIgniter 4 framework
+site_url: https://michalsn.github.io/codeigniter-htmx/
 
 theme:
   name: material
@@ -25,6 +26,8 @@ theme:
 
 extra:
   homepage: https://michalsn.github.io/codeigniter-htmx
+  version:
+    provider: mike
 
   social:
     - icon: fontawesome/brands/github
@@ -38,6 +41,10 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.highlight:
       use_pygments: false
+
+plugins:
+  - search
+  - mike
 
 extra_css:
   - assets/github-dark-dimmed.css
