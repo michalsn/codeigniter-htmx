@@ -21,7 +21,7 @@ class RedirectResponse extends BaseRedirectResponse
         ?array $values = null,
         ?array $headers = null,
         ?string $select = null,
-        string|false|null $push = null,
+        false|string|null $push = null,
         ?string $replace = null,
         mixed $handler = null,
     ): RedirectResponse {

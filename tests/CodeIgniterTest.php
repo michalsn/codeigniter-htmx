@@ -39,7 +39,6 @@ final class CodeIgniterTest extends CIUnitTestCase
         ob_get_clean();
 
         $this->assertTrue(service('request')->isHTMX());
-        $this->assertArrayHasKey('_ci_previous_url', $_SESSION);
         $this->assertSame('https://example.com/index.php/?previous=saved_from_htmx', $_SESSION['_ci_previous_url']);
     }
 
@@ -59,7 +58,6 @@ final class CodeIgniterTest extends CIUnitTestCase
         ob_get_clean();
 
         $this->assertTrue(service('request')->isHTMX());
-        $this->assertArrayHasKey('_ci_previous_url', $_SESSION);
         $this->assertSame('https://example.com/index.php/?previous=original', $_SESSION['_ci_previous_url']);
     }
 }

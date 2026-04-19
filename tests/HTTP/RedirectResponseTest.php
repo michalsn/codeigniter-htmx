@@ -90,9 +90,9 @@ final class RedirectResponseTest extends CIUnitTestCase
 
         $this->assertTrue($this->response->hasHeader('HX-Location'));
         $expected = json_encode([
-            'path' => '/foo',
-            'select' => '#fragment',
-            'push' => '/pushed',
+            'path'    => '/foo',
+            'select'  => '#fragment',
+            'push'    => '/pushed',
             'replace' => '/replaced',
             'handler' => 'customHandler',
         ]);
@@ -119,8 +119,8 @@ final class RedirectResponseTest extends CIUnitTestCase
         );
 
         $expected = json_encode([
-            'path' => '/foo',
-            'push' => '/pushed?page=1#top',
+            'path'    => '/foo',
+            'push'    => '/pushed?page=1#top',
             'replace' => '/replaced?sort=asc',
         ]);
         $this->assertSame($expected, $this->response->getHeaderLine('HX-Location'));

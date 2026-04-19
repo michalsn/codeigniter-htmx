@@ -22,12 +22,6 @@ parameters:
 			path: src/View/View.php
 
 		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertArrayHasKey\(\) with ''_ci_previous_url'' and non\-empty\-array will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 2
-			path: tests/CodeIgniterTest.php
-
-		-
 			message: '''
 				#^Call to deprecated method __construct\(\) of class CodeIgniter\\HTTP\\Response\:
 				4\.5\.0 The param \$config is no longer used\.$#
