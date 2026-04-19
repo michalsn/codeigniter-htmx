@@ -27,7 +27,7 @@ $this->response->setReplaceUrl('/replaced-url');
 
 ### setReswap()
 
-Sets the value in `HX-Reswap` header. Allows you to specify how the response will be swapped. See [hx-swap](https://htmx.org/attributes/hx-swap) for possible values.
+Sets the value in `HX-Reswap` header. Allows you to specify how the response will be swapped. See [hx-swap](https://four.htmx.org/reference/attributes/hx-swap/) for possible values.
 
 ```php
 $this->response->setReswap('innerHTML show:#another-div:top');
@@ -43,7 +43,7 @@ $this->response->setRetarget('#another-div');
 
 ### setReselect()
 
-Sets the value in `HX-Reselect` header. A CSS selector that allows you to choose which part of the response is used to be swapped in. Overrides an existing [hx-select](https://htmx.org/attributes/hx-select/) on the triggering element.
+Sets the value in `HX-Reselect` header. A CSS selector that allows you to choose which part of the response is used to be swapped in. Overrides an existing [`hx-select`](https://four.htmx.org/reference/) on the triggering element.
 
 ```php
 $this->response->setReselect('#another-div');
@@ -51,15 +51,12 @@ $this->response->setReselect('#another-div');
 
 ### triggerClientEvent()
 
-Allows you to set the headers: `HX-Trigger`, `HX-Trigger-After-Settle` or `HX-Trigger-After-Swap`.
+Allows you to set the `HX-Trigger` header.
 
-This method has 3 parameters:
+This method has 2 parameters:
 * `name`
 * `params`
-* `method` - which can be one of: `receive` (default), `settle`, `swap`.
 
 ```php
 $this->response->triggerClientEvent('showMessage', ['level' => 'info', 'message' => 'Here Is A Message']);
 ```
-
-For more information, please see [hx-trigger](https://htmx.org/headers/hx-trigger/).

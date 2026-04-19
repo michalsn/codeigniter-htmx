@@ -4,6 +4,8 @@ This library is set of methods for `IncomingRequest`, `Response` and `RedirectRe
 
 It also provides some additional help with **handling errors** and **Debug Toolbar** in development mode as well as support for **view fragments**.
 
+The current `develop` branch tracks the HTMX 4 request/response model and event lifecycle. For HTMX 2 projects, please use the `v2` branch.
+
 ### Requirements
 
 ![PHP](https://img.shields.io/badge/PHP-%5E8.0-blue)
@@ -15,12 +17,13 @@ It also provides some additional help with **handling errors** and **Debug Toolb
 * [Configuration](configuration.md)
 * [Error handling](error_handling.md)
 * [View fragments](view_fragments.md)
-* [IncomingReqeuest](incoming_request.md)
+* [IncomingRequest](incoming_request.md)
 * [Response](response.md)
-* [RediretResponse](redirect_response.md)
+* [RedirectResponse](redirect_response.md)
 * [HTML Formatter](html_formatter.md)
 * [Debug Toolbar](debug_toolbar.md)
 * [Troubleshooting](troubleshooting.md)
+* [HTMX 4 migration](htmx_4_migration.md)
 
 ### Demos
 

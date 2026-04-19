@@ -65,3 +65,4 @@ nav:
   - HTML Formatter: html_formatter.md
   - Debug Toolbar: debug_toolbar.md
   - Troubleshooting: troubleshooting.md
+  - HTMX 4 migration: htmx_4_migration.md

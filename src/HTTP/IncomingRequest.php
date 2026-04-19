@@ -8,6 +8,9 @@ class IncomingRequest extends BaseIncomingRequest
 {
     /**
      * Indicates that the request is triggered by Htmx.
+     *
+     * Checks whether the request carries the HX-Request header
+     * with the value "true".
      */
     public function isHtmx(): bool
     {
@@ -23,12 +26,39 @@ class IncomingRequest extends BaseIncomingRequest
     }
 
     /**
-     * True if the request is for history restoration
-     * after a miss in the local history cache.
+     * True if the request is for history restoration.
      */
     public function isHistoryRestoreRequest(): bool
     {
         return $this->getHtmxHeaderToBool('HX-History-Restore-Request');
+    }
+
+    /**
+     * The request type for HTMX 4 requests.
+     *
+     * Returns "partial" for targeted swaps and "full"
+     * for body-level swaps, including hx-boost requests,
+     * or requests using hx-select.
+     */
+    public function getRequestType(): ?string
+    {
+        return $this->getHtmxHeader('HX-Request-Type');
+    }
+
+    /**
+     * Indicates a partial HTMX request.
+     */
+    public function isPartial(): bool
+    {
+        return $this->getRequestType() === 'partial';
+    }
+
+    /**
+     * Indicates a full HTMX request.
+     */
+    public function isFull(): bool
+    {
+        return $this->getRequestType() === 'full';
     }
 
     /**
@@ -40,50 +70,26 @@ class IncomingRequest extends BaseIncomingRequest
     }
 
     /**
-     * The user response to an hx-prompt.
+     * The identifier of the triggered element if it exists.
+     *
+     * In HTMX 4 this is sent in HX-Source and uses the
+     * element identifier format, such as "button#submit?send"
+     * or "div#results?".
      */
-    public function getPrompt(): ?string
+    public function getSource(): ?string
     {
-        return $this->getHtmxHeader('HX-Prompt');
+        return $this->getHtmxHeader('HX-Source');
     }
 
     /**
-     * The id of the target element if it exists.
+     * The identifier of the target element if it exists.
+     *
+     * HTMX 4 uses the same element identifier format as HX-Source,
+     * for example "div#results?".
      */
     public function getTarget(): ?string
     {
         return $this->getHtmxHeader('HX-Target');
-    }
-
-    /**
-     * The id of the triggered element if it exists.
-     */
-    public function getTrigger(): ?string
-    {
-        return $this->getHtmxHeader('HX-Trigger');
-    }
-
-    /**
-     * The name of the triggered element if it exists.
-     */
-    public function getTriggerName(): ?string
-    {
-        return $this->getHtmxHeader('HX-Trigger-Name');
-    }
-
-    /**
-     * The value of the header is a JSON serialized
-     * version of the event that triggered the request.
-     *
-     * @see https://htmx.org/extensions/event-header/
-     */
-    public function getTriggeringEvent(bool $toArray = true): array|object|null
-    {
-        if (! $this->hasHeader('Triggering-Event')) {
-            return null;
-        }
-
-        return json_decode($this->header('Triggering-Event')->getValueLine(), $toArray);
     }
 
     /**
@@ -110,8 +116,8 @@ class IncomingRequest extends BaseIncomingRequest
     /**
      * Checks this request type.
      *
-     * @param         string                                                                                     $type HTTP verb or 'json' or 'ajax' or 'htmx' or 'boosted'
-     * @phpstan-param string|'get'|'post'|'put'|'delete'|'head'|'patch'|'options'|'json'|'ajax'|'htmx'|'boosted' $type
+     * @param         string                                                                                                      $type HTTP verb or 'json' or 'ajax' or 'htmx' or 'boosted' or 'partial' or 'full'
+     * @phpstan-param string|'get'|'post'|'put'|'delete'|'head'|'patch'|'options'|'json'|'ajax'|'htmx'|'boosted'|'partial'|'full' $type
      */
     public function is(string $type): bool
     {
@@ -123,6 +129,14 @@ class IncomingRequest extends BaseIncomingRequest
 
         if ($valueUpper === 'BOOSTED') {
             return $this->isBoosted();
+        }
+
+        if ($valueUpper === 'PARTIAL') {
+            return $this->isPartial();
+        }
+
+        if ($valueUpper === 'FULL') {
+            return $this->isFull();
         }
 
         return parent::is($type);

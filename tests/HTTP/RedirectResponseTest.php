@@ -78,6 +78,54 @@ final class RedirectResponseTest extends CIUnitTestCase
         $this->assertSame(200, $this->response->getStatusCode());
     }
 
+    public function testHxLocationWithSelectPushReplaceAndHandler(): void
+    {
+        $this->response = $this->response->hxLocation(
+            path: '/foo',
+            select: '#fragment',
+            push: '/pushed',
+            replace: '/replaced',
+            handler: 'customHandler',
+        );
+
+        $this->assertTrue($this->response->hasHeader('HX-Location'));
+        $expected = json_encode([
+            'path' => '/foo',
+            'select' => '#fragment',
+            'push' => '/pushed',
+            'replace' => '/replaced',
+            'handler' => 'customHandler',
+        ]);
+        $this->assertSame($expected, $this->response->getHeaderLine('HX-Location'));
+        $this->assertSame(200, $this->response->getStatusCode());
+    }
+
+    public function testHxLocationWithPushFalse(): void
+    {
+        $this->response = $this->response->hxLocation(path: '/foo', push: false);
+
+        $this->assertSame(
+            json_encode(['path' => '/foo', 'push' => false]),
+            $this->response->getHeaderLine('HX-Location'),
+        );
+    }
+
+    public function testHxLocationNormalizesPushAndReplaceFullUrl(): void
+    {
+        $this->response = $this->response->hxLocation(
+            path: '/foo',
+            push: 'https://example.com/pushed?page=1#top',
+            replace: 'https://example.com/replaced?sort=asc',
+        );
+
+        $expected = json_encode([
+            'path' => '/foo',
+            'push' => '/pushed?page=1#top',
+            'replace' => '/replaced?sort=asc',
+        ]);
+        $this->assertSame($expected, $this->response->getHeaderLine('HX-Location'));
+    }
+
     public function testHxLocationThrowInvalidArgumentException(): void
     {
         $this->expectException(InvalidArgumentException::class);

@@ -13,9 +13,35 @@ Sets the `HX-Location` header to redirect without reloading the whole page.
 ```php
 return redirect()->hxLocation('/path');
 ```
-For convenience, the set path with `http(s)://` will be converted to relative. Like this: `http://example.com/articles/` it will become `/articles/`.
+For convenience, absolute `http(s)://` paths are converted to relative paths. For example, `http://example.com/articles/` becomes `/articles/`.
 
-For more information, please see [hx-location](https://htmx.org/headers/hx-location/).
+Supported fields mirror the HTMX 4 `HX-Location` JSON payload:
+
+- `path` - required
+- `source`
+- `event`
+- `handler`
+- `target`
+- `swap`
+- `values`
+- `headers`
+- `select`
+- `push`
+- `replace`
+
+Example:
+
+```php
+return redirect()->hxLocation(
+    path: '/photos',
+    target: '#content',
+    swap: 'innerHTML',
+    select: '#photos-list',
+    push: '/photos',
+);
+```
+
+For more information, please see the HTMX 4 [HX-Location response header docs](https://four.htmx.org/reference/headers/hx-location/).
 
 ### hxRedirect()
 

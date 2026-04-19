@@ -3,7 +3,7 @@
 - [Composer Installation](#composer-installation)
 - [Manual Installation](#manual-installation)
 
-Remember - you still need to include the `htmx` javascript library inside the `head` tag.
+Remember - you still need to include the `htmx` JavaScript library inside the `head` tag. The current `develop` branch expects an HTMX 4 client.
 
 ## Composer Installation
 
@@ -36,5 +36,4 @@ public $files = [
     APPPATH . 'ThirdParty/htmx/src/Common.php',
 ];
 ```
-
 

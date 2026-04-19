@@ -1,6 +1,6 @@
 # Debug Toolbar
 
-As long as you **don't use** the [head-support](https://htmx.org/extensions/head-support/) extension,
+As long as you **don't use** the [head-support](https://four.htmx.org/docs/extensions/head-support) extension,
 the Debug Toolbar should work out of the box. It will be updated after every request, so please remember
 it will only display the latest information. If you want to see what happened in earlier request,
 use the `History` tab in the Toolbar.

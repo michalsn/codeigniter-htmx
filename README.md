@@ -1,8 +1,10 @@
 # CodeIgniter HTMX
 
-A set of methods for `IncomingRequest`, `Response` and `RedirectResponse` classes to help you work with [htmx](https://htmx.org) fluently in CodeIgniter 4 framework.
+A set of methods for `IncomingRequest`, `Response` and `RedirectResponse` classes to help you work with [htmx](https://four.htmx.org/) fluently in CodeIgniter 4 framework.
 
 It also provides some additional help with **handling errors** and **Debug Toolbar** in development mode as well as support for **view fragments**.
+
+The `develop` branch targets the HTMX 4 request/response model and development event lifecycle.
 
 [![PHPUnit](https://github.com/michalsn/codeigniter-htmx/actions/workflows/phpunit.yml/badge.svg)](https://github.com/michalsn/codeigniter-htmx/actions/workflows/phpunit.yml)
 [![PHPStan](https://github.com/michalsn/codeigniter-htmx/actions/workflows/phpstan.yml/badge.svg)](https://github.com/michalsn/codeigniter-htmx/actions/workflows/phpstan.yml)

@@ -65,6 +65,27 @@ final class ResponseTest extends CIUnitTestCase
         $this->assertSame('innerHTML swap:1s', $this->response->getHeaderLine('HX-Reswap'));
     }
 
+    public function testSetReswapWithTextContent(): void
+    {
+        $this->response->setReswap('textContent');
+
+        $this->assertSame('textContent', $this->response->getHeaderLine('HX-Reswap'));
+    }
+
+    public function testSetReswapWithAlias(): void
+    {
+        $this->response->setReswap('append');
+
+        $this->assertSame('append', $this->response->getHeaderLine('HX-Reswap'));
+    }
+
+    public function testSetReswapWithMorph(): void
+    {
+        $this->response->setReswap('innerMorph');
+
+        $this->assertSame('innerMorph', $this->response->getHeaderLine('HX-Reswap'));
+    }
+
     public function testSetReswapThrowInvalidArgumentException(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -115,33 +136,6 @@ final class ResponseTest extends CIUnitTestCase
             '{"event1":"A message","event2":"Another message"}',
             $this->response->getHeaderLine('HX-Trigger'),
         );
-    }
-
-    public function testTriggerClientEventWithSettle(): void
-    {
-        $this->response->triggerClientEvent('showMessage', '', 'settle');
-
-        $this->assertSame(
-            '{"showMessage":""}',
-            $this->response->getHeaderLine('HX-Trigger-After-Settle'),
-        );
-    }
-
-    public function testTriggerClientEventWithSwap(): void
-    {
-        $this->response->triggerClientEvent('showMessage', '', 'swap');
-
-        $this->assertSame(
-            '{"showMessage":""}',
-            $this->response->getHeaderLine('HX-Trigger-After-Swap'),
-        );
-    }
-
-    public function testTriggerClientEventThrowInvalidArgumentException(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-
-        $this->response->triggerClientEvent('event1', 'A message', 'foo');
     }
 
     public function testTriggerClientEventThrowInvalidArgumentExceptionForHeaderContent(): void

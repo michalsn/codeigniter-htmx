@@ -20,12 +20,12 @@ class RedirectResponse extends BaseRedirectResponse
         ?string $swap = null,
         ?array $values = null,
         ?array $headers = null,
+        ?string $select = null,
+        string|false|null $push = null,
+        ?string $replace = null,
+        mixed $handler = null,
     ): RedirectResponse {
-        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
-            $path = (string) service('uri', $path, false)->withScheme('')->setHost('');
-        }
-
-        $data = ['path' => '/' . ltrim($path, '/')];
+        $data = ['path' => $this->normalizeLocationPath($path)];
 
         if ($source !== null) {
             $data['source'] = $source;
@@ -52,6 +52,22 @@ class RedirectResponse extends BaseRedirectResponse
             $data['headers'] = $headers;
         }
 
+        if ($select !== null) {
+            $data['select'] = $select;
+        }
+
+        if ($push !== null) {
+            $data['push'] = $push === false ? false : $this->normalizeLocationPath($push);
+        }
+
+        if ($replace !== null) {
+            $data['replace'] = $this->normalizeLocationPath($replace);
+        }
+
+        if ($handler !== null) {
+            $data['handler'] = $handler;
+        }
+
         return $this->setStatusCode(200)->setHeader('HX-Location', json_encode($data));
     }
 
@@ -75,5 +91,14 @@ class RedirectResponse extends BaseRedirectResponse
     public function hxRefresh(): RedirectResponse
     {
         return $this->setStatusCode(200)->setHeader('HX-Refresh', 'true');
+    }
+
+    private function normalizeLocationPath(string $path): string
+    {
+        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            $path = (string) service('uri', $path, false)->withScheme('')->setHost('');
+        }
+
+        return '/' . ltrim($path, '/');
     }
 }
