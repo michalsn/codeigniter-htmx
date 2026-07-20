@@ -17,6 +17,7 @@ class RedirectResponse extends BaseRedirectResponse
         ?string $source = null,
         ?string $event = null,
         ?string $target = null,
+        ?string $push = null,
         ?string $swap = null,
         ?array $values = null,
         ?array $headers = null,
@@ -37,6 +38,10 @@ class RedirectResponse extends BaseRedirectResponse
 
         if ($target !== null) {
             $data['target'] = $target;
+        }
+
+        if ($push !== null) {
+            $data['push'] = $push;
         }
 
         if ($swap !== null) {
