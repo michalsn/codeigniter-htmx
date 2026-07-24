@@ -68,6 +68,16 @@ final class RedirectResponseTest extends CIUnitTestCase
         $this->assertSame(200, $this->response->getStatusCode());
     }
 
+    public function testHxLocationWithPushReplaceSelectAndHandler(): void
+    {
+        $this->response = $this->response->hxLocation(path: '/foo', push: 'true', replace: 'false', select: '#myDiv', handler: 'myHandler');
+
+        $this->assertTrue($this->response->hasHeader('HX-Location'));
+        $expected = json_encode(['path' => '/foo', 'push' => 'true', 'replace' => 'false', 'select' => '#myDiv', 'handler' => 'myHandler']);
+        $this->assertSame($expected, $this->response->getHeaderLine('HX-Location'));
+        $this->assertSame(200, $this->response->getStatusCode());
+    }
+
     public function testHxLocationWithValuesAndHeaders(): void
     {
         $this->response = $this->response->hxLocation(path: '/foo', values: ['myVal' => 'My Value'], headers: ['myHeader' => 'My Value']);
