@@ -29,7 +29,7 @@ if (! function_exists('view_fragment')) {
         }
 
         $options['fragments'] = is_string($fragments)
-            ? array_map('trim', explode(',', $fragments))
+            ? array_map(trim(...), explode(',', $fragments))
             : $fragments;
 
         return $renderer->setData($data, 'raw')->renderFragments($name, $options, $saveData);

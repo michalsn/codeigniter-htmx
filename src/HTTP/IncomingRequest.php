@@ -70,11 +70,18 @@ class IncomingRequest extends BaseIncomingRequest
     }
 
     /**
+     * The prompt response sent by the optional hx-prompt extension.
+     */
+    public function getPrompt(): ?string
+    {
+        return $this->getHtmxHeader('HX-Prompt');
+    }
+
+    /**
      * The identifier of the triggered element if it exists.
      *
      * In HTMX 4 this is sent in HX-Source and uses the
-     * element identifier format, such as "button#submit?send"
-     * or "div#results?".
+     * element identifier format, such as "button#submit".
      */
     public function getSource(): ?string
     {
@@ -85,7 +92,7 @@ class IncomingRequest extends BaseIncomingRequest
      * The identifier of the target element if it exists.
      *
      * HTMX 4 uses the same element identifier format as HX-Source,
-     * for example "div#results?".
+     * for example "div#results".
      */
     public function getTarget(): ?string
     {

@@ -11,10 +11,6 @@ if (typeof window.htmx !== 'undefined' &&
             return response.headers.get('debugbar-time');
         }
 
-        if (detail.xhr && typeof detail.xhr.getResponseHeader === 'function') {
-            return detail.xhr.getResponseHeader('debugbar-time');
-        }
-
         return null;
     };
 
@@ -27,6 +23,5 @@ if (typeof window.htmx !== 'undefined' &&
         }
     };
 
-    htmx.on('htmx:after:request', refreshDebugBar);
-    htmx.on('htmx:after:settle', refreshDebugBar);
+    htmx.on('htmx:finally:request', refreshDebugBar);
 }

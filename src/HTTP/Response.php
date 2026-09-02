@@ -2,8 +2,8 @@
 
 namespace Michalsn\CodeIgniterHtmx\HTTP;
 
+use CodeIgniter\Exceptions\InvalidArgumentException;
 use CodeIgniter\HTTP\Response as BaseResponse;
-use InvalidArgumentException;
 
 class Response extends BaseResponse
 {

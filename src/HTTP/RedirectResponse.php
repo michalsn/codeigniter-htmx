@@ -2,6 +2,7 @@
 
 namespace Michalsn\CodeIgniterHtmx\HTTP;
 
+use CodeIgniter\Exceptions\InvalidArgumentException;
 use CodeIgniter\HTTP\RedirectResponse as BaseRedirectResponse;
 
 class RedirectResponse extends BaseRedirectResponse
@@ -15,16 +16,24 @@ class RedirectResponse extends BaseRedirectResponse
     public function hxLocation(
         string $path,
         ?string $source = null,
-        ?string $event = null,
+        array|string|null $event = null,
         ?string $target = null,
         ?string $swap = null,
         ?array $values = null,
         ?array $headers = null,
-        ?string $select = null,
         false|string|null $push = null,
-        ?string $replace = null,
-        mixed $handler = null,
+        false|string|null $replace = null,
+        ?string $select = null,
+        ?string $handler = null,
+        ?string $selectOOB = null,
+        ?bool $transition = null,
     ): RedirectResponse {
+        if ($handler !== null) {
+            throw new InvalidArgumentException(
+                'The "handler" option is not supported by htmx 4. Use client-side htmx lifecycle events instead.',
+            );
+        }
+
         $data = ['path' => $this->normalizeLocationPath($path)];
 
         if ($source !== null) {
@@ -52,20 +61,24 @@ class RedirectResponse extends BaseRedirectResponse
             $data['headers'] = $headers;
         }
 
+        if ($push !== null) {
+            $data['push'] = $this->normalizeHistoryOption($push);
+        }
+
+        if ($replace !== null) {
+            $data['replace'] = $this->normalizeHistoryOption($replace);
+        }
+
         if ($select !== null) {
             $data['select'] = $select;
         }
 
-        if ($push !== null) {
-            $data['push'] = $push === false ? false : $this->normalizeLocationPath($push);
+        if ($selectOOB !== null) {
+            $data['selectOOB'] = $selectOOB;
         }
 
-        if ($replace !== null) {
-            $data['replace'] = $this->normalizeLocationPath($replace);
-        }
-
-        if ($handler !== null) {
-            $data['handler'] = $handler;
+        if ($transition !== null) {
+            $data['transition'] = $transition;
         }
 
         return $this->setStatusCode(200)->setHeader('HX-Location', json_encode($data));
@@ -100,5 +113,14 @@ class RedirectResponse extends BaseRedirectResponse
         }
 
         return '/' . ltrim($path, '/');
+    }
+
+    private function normalizeHistoryOption(false|string $option): false|string
+    {
+        if ($option === false || $option === 'true' || $option === 'false') {
+            return $option;
+        }
+
+        return $this->normalizeLocationPath($option);
     }
 }

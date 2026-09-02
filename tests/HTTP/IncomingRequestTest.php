@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\HTTP;
 
+use CodeIgniter\Exceptions\InvalidArgumentException;
 use CodeIgniter\HTTP\URI;
 use CodeIgniter\HTTP\UserAgent;
 use CodeIgniter\Test\CIUnitTestCase;
 use Config\App;
-use InvalidArgumentException;
 use Michalsn\CodeIgniterHtmx\HTTP\IncomingRequest;
 
 /**
@@ -103,6 +103,18 @@ final class IncomingRequestTest extends CIUnitTestCase
     public function testGetCurrentUrlIsNull(): void
     {
         $this->assertNull($this->request->getCurrentUrl());
+    }
+
+    public function testGetPrompt(): void
+    {
+        $header = 'Delete this item?';
+        $this->request->appendHeader('HX-Prompt', $header);
+        $this->assertSame($header, $this->request->getPrompt());
+    }
+
+    public function testGetPromptIsNull(): void
+    {
+        $this->assertNull($this->request->getPrompt());
     }
 
     public function testGetTarget(): void

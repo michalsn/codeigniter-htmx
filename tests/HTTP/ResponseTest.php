@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\HTTP;
 
+use CodeIgniter\Exceptions\InvalidArgumentException;
 use CodeIgniter\Test\CIUnitTestCase;
 use Config\App;
-use InvalidArgumentException;
 use Michalsn\CodeIgniterHtmx\HTTP\Response;
 
 /**
@@ -84,6 +84,13 @@ final class ResponseTest extends CIUnitTestCase
         $this->response->setReswap('innerMorph');
 
         $this->assertSame('innerMorph', $this->response->getHeaderLine('HX-Reswap'));
+    }
+
+    public function testSetReswapWithOuterSync(): void
+    {
+        $this->response->setReswap('outerSync');
+
+        $this->assertSame('outerSync', $this->response->getHeaderLine('HX-Reswap'));
     }
 
     public function testSetReswapThrowInvalidArgumentException(): void

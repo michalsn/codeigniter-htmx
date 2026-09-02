@@ -1,7 +1,39 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [4.0.0](https://github.com/michalsn/codeigniter-htmx/compare/v2.3.0...v4.0.0) - 2026-09-02
+
+### Breaking changes
+
+- Requires PHP 8.2 or later.
+- Requires CodeIgniter 4.7 or later.
+- Drops htmx 2 support and targets the final htmx 4 request/response model and event lifecycle.
+- Replaces `IncomingRequest::getTrigger()` with `getSource()` and removes `getTriggerName()` and `getTriggeringEvent()`. The `getSource()` and `getTarget()` methods now return htmx 4 element identifiers in `tag#id` format.
+- Removes the third `$after` argument from `Response::triggerClientEvent()` because htmx 4 removed the `HX-Trigger-After-Swap` and `HX-Trigger-After-Settle` response headers.
+- Keeps the `RedirectResponse::hxLocation()` argument order introduced in version 2.3. Its legacy `handler` position remains reserved, but passing a value now throws because final htmx 4 no longer supports that callback option.
+
+### Enhancements
+
+- Added `IncomingRequest::getRequestType()`, `isPartial()`, and `isFull()` for `HX-Request-Type`.
+- Added the htmx 4 swap styles, including `outerSync`, morph swaps, `textContent`, and shorthand insertion styles.
+- Extended `RedirectResponse::hxLocation()` with `selectOOB`, `transition`, array event data, `false` values for `push` and `replace`, and URL normalization for history options.
+
+### Changed
+
+- Updated the Debug Toolbar integration for the fetch-based htmx 4 request lifecycle.
+- Reworked the error modal for htmx 4 error responses, including a sandboxed HTML preview and raw response source.
+
+## [2.3.0](https://github.com/michalsn/codeigniter-htmx/compare/v2.2.0...v2.3.0) - 2026-07-24
+
+### Fixes
+
+- Added the missing `push`, `replace`, `select`, and `handler` parameters to `RedirectResponse::hxLocation()`.
+
+## [2.2.0](https://github.com/michalsn/codeigniter-htmx/compare/v2.1.0...v2.2.0) - 2026-02-04
+
+### Fixes
+
+- Updated the Debug Toolbar integration for newer CodeIgniter releases, including the method signature required by CodeIgniter 4.7 and support for required after filters.
 
 ## [2.1.0](https://github.com/michalsn/codeigniter-htmx/compare/v2.0.0...v2.1.0) - 2024-11-06
 

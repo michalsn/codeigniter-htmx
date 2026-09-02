@@ -9,6 +9,7 @@ Available methods:
 - [isPartial()](#ispartial)
 - [isFull()](#isfull)
 - [getCurrentUrl()](#getcurrenturl)
+- [getPrompt()](#getprompt)
 - [getSource()](#getsource)
 - [getTarget()](#gettarget)
 - [is()](#is)
@@ -66,16 +67,24 @@ $this->request->isFull();
 
 ### getCurrentUrl()
 
-Checks the `HX-Current-URL` header and return current URL of the browser.
+Checks the `HX-Current-URL` header and returns the current URL of the browser.
 
 ```php
 $this->request->getCurrentUrl();
 ```
 
+### getPrompt()
+
+Checks the `HX-Prompt` header sent by the optional htmx 4 [hx-prompt extension](https://four.htmx.org/extensions/hx-prompt).
+
+```php
+$this->request->getPrompt();
+```
+
 ### getSource()
 
 Checks the `HX-Source` header.
-In HTMX 4 this identifies the triggering element using the element identifier format, for example `button#save`.
+In htmx 4 this identifies the triggering element using the element identifier format, for example `button#save`.
 
 ```php
 $this->request->getSource();
@@ -84,7 +93,7 @@ $this->request->getSource();
 ### getTarget()
 
 Checks the `HX-Target` header.
-In HTMX 4 it identifies the target element using the element identifier format, for example `div#results`.
+In htmx 4 it identifies the target element using the element identifier format, for example `div#results`.
 
 ```php
 $this->request->getTarget();
@@ -92,7 +101,7 @@ $this->request->getTarget();
 
 ### is()
 
-This new method is available in CodeIgniter since v4.3. It's a handful shortcut and alternative to another CodeIgniter method: `getMethod()`. But it also provides different types of checks - you can read more about it in the [user guide](https://codeigniter.com/user_guide/incoming/incomingrequest.html#is).
+This method is available in every CodeIgniter version supported by this package. It is a convenient alternative to `getMethod()` and also supports other request-type checks. See the [CodeIgniter user guide](https://codeigniter.com/user_guide/incoming/incomingrequest.html#is) for details.
 
 Along with this library, we added extra parameters that can be used: `htmx`, `boosted`, `partial`, and `full`.
 

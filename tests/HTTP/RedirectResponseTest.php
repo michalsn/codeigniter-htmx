@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\HTTP;
 
+use CodeIgniter\Exceptions\InvalidArgumentException;
 use CodeIgniter\Test\CIUnitTestCase;
 use Config\App;
-use InvalidArgumentException;
 use Michalsn\CodeIgniterHtmx\HTTP\RedirectResponse;
 
 /**
@@ -50,10 +50,10 @@ final class RedirectResponseTest extends CIUnitTestCase
 
     public function testHxLocationWithSourceAndEvent(): void
     {
-        $this->response = $this->response->hxLocation(path: '/foo', source: '#myElem', event: 'doubleclick');
+        $this->response = $this->response->hxLocation(path: '/foo', source: '#myElem', event: ['type' => 'doubleclick']);
 
         $this->assertTrue($this->response->hasHeader('HX-Location'));
-        $expected = json_encode(['path' => '/foo', 'source' => '#myElem', 'event' => 'doubleclick']);
+        $expected = json_encode(['path' => '/foo', 'source' => '#myElem', 'event' => ['type' => 'doubleclick']]);
         $this->assertSame($expected, $this->response->getHeaderLine('HX-Location'));
         $this->assertSame(200, $this->response->getStatusCode());
     }
@@ -78,26 +78,72 @@ final class RedirectResponseTest extends CIUnitTestCase
         $this->assertSame(200, $this->response->getStatusCode());
     }
 
-    public function testHxLocationWithSelectPushReplaceAndHandler(): void
+    public function testHxLocationWithSelectPushAndReplace(): void
     {
         $this->response = $this->response->hxLocation(
             path: '/foo',
             select: '#fragment',
             push: '/pushed',
             replace: '/replaced',
-            handler: 'customHandler',
         );
 
         $this->assertTrue($this->response->hasHeader('HX-Location'));
         $expected = json_encode([
             'path'    => '/foo',
-            'select'  => '#fragment',
             'push'    => '/pushed',
             'replace' => '/replaced',
-            'handler' => 'customHandler',
+            'select'  => '#fragment',
         ]);
         $this->assertSame($expected, $this->response->getHeaderLine('HX-Location'));
         $this->assertSame(200, $this->response->getStatusCode());
+    }
+
+    public function testHxLocationKeepsVersionTwoPointThreePositionalArgumentOrder(): void
+    {
+        $this->response = $this->response->hxLocation(
+            '/foo',
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            'true',
+            'false',
+            '#fragment',
+        );
+
+        $expected = json_encode([
+            'path'    => '/foo',
+            'push'    => 'true',
+            'replace' => 'false',
+            'select'  => '#fragment',
+        ]);
+        $this->assertSame($expected, $this->response->getHeaderLine('HX-Location'));
+    }
+
+    public function testHxLocationRejectsVersionTwoHandler(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('The "handler" option is not supported by htmx 4.');
+
+        $this->response->hxLocation(path: '/foo', handler: 'myHandler');
+    }
+
+    public function testHxLocationWithSelectOobAndTransition(): void
+    {
+        $this->response = $this->response->hxLocation(
+            path: '/foo',
+            selectOOB: '#flash:beforeend',
+            transition: true,
+        );
+
+        $expected = json_encode([
+            'path'       => '/foo',
+            'selectOOB'  => '#flash:beforeend',
+            'transition' => true,
+        ]);
+        $this->assertSame($expected, $this->response->getHeaderLine('HX-Location'));
     }
 
     public function testHxLocationWithPushFalse(): void
@@ -106,6 +152,16 @@ final class RedirectResponseTest extends CIUnitTestCase
 
         $this->assertSame(
             json_encode(['path' => '/foo', 'push' => false]),
+            $this->response->getHeaderLine('HX-Location'),
+        );
+    }
+
+    public function testHxLocationPreservesTrueAndFalseHistoryOptions(): void
+    {
+        $this->response = $this->response->hxLocation(path: '/foo', push: 'true', replace: false);
+
+        $this->assertSame(
+            json_encode(['path' => '/foo', 'push' => 'true', 'replace' => false]),
             $this->response->getHeaderLine('HX-Location'),
         );
     }

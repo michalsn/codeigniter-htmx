@@ -1,160 +1,78 @@
-# HTMX 4 migration
+# Migrating from htmx 2 to htmx 4
 
-This package now follows the HTMX 4 request/response model.
+This page covers changes in this CodeIgniter integration. Use the official [htmx 2 to htmx 4 migration guide](https://four.htmx.org/docs#migrating-from-htmx-2x-to-4x) for client-side attributes, JavaScript APIs, events, configuration, and extensions. The official [What's new in htmx 4](https://four.htmx.org/docs/whats-new-in-htmx-4) page provides additional context.
 
-The most important HTMX 4 changes for this package are:
+## Install htmx 4 explicitly
 
-- Requests use `fetch()` instead of `XMLHttpRequest`.
-- Browser event names use the `htmx:phase:action` format.
-- `HX-Source` replaces `HX-Trigger`.
-- `HX-Request-Type` is available with `partial` and `full` values.
-- `HX-Target` now uses the `tag#id` identifier format.
-- `HX-Prompt` and `HX-Trigger-Name` are no longer sent by HTMX 4 clients.
-- Error response handling is configured through `hx-status:*` and `htmx.config.noSwap`.
+This package does not install the browser library. Select the htmx 4 major version explicitly; an unversioned npm install may still resolve to htmx 2 during the transition period.
 
-## Quick start
-
-If you want to preserve the most common HTMX 2 defaults while you migrate your application, add:
-
-```html
-<script>
-    htmx.config.implicitInheritance = true;
-    htmx.config.noSwap = [204, 304, '4xx', '5xx'];
-</script>
+```console
+npm install htmx.org@4
 ```
 
-This is only a transition aid. For a native HTMX 4 setup, prefer explicit `:inherited` attributes and keep the default `noSwap` behavior unless your application needs something else.
+## IncomingRequest API
 
-## IncomingRequest changes
+htmx 4 renamed request headers and added a request type:
 
-Use the new methods when working with HTMX 4 requests:
+| htmx 2 package API | htmx 4 package API | Notes |
+| --- | --- | --- |
+| `getTrigger()` | `getSource()` | `HX-Trigger` became `HX-Source`; its value is now an element identifier such as `button#save`. |
+| `getTriggerName()` | — | `HX-Trigger-Name` was removed. |
+| `getTriggeringEvent()` | — | The `Triggering-Event` extension header is not part of the htmx 4 request model. Read a custom header through CodeIgniter if your application still sends one. |
+| `getPrompt()` | `getPrompt()` | Retained for the optional [hx-prompt extension](https://four.htmx.org/extensions/hx-prompt). |
+| — | `getRequestType()` | Returns `partial`, `full`, or `null`. |
+| — | `isPartial()` / `isFull()` | Convenience checks for `HX-Request-Type`. These values also work with `is('partial')` and `is('full')`. |
+
+`getTarget()` remains available, but `HX-Target` now contains an element identifier such as `div#results`, rather than only its ID.
+
+The existing `isHtmx()`, `isBoosted()`, `isHistoryRestoreRequest()`, and `getCurrentUrl()` methods remain available.
+
+## Response API
+
+htmx 4 removed the response headers that scheduled triggers after the swap or settle phase. Consequently, the third `$after` argument was removed from `triggerClientEvent()`:
 
 ```php
-$this->request->getSource();
-$this->request->getRequestType();
-$this->request->isPartial();
-$this->request->isFull();
+$this->response->triggerClientEvent('showMessage', [
+    'level'   => 'info',
+    'message' => 'Saved',
+]);
 ```
 
-## Response behavior
+Events are now sent through `HX-Trigger`. Listen at the appropriate point in the htmx 4 event lifecycle when later client-side handling is required.
 
-HTMX 4 still supports the response headers used by this package, including:
+`setReswap()` accepts the final htmx 4 swap styles, including `innerMorph`, `outerMorph`, `outerSync`, `textContent`, `before`, `after`, `prepend`, and `append`, in addition to the existing styles.
 
-- `HX-Location`
-- `HX-Push-Url`
-- `HX-Redirect`
-- `HX-Refresh`
-- `HX-Replace-Url`
-- `HX-Retarget`
-- `HX-Reswap`
-- `HX-Reselect`
-- `HX-Trigger`
+`RedirectResponse::hxLocation()` supports the serializable htmx 4 request-context options exposed by this package: `source`, `event`, `target`, `swap`, `values`, `headers`, `select`, `selectOOB`, `push`, `replace`, and `transition`.
 
-## Error responses
+The `push`, `replace`, and `select` parameter positions introduced in package version 2.3 are retained for positional calls. The legacy `handler` position is reserved as a migration guard, but passing a value throws an `InvalidArgumentException`: final htmx 4 no longer supports a response callback in `htmx.ajax()` options.
 
-If you want to avoid swapping `4xx` and `5xx` responses, configure:
+## Server behavior to review
 
-```html
-<script>
-    htmx.config.noSwap = [204, 304, '4xx', '5xx'];
-</script>
-```
+htmx 4 swaps error responses by default; only `204` and `304` are excluded. If your application expects the htmx 2 behavior, either configure `htmx.config.noSwap` or use `hx-status:*` attributes. The package's development error modal continues to show error responses without changing their HTTP status.
 
-You can also enable HTMX 2 compatibility mode in the browser:
-
-```html
-<script src="/path/to/htmx.js"></script>
-<script src="/path/to/ext/htmx-2-compat.js"></script>
-```
-
-## Attribute inheritance
-
-HTMX 4 uses explicit inheritance by default.
-
-If your markup relied on inherited attributes such as `hx-target`, `hx-boost`, or `hx-confirm`, update the attributes to use the `:inherited` modifier:
-
-```html
-<div hx-confirm:inherited="Are you sure?">
-    <button hx-delete="/item/1">Delete</button>
-</div>
-```
-
-If you need the old behavior:
-
-```html
-<script>
-    htmx.config.implicitInheritance = true;
-</script>
-```
-
-For larger migrations, the HTMX 2 compatibility extension can be a more convenient temporary bridge than enabling `implicitInheritance` globally.
-
-## Request markup changes
-
-HTMX 4 also changes a few client-side attributes that may affect applications using this package:
-
-- `hx-delete` no longer includes enclosing form values automatically. Use `hx-include="closest form"` when needed.
-- In HTMX 2, `hx-disable` prevented HTMX processing. In HTMX 4 that behavior moved to `hx-ignore`, while `hx-disabled-elt` was renamed to `hx-disable`.
-- `hx-request` was replaced by `hx-config`.
-- `hx-prompt` was removed. Use `hx-confirm` with JavaScript instead.
-- `hx-ext` was removed. Extensions now register through standard events, so load the extension script directly and use its attributes where needed.
-- `hx-history` and `hx-history-elt` were removed.
-- `data-hx-*` attributes are no longer recognized automatically unless you configure `htmx.config.prefix`.
-
-## History behavior
-
-HTMX 4 no longer stores page snapshots in browser storage.
-
-When the user navigates through history, HTMX issues a new full-page request instead. The `HX-History-Restore-Request` header is still available, so this package continues to expose `isHistoryRestoreRequest()`.
-
-If you want hard browser reloads on history navigation instead of HTMX restoration, use:
-
-```html
-<script>
-    htmx.config.history = 'reload';
-</script>
-```
-
-## Out-of-band swap order
-
-In HTMX 4, the main swap happens before `hx-swap-oob` content.
-
-If your UI depends on out-of-band fragments being processed first, review the markup and make each swap independent.
-
-## Timeouts
-
-HTMX 4 sets a 60-second request timeout by default:
-
-```html
-<script>
-    htmx.config.defaultTimeout = 60000;
-</script>
-```
-
-If your application expects no timeout, set it back to `0`.
-
-## Extensions
-
-Extensions are now loaded by including their scripts directly.
-
-```html
-<script src="/path/to/htmx.js"></script>
-<script src="/path/to/ext/sse.js"></script>
-```
-
-You can optionally restrict which extensions may load with `htmx.config.extensions`.
-
-## Caching
-
-If your application returns different HTML for full and partial HTMX requests, configure caching carefully and consider sending:
+If a cache can serve both full and partial responses for the same URL, make the variants explicit. A typical starting point is:
 
 ```http
 Vary: HX-Request-Type
 ```
 
-If responses also depend on the source or target element, extend the `Vary` header accordingly.
+Extend `Vary` when the representation also depends on another request header.
+
+## Client-side checklist
+
+The following application-level changes are intentionally not duplicated here; review them in the official migration guide:
+
+- explicit attribute inheritance and the temporary htmx 2 compatibility extension;
+- renamed or removed attributes and configuration options;
+- the `fetch()`-based request and event lifecycle;
+- history restoration, timeouts, and out-of-band swap ordering;
+- the htmx 4 extension registration model.
+
+Use the official upgrade checker as a first pass, then test behavior that depends on inheritance, error responses, history, and custom events.
 
 ## References
 
-- [HTMX 4 migration guide](https://four.htmx.org/docs/get-started/migration)
-- [HTMX 4 reference](https://four.htmx.org/reference/)
+- [Migrating from htmx 2.x to 4.x](https://four.htmx.org/docs#migrating-from-htmx-2x-to-4x)
+- [What's new in htmx 4](https://four.htmx.org/docs/whats-new-in-htmx-4)
+- [htmx 4.0.0 release notes](https://four.htmx.org/announcements/2026-08-28-htmx-4.0.0-is-released)
+- [htmx 4 reference](https://four.htmx.org/reference/)

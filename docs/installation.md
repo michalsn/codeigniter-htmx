@@ -3,11 +3,19 @@
 - [Composer Installation](#composer-installation)
 - [Manual Installation](#manual-installation)
 
-Remember - you still need to include the `htmx` JavaScript library inside the `head` tag. The current `develop` branch expects an HTMX 4 client.
+This version requires PHP 8.2 or later and CodeIgniter 4.7 or later.
+
+This package does not install the browser-side htmx library. Install the htmx 4 major version explicitly:
+
+```console
+npm install htmx.org@4
+```
+
+An unversioned `npm install htmx.org` may still install htmx 2 during the htmx 4 release transition. See the [htmx 4.0.0 release notes](https://four.htmx.org/announcements/2026-08-28-htmx-4.0.0-is-released) for details. Include the resulting JavaScript bundle in your page's `head` element.
 
 ## Composer Installation
 
-The only thing you have to do is to run this command, and you're ready to go.
+Install the PHP integration with Composer:
 
 ```console
 composer require michalsn/codeigniter-htmx
@@ -36,4 +44,3 @@ public $files = [
     APPPATH . 'ThirdParty/htmx/src/Common.php',
 ];
 ```
-
