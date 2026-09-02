@@ -10,13 +10,11 @@
       
       
       
-        <link rel="canonical" href="https://michalsn.github.io/codeigniter-htmx/dev/configuration/">
+        <link rel="canonical" href="https://michalsn.github.io/codeigniter-htmx/dev/htmx_4_migration/">
       
       
-        <link rel="prev" href="../installation/">
+        <link rel="prev" href="../troubleshooting/">
       
-      
-        <link rel="next" href="../error_handling/">
       
       
         
@@ -27,7 +25,7 @@
     
     
       
-        <title>Configuration - CodeIgniter HTMX</title>
+        <title>HTMX 4 migration - CodeIgniter HTMX</title>
       
     
     
@@ -80,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#configuration" class="md-skip">
+        <a href="#migrating-from-htmx-2-to-htmx-4" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Configuration
+              HTMX 4 migration
             
           </span>
         </div>
@@ -315,37 +313,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Configuration
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
         
   
   
@@ -361,70 +332,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#toolbardecorator" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        $toolbarDecorator
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#errormodaldecorator" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        $errorModalDecorator
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#skipviewdecoratorsstring" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        $skipViewDecoratorsString
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#storepreviousurl" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        $storePreviousURL
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -649,10 +556,37 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../htmx_4_migration/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTMX 4 migration
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -668,6 +602,92 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-htmx-4-explicitly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install htmx 4 explicitly
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#incomingrequest-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IncomingRequest API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#response-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Response API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#server-behavior-to-review" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server behavior to review
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#client-side-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client-side checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -699,10 +719,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#toolbardecorator" class="md-nav__link">
+  <a href="#install-htmx-4-explicitly" class="md-nav__link">
     <span class="md-ellipsis">
       
-        $toolbarDecorator
+        Install htmx 4 explicitly
       
     </span>
   </a>
@@ -710,10 +730,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#errormodaldecorator" class="md-nav__link">
+  <a href="#incomingrequest-api" class="md-nav__link">
     <span class="md-ellipsis">
       
-        $errorModalDecorator
+        IncomingRequest API
       
     </span>
   </a>
@@ -721,10 +741,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#skipviewdecoratorsstring" class="md-nav__link">
+  <a href="#response-api" class="md-nav__link">
     <span class="md-ellipsis">
       
-        $skipViewDecoratorsString
+        Response API
       
     </span>
   </a>
@@ -732,10 +752,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#storepreviousurl" class="md-nav__link">
+  <a href="#server-behavior-to-review" class="md-nav__link">
     <span class="md-ellipsis">
       
-        $storePreviousURL
+        Server behavior to review
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#client-side-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client-side checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
       
     </span>
   </a>
@@ -762,36 +804,88 @@
   
 
 
-<h1 id="configuration">Configuration</h1>
-<p>To make changes to the config file, we have to have our copy in the <code>app/Config/Htmx.php</code>. Luckily, this package comes with handy command that will make this easy.</p>
-<p>When we run:</p>
-<pre class="highlight"><code>php spark htmx:publish</code></pre>
-<p>We will get our copy ready for modifications.</p>
-<hr />
-<p>Available options:</p>
+<h1 id="migrating-from-htmx-2-to-htmx-4">Migrating from htmx 2 to htmx 4</h1>
+<p>This page covers changes in this CodeIgniter integration. Use the official <a href="https://four.htmx.org/docs#migrating-from-htmx-2x-to-4x">htmx 2 to htmx 4 migration guide</a> for client-side attributes, JavaScript APIs, events, configuration, and extensions. The official <a href="https://four.htmx.org/docs/whats-new-in-htmx-4">What's new in htmx 4</a> page provides additional context.</p>
+<h2 id="install-htmx-4-explicitly">Install htmx 4 explicitly</h2>
+<p>This package does not install the browser library. Select the htmx 4 major version explicitly; an unversioned npm install may still resolve to htmx 2 during the transition period.</p>
+<pre class="highlight"><code class="language-console">npm install htmx.org@4</code></pre>
+<h2 id="incomingrequest-api">IncomingRequest API</h2>
+<p>htmx 4 renamed request headers and added a request type:</p>
+<table>
+<thead>
+<tr>
+<th>htmx 2 package API</th>
+<th>htmx 4 package API</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>getTrigger()</code></td>
+<td><code>getSource()</code></td>
+<td><code>HX-Trigger</code> became <code>HX-Source</code>; its value is now an element identifier such as <code>button#save</code>.</td>
+</tr>
+<tr>
+<td><code>getTriggerName()</code></td>
+<td>—</td>
+<td><code>HX-Trigger-Name</code> was removed.</td>
+</tr>
+<tr>
+<td><code>getTriggeringEvent()</code></td>
+<td>—</td>
+<td>The <code>Triggering-Event</code> extension header is not part of the htmx 4 request model. Read a custom header through CodeIgniter if your application still sends one.</td>
+</tr>
+<tr>
+<td><code>getPrompt()</code></td>
+<td><code>getPrompt()</code></td>
+<td>Retained for the optional <a href="https://four.htmx.org/extensions/hx-prompt">hx-prompt extension</a>.</td>
+</tr>
+<tr>
+<td>—</td>
+<td><code>getRequestType()</code></td>
+<td>Returns <code>partial</code>, <code>full</code>, or <code>null</code>.</td>
+</tr>
+<tr>
+<td>—</td>
+<td><code>isPartial()</code> / <code>isFull()</code></td>
+<td>Convenience checks for <code>HX-Request-Type</code>. These values also work with <code>is('partial')</code> and <code>is('full')</code>.</td>
+</tr>
+</tbody>
+</table>
+<p><code>getTarget()</code> remains available, but <code>HX-Target</code> now contains an element identifier such as <code>div#results</code>, rather than only its ID.</p>
+<p>The existing <code>isHtmx()</code>, <code>isBoosted()</code>, <code>isHistoryRestoreRequest()</code>, and <code>getCurrentUrl()</code> methods remain available.</p>
+<h2 id="response-api">Response API</h2>
+<p>htmx 4 removed the response headers that scheduled triggers after the swap or settle phase. Consequently, the third <code>$after</code> argument was removed from <code>triggerClientEvent()</code>:</p>
+<pre class="highlight"><code class="language-php">$this-&gt;response-&gt;triggerClientEvent('showMessage', [
+    'level'   =&gt; 'info',
+    'message' =&gt; 'Saved',
+]);</code></pre>
+<p>Events are now sent through <code>HX-Trigger</code>. Listen at the appropriate point in the htmx 4 event lifecycle when later client-side handling is required.</p>
+<p><code>setReswap()</code> accepts the final htmx 4 swap styles, including <code>innerMorph</code>, <code>outerMorph</code>, <code>outerSync</code>, <code>textContent</code>, <code>before</code>, <code>after</code>, <code>prepend</code>, and <code>append</code>, in addition to the existing styles.</p>
+<p><code>RedirectResponse::hxLocation()</code> supports the serializable htmx 4 request-context options exposed by this package: <code>source</code>, <code>event</code>, <code>target</code>, <code>swap</code>, <code>values</code>, <code>headers</code>, <code>select</code>, <code>selectOOB</code>, <code>push</code>, <code>replace</code>, and <code>transition</code>.</p>
+<p>The <code>push</code>, <code>replace</code>, and <code>select</code> parameter positions introduced in package version 2.3 are retained for positional calls. The legacy <code>handler</code> position is reserved as a migration guard, but passing a value throws an <code>InvalidArgumentException</code>: final htmx 4 no longer supports a response callback in <code>htmx.ajax()</code> options.</p>
+<h2 id="server-behavior-to-review">Server behavior to review</h2>
+<p>htmx 4 swaps error responses by default; only <code>204</code> and <code>304</code> are excluded. If your application expects the htmx 2 behavior, either configure <code>htmx.config.noSwap</code> or use <code>hx-status:*</code> attributes. The package's development error modal continues to show error responses without changing their HTTP status.</p>
+<p>If a cache can serve both full and partial responses for the same URL, make the variants explicit. A typical starting point is:</p>
+<pre class="highlight"><code class="language-http">Vary: HX-Request-Type</code></pre>
+<p>Extend <code>Vary</code> when the representation also depends on another request header.</p>
+<h2 id="client-side-checklist">Client-side checklist</h2>
+<p>The following application-level changes are intentionally not duplicated here; review them in the official migration guide:</p>
 <ul>
-<li><a href="#toolbardecorator">$toolbarDecorator</a></li>
-<li><a href="#errormodaldecorator">$errorModalDecorator</a></li>
-<li><a href="#skipviewdecoratorsstring">$skipViewDecoratorsString</a></li>
-<li><a href="#storepreviousurl">$storePreviousURL</a></li>
+<li>explicit attribute inheritance and the temporary htmx 2 compatibility extension;</li>
+<li>renamed or removed attributes and configuration options;</li>
+<li>the <code>fetch()</code>-based request and event lifecycle;</li>
+<li>history restoration, timeouts, and out-of-band swap ordering;</li>
+<li>the htmx 4 extension registration model.</li>
 </ul>
-<h3 id="toolbardecorator">$toolbarDecorator</h3>
-<p>This allows us to disable the <code>ToolbarDecorator</code> class. Please read <a href="../debug_toolbar/">Debug Toolbar</a> page for more information.</p>
-<h3 id="errormodaldecorator">$errorModalDecorator</h3>
-<p>This allows us to disable the <code>ErrorModalDecorator</code> class. Please read <a href="../error_handling/">Error handling</a> page for more information.</p>
-<h3 id="skipviewdecoratorsstring">$skipViewDecoratorsString</h3>
-<p>If this string appears in the content of the file, it will prevent CodeIgniter from using both View Decorator classes above - even if they are enabled.</p>
-<p>You can change this string to whatever you want. Just remember to make it unique enough to not use it by accident.</p>
-<p>This may be useful when we want to send an e-mail, which message is prepared via the View file.
-Since these decorators are used automatically in the <code>development</code> mode (or to be more strict - when <code>CI_DEBUG</code> is enabled), we may want to disable all the scripts for the e-mail messages.</p>
-<p>We can add the defined string as an <code>id</code> or <code>class</code> to the html tag.</p>
-<p>In the <code>production</code> environment these decorators are ignored by design. So this is useful only for the <code>development</code> mode.</p>
-<h3 id="storepreviousurl">$storePreviousURL</h3>
-<p>Specifies whether the HTMX request URL should be stored in the session, for use with the <code>previous_url()</code> helper function.
-For more information, see the <a href="https://codeigniter.com/user_guide/helpers/url_helper.html#previous_url">user guide</a>.</p>
-<p>Basically, if you use HTMX extensively, including for navigating your site, you will probably want to leave it as <code>true</code>.
-If storing the request is not desirable, mark it as a traditional AJAX request or use a custom header in your application flow.
-URLs from AJAX requests are always excluded from session storage.</p>
+<p>Use the official upgrade checker as a first pass, then test behavior that depends on inheritance, error responses, history, and custom events.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://four.htmx.org/docs#migrating-from-htmx-2x-to-4x">Migrating from htmx 2.x to 4.x</a></li>
+<li><a href="https://four.htmx.org/docs/whats-new-in-htmx-4">What's new in htmx 4</a></li>
+<li><a href="https://four.htmx.org/announcements/2026-08-28-htmx-4.0.0-is-released">htmx 4.0.0 release notes</a></li>
+<li><a href="https://four.htmx.org/reference/">htmx 4 reference</a></li>
+</ul>
 
 
 

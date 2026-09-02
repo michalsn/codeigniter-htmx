@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../assets/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -31,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -406,7 +406,7 @@
   <span class="md-ellipsis">
     
   
-    IncomingReqeuest
+    IncomingRequest
   
 
     
@@ -623,6 +623,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../htmx_4_migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTMX 4 migration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -697,9 +724,10 @@
 <h3 id="configuration">Configuration</h3>
 <p>We should edit the <code>app/Config/Format.php</code> file to include the necessary changes. We should add <code>'text/html'</code> to the <code>$supportedResponseFormats</code> array, and <code>'text/html' =&gt; HTMLFormatter::class</code> to the <code>$formatters</code> array. This will be done automatically when you run the command:</p>
 <pre class="highlight"><code>php spark htmx:publish</code></pre>
-<p>Since content negotiation will be triggered for any format other than <code>json</code> or <code>xml</code>, we have two options:</p>
+<p>With HTMX 4, requests already send <code>Accept: text/html</code>, so in the most common HTMX case no extra client-side configuration is needed.</p>
+<p>If you want to use the formatter outside HTMX requests, you still have two options:</p>
 <ol>
-<li>Set the custom headers for every request via HTML tag
+<li>Set the custom headers for a request explicitly
    <pre class="highlight"><code class="language-html">hx-headers='{"Accept":"text/html"}'</code></pre></li>
 <li>Move the <code>'text/html'</code> entry from the <code>$supportedResponseFormats</code> config array to the first position in the array - this way it will be used as the default value.
    <pre class="highlight"><code class="language-php">public array $supportedResponseFormats = [
@@ -710,7 +738,7 @@
 ];</code></pre></li>
 </ol>
 <h3 id="example">Example</h3>
-<p>This is an sample of using HTML formatter:</p>
+<p>This is a sample of using HTML formatter:</p>
 <pre class="highlight"><code class="language-php">&lt;?php
 
 namespace App\Controllers;
@@ -793,7 +821,7 @@ class Photos extends ResourcePresenter
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/highlight.min.js"></script>
       

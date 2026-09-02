@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../assets/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -31,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -406,7 +406,7 @@
   <span class="md-ellipsis">
     
   
-    IncomingReqeuest
+    IncomingRequest
   
 
     
@@ -634,6 +634,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../htmx_4_migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTMX 4 migration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -722,14 +749,41 @@
 </ul>
 <h3 id="hxlocation">hxLocation()</h3>
 <p>Sets the <code>HX-Location</code> header to redirect without reloading the whole page.</p>
-<p><pre class="highlight"><code class="language-php">return redirect()-&gt;hxLocation('/path');</code></pre>
-For convenience, the set path with <code>http(s)://</code> will be converted to relative. Like this: <code>http://example.com/articles/</code> it will become <code>/articles/</code>.</p>
-<p>For more information, please see <a href="https://htmx.org/headers/hx-location/">hx-location</a>.</p>
+<pre class="highlight"><code class="language-php">return redirect()-&gt;hxLocation('/path');</code></pre>
+<p>For convenience, absolute <code>http(s)://</code> paths are converted to relative paths. For example, <code>http://example.com/articles/</code> becomes <code>/articles/</code>.</p>
+<p>Supported fields mirror the serializable htmx 4 request-context options accepted by <code>HX-Location</code>:</p>
+<ul>
+<li><code>path</code> - required</li>
+<li><code>source</code></li>
+<li><code>event</code></li>
+<li><code>target</code></li>
+<li><code>swap</code></li>
+<li><code>values</code></li>
+<li><code>headers</code></li>
+<li><code>select</code></li>
+<li><code>selectOOB</code></li>
+<li><code>push</code></li>
+<li><code>replace</code></li>
+<li><code>transition</code></li>
+</ul>
+<p><code>push</code> and <code>replace</code> accept a path, the strings <code>true</code> or <code>false</code>, or the boolean <code>false</code>. Absolute URLs used for <code>path</code>, <code>push</code>, or <code>replace</code> are normalized to same-origin paths.</p>
+<p>For positional calls, <code>push</code>, <code>replace</code>, and <code>select</code> retain their positions from version 2.3. The legacy <code>handler</code> position is also reserved to prevent subsequent arguments from being misinterpreted. Because final htmx 4 no longer supports this callback option, passing a non-null <code>handler</code> throws an <code>InvalidArgumentException</code>. Use client-side htmx lifecycle events instead.</p>
+<p>Example:</p>
+<pre class="highlight"><code class="language-php">return redirect()-&gt;hxLocation(
+    path: '/photos',
+    target: '#content',
+    swap: 'innerHTML',
+    select: '#photos-list',
+    selectOOB: '#flash:beforeend',
+    push: '/photos',
+    transition: true,
+);</code></pre>
+<p>For more information, see the htmx 4 <a href="https://four.htmx.org/reference/headers/hx-location/">HX-Location response header documentation</a>.</p>
 <h3 id="hxredirect">hxRedirect()</h3>
 <p>Can be used to do a client-side redirect to a new location.</p>
 <pre class="highlight"><code class="language-php">return redirect()-&gt;hxRedirect('/path');</code></pre>
 <h3 id="hxrefresh">hxRefresh()</h3>
-<p>If called the client side will do a full refresh of the page.</p>
+<p>If called, the client performs a full refresh of the page.</p>
 <pre class="highlight"><code class="language-php">return redirect()-&gt;hxRefresh();</code></pre>
 
 
@@ -796,7 +850,7 @@ For convenience, the set path with <code>http(s)://</code> will be converted to 
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/highlight.min.js"></script>
       

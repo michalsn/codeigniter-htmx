@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../assets/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -31,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -475,7 +475,7 @@
   <span class="md-ellipsis">
     
   
-    IncomingReqeuest
+    IncomingRequest
   
 
     
@@ -623,6 +623,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../htmx_4_migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTMX 4 migration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -696,9 +723,12 @@
 <li><a href="#composer-installation">Composer Installation</a></li>
 <li><a href="#manual-installation">Manual Installation</a></li>
 </ul>
-<p>Remember - you still need to include the <code>htmx</code> javascript library inside the <code>head</code> tag.</p>
+<p>This version requires PHP 8.2 or later and CodeIgniter 4.7 or later.</p>
+<p>This package does not install the browser-side htmx library. Install the htmx 4 major version explicitly:</p>
+<pre class="highlight"><code class="language-console">npm install htmx.org@4</code></pre>
+<p>An unversioned <code>npm install htmx.org</code> may still install htmx 2 during the htmx 4 release transition. See the <a href="https://four.htmx.org/announcements/2026-08-28-htmx-4.0.0-is-released">htmx 4.0.0 release notes</a> for details. Include the resulting JavaScript bundle in your page's <code>head</code> element.</p>
 <h2 id="composer-installation">Composer Installation</h2>
-<p>The only thing you have to do is to run this command, and you're ready to go.</p>
+<p>Install the PHP integration with Composer:</p>
 <pre class="highlight"><code class="language-console">composer require michalsn/codeigniter-htmx</code></pre>
 <h2 id="manual-installation">Manual Installation</h2>
 <p>In the example below we will assume, that files from this project will be located in <code>app/ThirdParty/htmx</code> directory.</p>
@@ -783,7 +813,7 @@ public $files = [
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/highlight.min.js"></script>
       

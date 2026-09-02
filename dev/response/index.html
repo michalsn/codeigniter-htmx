@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../assets/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -31,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -406,7 +406,7 @@
   <span class="md-ellipsis">
     
   
-    IncomingReqeuest
+    IncomingRequest
   
 
     
@@ -667,6 +667,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../htmx_4_migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTMX 4 migration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -796,22 +823,22 @@
 <p>Sets the value in <code>HX-Replace-Url</code> header. Replaces the current URL in the location bar.</p>
 <pre class="highlight"><code class="language-php">$this-&gt;response-&gt;setReplaceUrl('/replaced-url');</code></pre>
 <h3 id="setreswap">setReswap()</h3>
-<p>Sets the value in <code>HX-Reswap</code> header. Allows you to specify how the response will be swapped. See <a href="https://htmx.org/attributes/hx-swap">hx-swap</a> for possible values.</p>
-<pre class="highlight"><code class="language-php">$this-&gt;response-&gt;setReswap('innerHTML show:#another-div:top');</code></pre>
+<p>Sets the value in <code>HX-Reswap</code> header. Allows you to specify how the response will be swapped. See <a href="https://four.htmx.org/reference/attributes/hx-swap/">hx-swap</a> for possible values.</p>
+<pre class="highlight"><code class="language-php">$this-&gt;response-&gt;setReswap('innerHTML show:top showTarget:#another-div');</code></pre>
 <h3 id="setretarget">setRetarget()</h3>
 <p>Sets the value in <code>HX-Retarget</code> header. A CSS selector that updates the target of the content update to a different element on the page.</p>
 <pre class="highlight"><code class="language-php">$this-&gt;response-&gt;setRetarget('#another-div');</code></pre>
 <h3 id="setreselect">setReselect()</h3>
-<p>Sets the value in <code>HX-Reselect</code> header. A CSS selector that allows you to choose which part of the response is used to be swapped in. Overrides an existing <a href="https://htmx.org/attributes/hx-select/">hx-select</a> on the triggering element.</p>
+<p>Sets the value in <code>HX-Reselect</code> header. A CSS selector that allows you to choose which part of the response is used to be swapped in. Overrides an existing <a href="https://four.htmx.org/reference/"><code>hx-select</code></a> on the triggering element.</p>
 <pre class="highlight"><code class="language-php">$this-&gt;response-&gt;setReselect('#another-div');</code></pre>
 <h3 id="triggerclientevent">triggerClientEvent()</h3>
-<p>Allows you to set the headers: <code>HX-Trigger</code>, <code>HX-Trigger-After-Settle</code> or <code>HX-Trigger-After-Swap</code>.</p>
-<p>This method has 3 parameters:
-* <code>name</code>
-* <code>params</code>
-* <code>method</code> - which can be one of: <code>receive</code> (default), <code>settle</code>, <code>swap</code>.</p>
+<p>Allows you to set the <code>HX-Trigger</code> header.</p>
+<p>This method has two parameters:</p>
+<ul>
+<li><code>name</code></li>
+<li><code>params</code></li>
+</ul>
 <pre class="highlight"><code class="language-php">$this-&gt;response-&gt;triggerClientEvent('showMessage', ['level' =&gt; 'info', 'message' =&gt; 'Here Is A Message']);</code></pre>
-<p>For more information, please see <a href="https://htmx.org/headers/hx-trigger/">hx-trigger</a>.</p>
 
 
 
@@ -877,7 +904,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/highlight.min.js"></script>
       

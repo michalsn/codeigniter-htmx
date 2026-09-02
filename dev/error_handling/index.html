@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../assets/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -31,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -416,7 +416,7 @@
   <span class="md-ellipsis">
     
   
-    IncomingReqeuest
+    IncomingRequest
   
 
     
@@ -564,6 +564,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../htmx_4_migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTMX 4 migration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -603,7 +630,17 @@
 
 
 <h1 id="error-handling">Error handling</h1>
-<p>By default, when an HTTP error response occurs, htmx is not displaying the error. This library changes it so that in the development mode, errors are displayed in a modal window.</p>
+<p>HTMX 4 handles error responses through its response handling rules, using <code>hx-status:*</code> attributes and <code>htmx.config.noSwap</code>.</p>
+<p>In development mode, when <code>errorModalDecorator</code> is enabled, this library overrides that default browser-side behavior for failed HTMX requests.</p>
+<p>Instead of allowing HTMX to continue with its normal response handling, the raw response is displayed in a modal window and the normal HTMX swap is skipped.</p>
+<p>This makes it easier to inspect exception pages, validation output, and malformed HTML returned during development, without changing the actual HTTP status code.</p>
+<p>HTML error pages are shown in a sandboxed preview iframe, with a source view available for inspecting the raw response. JSON and plain-text responses are shown directly as source.</p>
+<p>If you want to use HTMX's native error handling rules in development instead, disable <code>errorModalDecorator</code> in the config.</p>
+<p>When the decorator is disabled, you can configure HTMX directly, for example:</p>
+<pre class="highlight"><code class="language-html">&lt;script&gt;
+    htmx.config.noSwap = [204, 304, '4xx', '5xx'];
+&lt;/script&gt;</code></pre>
+<p>You can also use <code>hx-status:*</code> attributes to define per-status error targets in your application.</p>
 <p>This feature can be disabled in the <a href="../configuration/">Config</a> file.</p>
 
 
@@ -670,7 +707,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/highlight.min.js"></script>
       
