@@ -2,6 +2,7 @@
 
 namespace Michalsn\CodeIgniterHtmx\HTTP;
 
+use CodeIgniter\Exceptions\InvalidArgumentException;
 use CodeIgniter\HTTP\RedirectResponse as BaseRedirectResponse;
 
 class RedirectResponse extends BaseRedirectResponse
@@ -15,17 +16,25 @@ class RedirectResponse extends BaseRedirectResponse
     public function hxLocation(
         string $path,
         ?string $source = null,
-        ?string $event = null,
+        array|string|null $event = null,
         ?string $target = null,
         ?string $swap = null,
         ?array $values = null,
         ?array $headers = null,
+        false|string|null $push = null,
+        false|string|null $replace = null,
+        ?string $select = null,
+        ?string $handler = null,
+        ?string $selectOOB = null,
+        ?bool $transition = null,
     ): RedirectResponse {
-        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
-            $path = (string) service('uri', $path, false)->withScheme('')->setHost('');
+        if ($handler !== null) {
+            throw new InvalidArgumentException(
+                'The "handler" option is not supported by htmx 4. Use client-side htmx lifecycle events instead.',
+            );
         }
 
-        $data = ['path' => '/' . ltrim($path, '/')];
+        $data = ['path' => $this->normalizeLocationPath($path)];
 
         if ($source !== null) {
             $data['source'] = $source;
@@ -52,6 +61,26 @@ class RedirectResponse extends BaseRedirectResponse
             $data['headers'] = $headers;
         }
 
+        if ($push !== null) {
+            $data['push'] = $this->normalizeHistoryOption($push);
+        }
+
+        if ($replace !== null) {
+            $data['replace'] = $this->normalizeHistoryOption($replace);
+        }
+
+        if ($select !== null) {
+            $data['select'] = $select;
+        }
+
+        if ($selectOOB !== null) {
+            $data['selectOOB'] = $selectOOB;
+        }
+
+        if ($transition !== null) {
+            $data['transition'] = $transition;
+        }
+
         return $this->setStatusCode(200)->setHeader('HX-Location', json_encode($data));
     }
 
@@ -75,5 +104,23 @@ class RedirectResponse extends BaseRedirectResponse
     public function hxRefresh(): RedirectResponse
     {
         return $this->setStatusCode(200)->setHeader('HX-Refresh', 'true');
+    }
+
+    private function normalizeLocationPath(string $path): string
+    {
+        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            $path = (string) service('uri', $path, false)->withScheme('')->setHost('');
+        }
+
+        return '/' . ltrim($path, '/');
+    }
+
+    private function normalizeHistoryOption(false|string $option): false|string
+    {
+        if ($option === false || $option === 'true' || $option === 'false') {
+            return $option;
+        }
+
+        return $this->normalizeLocationPath($option);
     }
 }

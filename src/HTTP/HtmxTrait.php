@@ -2,16 +2,24 @@
 
 namespace Michalsn\CodeIgniterHtmx\HTTP;
 
-use InvalidArgumentException;
+use CodeIgniter\Exceptions\InvalidArgumentException;
 
 trait HtmxTrait
 {
     private array $swapOptions = [
         'innerHTML',
         'outerHTML',
+        'outerSync',
+        'innerMorph',
+        'outerMorph',
+        'textContent',
+        'before',
         'beforebegin',
+        'prepend',
         'afterbegin',
+        'append',
         'beforeend',
+        'after',
         'afterend',
         'delete',
         'none',

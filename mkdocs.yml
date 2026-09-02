@@ -59,9 +59,10 @@ nav:
   - Configuration: configuration.md
   - Error handling: error_handling.md
   - View fragments: view_fragments.md
-  - IncomingReqeuest: incoming_request.md
+  - IncomingRequest: incoming_request.md
   - Response: response.md
   - RedirectResponse: redirect_response.md
   - HTML Formatter: html_formatter.md
   - Debug Toolbar: debug_toolbar.md
   - Troubleshooting: troubleshooting.md
+  - HTMX 4 migration: htmx_4_migration.md

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\HTTP;
 
+use CodeIgniter\Exceptions\InvalidArgumentException;
 use CodeIgniter\HTTP\URI;
 use CodeIgniter\HTTP\UserAgent;
 use CodeIgniter\Test\CIUnitTestCase;
 use Config\App;
-use InvalidArgumentException;
 use Michalsn\CodeIgniterHtmx\HTTP\IncomingRequest;
 
 /**
@@ -67,6 +67,32 @@ final class IncomingRequestTest extends CIUnitTestCase
         $this->assertFalse($this->request->isHistoryRestoreRequest());
     }
 
+    public function testGetRequestType(): void
+    {
+        $header = 'partial';
+        $this->request->appendHeader('HX-Request-Type', $header);
+        $this->assertSame($header, $this->request->getRequestType());
+    }
+
+    public function testGetRequestTypeIsNull(): void
+    {
+        $this->assertNull($this->request->getRequestType());
+    }
+
+    public function testIsPartial(): void
+    {
+        $this->request->appendHeader('HX-Request-Type', 'partial');
+        $this->assertTrue($this->request->isPartial());
+        $this->assertFalse($this->request->isFull());
+    }
+
+    public function testIsFull(): void
+    {
+        $this->request->appendHeader('HX-Request-Type', 'full');
+        $this->assertTrue($this->request->isFull());
+        $this->assertFalse($this->request->isPartial());
+    }
+
     public function testGetCurrentUrl(): void
     {
         $header = 'https://codeigniter-htmx-demo.test/';
@@ -81,7 +107,7 @@ final class IncomingRequestTest extends CIUnitTestCase
 
     public function testGetPrompt(): void
     {
-        $header = 'prompt test';
+        $header = 'Delete this item?';
         $this->request->appendHeader('HX-Prompt', $header);
         $this->assertSame($header, $this->request->getPrompt());
     }
@@ -93,7 +119,7 @@ final class IncomingRequestTest extends CIUnitTestCase
 
     public function testGetTarget(): void
     {
-        $header = '#response-div';
+        $header = 'div#response-div';
         $this->request->appendHeader('HX-Target', $header);
         $this->assertSame($header, $this->request->getTarget());
     }
@@ -103,40 +129,16 @@ final class IncomingRequestTest extends CIUnitTestCase
         $this->assertNull($this->request->getTarget());
     }
 
-    public function testGetTrigger(): void
+    public function testGetSource(): void
     {
-        $header = 'test-id';
-        $this->request->appendHeader('HX-Trigger', $header);
-        $this->assertSame($header, $this->request->getTrigger());
+        $header = 'button#test-id';
+        $this->request->appendHeader('HX-Source', $header);
+        $this->assertSame($header, $this->request->getSource());
     }
 
-    public function testGetTriggerIsNull(): void
+    public function testGetSourceIsNull(): void
     {
-        $this->assertNull($this->request->getTrigger());
-    }
-
-    public function testGetTriggerName(): void
-    {
-        $header = 'test-name';
-        $this->request->appendHeader('HX-Trigger-Name', $header);
-        $this->assertSame($header, $this->request->getTriggerName());
-    }
-
-    public function testGetTriggerNameIsNull(): void
-    {
-        $this->assertNull($this->request->getTriggerName());
-    }
-
-    public function testGetTriggeringEvent(): void
-    {
-        $header = '{"isTrusted":true,"htmx-internal-data":{"triggerSpec":{"trigger":"click"},"handledFor":["button.btn.btn-sm btn-primary"]},"screenX":1347,"screenY":238,"pageX":106,"pageY":128,"clientX":106,"clientY":128,"x":106,"y":128,"offsetX":93,"offsetY":11,"ctrlKey":false,"shiftKey":false,"altKey":false,"metaKey":false,"button":0,"buttons":0,"relatedTarget":null,"movementX":0,"movementY":0,"mozPressure":0,"mozInputSource":1,"MOZ_SOURCE_UNKNOWN":0,"MOZ_SOURCE_MOUSE":1,"MOZ_SOURCE_PEN":2,"MOZ_SOURCE_ERASER":3,"MOZ_SOURCE…ck","target":"button.btn.btn-sm btn-primary","srcElement":"button.btn.btn-sm btn-primary","currentTarget":"button.btn.btn-sm btn-primary","eventPhase":2,"bubbles":true,"cancelable":true,"returnValue":true,"defaultPrevented":false,"composed":true,"timeStamp":1599,"cancelBubble":false,"originalTarget":"button.btn.btn-sm btn-primary","explicitOriginalTarget":"button.btn.btn-sm btn-primary","NONE":0,"CAPTURING_PHASE":1,"AT_TARGET":2,"BUBBLING_PHASE":3,"ALT_MASK":1,"CONTROL_MASK":2,"SHIFT_MASK":4,"META_MASK":8}';
-        $this->request->appendHeader('Triggering-Event', $header);
-        $this->assertSame(json_decode($header), $this->request->getTriggeringEvent());
-    }
-
-    public function testGetTriggeringEventIsNull(): void
-    {
-        $this->assertNull($this->request->getTriggeringEvent());
+        $this->assertNull($this->request->getSource());
     }
 
     public function testIsMethodWithHtmxParam(): void
@@ -149,6 +151,18 @@ final class IncomingRequestTest extends CIUnitTestCase
     {
         $request = $this->request->setHeader('HX-Boosted', 'true');
         $this->assertTrue($request->is('boosted'));
+    }
+
+    public function testIsMethodWithPartialParam(): void
+    {
+        $request = $this->request->setHeader('HX-Request-Type', 'partial');
+        $this->assertTrue($request->is('partial'));
+    }
+
+    public function testIsMethodWithFullParam(): void
+    {
+        $request = $this->request->setHeader('HX-Request-Type', 'full');
+        $this->assertTrue($request->is('full'));
     }
 
     public function testIsMethodWithInvalidParam(): void

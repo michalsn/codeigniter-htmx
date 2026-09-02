@@ -12,9 +12,10 @@ We will get our copy ready for modifications.
 
 Available options:
 
-- [$toolbarDecorator](#toolbarDecorator)
-- [$errorModalDecorator](#errorModalDecorator)
-- [$skipViewDecoratorsString](#skipViewDecoratorsString)
+- [$toolbarDecorator](#toolbardecorator)
+- [$errorModalDecorator](#errormodaldecorator)
+- [$skipViewDecoratorsString](#skipviewdecoratorsstring)
+- [$storePreviousURL](#storepreviousurl)
 
 ### $toolbarDecorator
 
@@ -42,7 +43,6 @@ In the `production` environment these decorators are ignored by design. So this 
 Specifies whether the HTMX request URL should be stored in the session, for use with the `previous_url()` helper function.
 For more information, see the [user guide](https://codeigniter.com/user_guide/helpers/url_helper.html#previous_url).
 
-Basically, if you use HTMX extensively, including for navigating your site, you will probably want to leave it as `true`,
-and in cases where storing the request is not desirable, even if it uses HTMX, you can use custom header, to indicate the
-AJAX call or [ajax-header](https://github.com/bigskysoftware/htmx-extensions/blob/main/src/ajax-header/README.md) extension,
-which will add the necessary headers automatically. URLs from AJAX requests are always excluded from session storage.
+Basically, if you use HTMX extensively, including for navigating your site, you will probably want to leave it as `true`.
+If storing the request is not desirable, mark it as a traditional AJAX request or use a custom header in your application flow.
+URLs from AJAX requests are always excluded from session storage.

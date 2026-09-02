@@ -10,9 +10,11 @@ We should edit the `app/Config/Format.php` file to include the necessary changes
 
     php spark htmx:publish
 
-Since content negotiation will be triggered for any format other than `json` or `xml`, we have two options:
+With HTMX 4, requests already send `Accept: text/html`, so in the most common HTMX case no extra client-side configuration is needed.
 
-1. Set the custom headers for every request via HTML tag
+If you want to use the formatter outside HTMX requests, you still have two options:
+
+1. Set the custom headers for a request explicitly
    ```html
    hx-headers='{"Accept":"text/html"}'
    ```
@@ -28,7 +30,7 @@ Since content negotiation will be triggered for any format other than `json` or 
 
 ### Example
 
-This is an sample of using HTML formatter:
+This is a sample of using HTML formatter:
 
 ```php
 <?php

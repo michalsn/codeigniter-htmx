@@ -60,7 +60,7 @@ class HTMLFormatter implements FormatterInterface
         foreach ($data as $row) {
             // Suppressing the "array to string conversion" notice
             // Keep the "evil" @ here
-            $row = @array_map('strval', $row);
+            $row = @array_map(strval(...), $row);
 
             $table->addRow($row);
         }

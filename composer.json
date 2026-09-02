@@ -13,11 +13,11 @@
     ],
     "homepage": "https://github.com/michalsn/codeigniter-htmx",
     "require": {
-        "php": "^8.0"
+        "php": "^8.2",
+        "codeigniter4/framework": "^4.7"
     },
     "require-dev": {
-        "codeigniter4/devkit": "^1.0",
-        "codeigniter4/framework": "^4.3"
+        "codeigniter4/devkit": "^1.3"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -48,16 +48,12 @@
         "ci": [
             "Composer\\Config::disableProcessTimeout",
             "@cs",
-            "@deduplicate",
-            "@inspect",
             "@analyze",
             "@test"
         ],
         "cs": "php-cs-fixer fix --ansi --verbose --dry-run --diff",
         "cs-fix": "php-cs-fixer fix --ansi --verbose --diff",
         "style": "@cs-fix",
-        "deduplicate": "phpcpd app/ src/",
-        "inspect": "deptrac analyze --cache-file=build/deptrac.cache",
         "mutate": "infection --threads=2 --skip-initial-tests --coverage=build/phpunit",
         "test": "phpunit"
     }

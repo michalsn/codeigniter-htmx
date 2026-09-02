@@ -58,9 +58,11 @@ final class ToolbarDecoratorTest extends CIUnitTestCase
         $view->setVar('testString', 'Hello World');
         $expected1 = '</script></head><body>Hello World';
         $expected2 = 'id="htmxToolbarScript"';
+        $expected3 = "htmx.on('htmx:finally:request', refreshDebugBar)";
 
         $this->assertStringContainsString($expected1, $view->render('with_decorator'));
         $this->assertStringContainsString($expected2, $view->render('with_decorator'));
+        $this->assertStringContainsString($expected3, $view->render('with_decorator'));
     }
 
     public function testDecoratorDisabled(): void
